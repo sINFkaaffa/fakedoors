@@ -1,8 +1,29 @@
 /* CSS-Script zu fakedoors.com */
+*{
+	margin: 0;
+	padding: 0;
+}
 
 body {
-	margin: 5em 10%;
-	background-color:#191970; /*HexCode für midnightblue*/
+	background-color: #0074D9; /*HexCode für midnightblue*/
 	text-align: center;
 }
-h1 { color:lawngreen;}
+
+h1 {
+	color:lawngreen;
+}
+
+span img {
+	position: fixed;
+}
+
+
+.parallax {
+	background-image: url("https://images4.alphacoders.com/606/606019.jpg");
+	height: 700px;
+	padding: 0;
+	background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

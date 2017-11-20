@@ -2,30 +2,31 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>fakedoors</title>
-<!-- <link rel="stylesheet" href="facedoors.css" type="text/css">-->
-<link rel="stylesheet" type="text/css" title="Cool stylesheet" href="styles/fakedoor.css">
-	<!--<link rel="stylesheet" type="text/css" href="fakedoors.css" > -->
-<!--body {
-	margin: 5em 10%;
-	background-color:midnightblue;
-	text-align: center;
-}
-h1 { color:lawngreen;
-font-size: 70px;}-->
+	<meta charset="UTF-8">
+	<!-- small auto screen size -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type="text/css" title="Cool stylesheet" href="styles/fakedoor.css">
 
 </head>
 <body>
 
-<img src="https://upload.wikimedia.org/wikipedia/en/c/c8/Rick_and_Morty_logo.png" alt="Rick and Morty">
-<div class="parallax"></div>
+<div class="parallax">
+	<div style="white-space:nowrap;">
+	<span class="w3-center w3-padding-large w3-xlarge w3-wide w3-animate-opacity">
+		<img src="https://upload.wikimedia.org/wikipedia/en/c/c8/Rick_and_Morty_logo.png" alt="Rick and Morty">
+	</span>
+</div>
+</div>
+
+<br>
 
 <div class="home">
-
 <iframe width="420" height="315" src="https://www.youtube.com/embed/4270c5qWPBg"></iframe><br>
-<a href="https://www.youtube.com/watch?v=4270c5qWPBg" target="_blank">fakedoors.com commercial by Rick and Morty</a>
+<a href="https://www.youtube.com/watch?v=4270c5qWPBg" target="_blank">
+	fakedoors.com commercial by Rick and Morty</a>
 <p id="sI" onclick="showImpressum()">Impressum</p>
 </div>
 
@@ -38,11 +39,7 @@ font-size: 70px;}-->
 <p>Die Seite wird bereitgestellt durch ...</p>
 </div>
 
+<script src="/srcipts/fakedoors.js"></script>
 
-<script src="/srcipts/fakedoors.js">
-function showImpressum(){
-	$(document).$(".home").hide();
-}
-</script>
 </body>
 </html>
