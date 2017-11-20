@@ -1,0 +1,48 @@
+<!-- HTML-Script zu fakedoors.com -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>fakedoors</title>
+<!-- <link rel="stylesheet" href="facedoors.css" type="text/css">-->
+<link rel="stylesheet" type="text/css" title="Cool stylesheet" href="styles/fakedoor.css">
+	<!--<link rel="stylesheet" type="text/css" href="fakedoors.css" > -->
+<!--body {
+	margin: 5em 10%;
+	background-color:midnightblue;
+	text-align: center;
+}
+h1 { color:lawngreen;
+font-size: 70px;}-->
+
+</head>
+<body>
+
+<img src="https://upload.wikimedia.org/wikipedia/en/c/c8/Rick_and_Morty_logo.png" alt="Rick and Morty">
+<div class="parallax"></div>
+
+<div class="home">
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/4270c5qWPBg"></iframe><br>
+<a href="https://www.youtube.com/watch?v=4270c5qWPBg" target="_blank">fakedoors.com commercial by Rick and Morty</a>
+<p id="sI" onclick="showImpressum()">Impressum</p>
+</div>
+
+<div class"impressum">
+<h3>Webtechnologieprojekt von Simon Braeuer, Alexander  und Karin Affa</h3>
+<p>Ziel: Online-Shop von fakedoors mit Warenkorb und Bestellhistorie</p>
+<p>Als Advanced Toolkit wird ... verwendet</p>
+<p>Wir verbinden uns mit der Datenbank/Permament Storage ...</p>
+<p>Die advanced Authentikation ist ...</p>
+<p>Die Seite wird bereitgestellt durch ...</p>
+</div>
+
+
+<script src="/srcipts/fakedoors.js">
+function showImpressum(){
+	$(document).$(".home").hide();
+}
+</script>
+</body>
+</html>
