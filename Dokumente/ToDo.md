@@ -19,14 +19,15 @@
   * - [ ] Backend Vorbereitung
 
 
+
 15.12.2017
 * nächstes Update/Fortschrittbesprechung am Mo 18.12.2017 um 9:30 Uhr (nach AD), evtl. abends in Discord.  
-* Karin:
- * - [ ] Design
-* Simon:
- * - [ ] Vue
-* Alex:
- * - [ ] Datenbank
+ * Karin:
+  * - [ ] Design
+ * Simon:
+  * - [ ] Vue
+ * Alex:
+  * - [ ] Datenbank
   
 ### HowTo
 Wenn man einen Part erledigt hat einfach das Leerzeichen mit einem x ersetzen.
