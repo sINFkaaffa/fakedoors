@@ -1,0 +1,31 @@
+<template>
+  <div id="app">
+    <div class="parallax">
+      <img src="src/assets/img/fakedoors_title.png" alt="fakedoors">
+    </div>
+    <main>
+      <div id="root" class="z-depth-3">
+  	    <div class="container">
+          <router-view></router-view>
+  	    </div>
+  	  </div>
+    </main>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app'
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*text-align: center;*/
+  /*color: #2c3e50;*/
+  margin-top: 0;
+}
+</style>
