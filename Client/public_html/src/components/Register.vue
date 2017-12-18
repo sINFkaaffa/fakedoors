@@ -42,8 +42,6 @@
         </div>
         <div class="row">
           <form action="#">
-            <br>
-            <br>
             <p>Zahlungsart</p>
             <p>
               <input class="with-gap" type="radio" name="group1" id="test1">
