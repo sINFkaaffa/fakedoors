@@ -1,4 +1,4 @@
-# fakedoors
+# Fakedoors
 
 > A WTProject
 
