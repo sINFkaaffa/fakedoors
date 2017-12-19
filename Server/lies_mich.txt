@@ -1,0 +1,2 @@
+Beide Dateien müssen ausführbar sein!
+$ chmod a+x dateiname
