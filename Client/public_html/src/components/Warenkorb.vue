@@ -32,7 +32,7 @@
       <div class="cartFoot">
       	<h5 id="cartTotalAll">Total: 700 Schmeckels</h5>
         <div id="btn">
-          <a class="waves-effect waves-light btn"><i class="material-icons right">shopping_cart</i>More shopping</a>
+          <a class="waves-effect waves-light btn" href="index.html"><i class="material-icons right">shopping_cart</i>More shopping</a>
         	<a class="waves-effect waves-light btn" id="cartBill"><i class="material-icons right">local_printshop</i>Bill</a>
         	<a class="waves-effect waves-light btn" href="error.html"><i class="material-icons right">credit_card</i>Pay</a>
         </div>
