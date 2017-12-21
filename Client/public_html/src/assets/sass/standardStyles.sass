@@ -1,0 +1,48 @@
+/* Style für alle Ansichten bis auf die Error-Ansicht */
+@import "config"
+
+*
+  margin: 0
+  padding: 0
+
+body
+  background-color: $colorDark
+
+#logo
+  padding-left: 2%
+  padding-top: 0.5%
+  font-family: 'get schwifty'
+  color: $logoFilling
+  font-size: 350%
+  text-shadow: 3px 0px $logoBorder, -3px 0px $logoBorder, 0 5px 10px black
+
+.parallax
+  opacity: 0.80
+  background-image: url("../img/bg.jpg")
+  transform: scale(1)
+  background-size: cover
+  height: 320px
+  padding: 0
+  background-attachment: fixed
+  background-position: center
+  background-repeat: no-repeat
+
+#root
+  background: $colorLight
+  margin: 0 auto
+  padding: 2.3% 1%
+  width: 90%
+
+.footer-copyright
+  margin-left: -11%
+  a
+    text-align: right
+    margin-right: -13%
+
+/* Importe der unterschiedlichen sass-datein für die einzelnen Ansichten */
+@import "shop"
+@import "cart"
+@import "orders"
+@import "error"
+@import "login"
+@import "register"

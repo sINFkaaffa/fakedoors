@@ -13,8 +13,8 @@
           </div>
         </div>
       </form>
+      <button class="btn waves-effect waves-light col s3 offset-s4" id="abort" type="submit">Abort</button>
       <button class="btn waves-effect waves-light col s3 offset-s4" type="submit">Login</button>
-      <button class="btn waves-effect waves-light col s3 offset-s4" type="submit">Abort</button>
     </div>
   </div>
 </template>

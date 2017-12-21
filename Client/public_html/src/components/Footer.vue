@@ -21,7 +21,7 @@
 	     <div class="footer-copyright">
          <div class="container">
            © 2017 Copyright by Simon Braeuer, Karin Affa and Alexander Roidl
-           <a class="grey-text text-lighten-4 right" href="#!">University of Applied Sciences</a>
+           <a class="grey-text text-lighten-4 right" href="#!">University of Applied Sciences Rosenheim</a>
          </div>
 	     </div>
     </footer>

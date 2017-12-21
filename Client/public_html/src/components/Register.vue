@@ -40,9 +40,10 @@
             <label>Planet</label>
           </div>
         </div>
-        <div class="row">
+      </form>
+        <h5 id="payText">Zahlungsart</h5>
+        <div class="row payment">
           <form action="#">
-            <p>Zahlungsart</p>
             <p>
               <input class="with-gap" type="radio" name="group1" id="test1">
               <label for="test1">Nachnahme</label>
@@ -53,9 +54,9 @@
             </p>
           </form>
         </div>
-      </form>
-      <button class="btn waves-effect waves-light col s3 offset-s9" type="submit">Register</button>
-      <button class="btn waves-effect waves-light col s3 offset-s9" type="submit">Arbort</button>
+          <button class="btn waves-effect waves-light col s3 offset-s9" id="abort" type="submit">Arbort</button>
+          <button class="btn waves-effect waves-light col s3 offset-s9" id="registBtn" type="submit">Register</button>
+
     </div>
   </div>
 </template>
