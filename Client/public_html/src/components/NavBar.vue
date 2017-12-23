@@ -7,13 +7,22 @@
             <router-link v-bind:to="'/'" class="brand-logo" id="logo">Fakedoors.com</router-link>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li>
-                <router-link v-bind:to="'/login'">Login</router-link>
+                <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
               </li>
               <li>
-                <router-link v-bind:to="'/register'">Registration</router-link>
+                <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
+              </li>
+              <li>
+                <p id="benutzer" v-if="gelogt">Hello, Name</p>
+              </li>
+              <li>
+                <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
               </li>
               <li>
                 <router-link v-bind:to="'/warenkorb'"> <i class="middle material-icons" alt="Shopping Cart">shopping_cart</i></router-link>
+              </li>
+              <li>
+                <router-link v-bind:to="'/'" v-if="gelogt"><i class="middle material-icons" alt="Shopping Cart">exit_to_app</i></router-link>
               </li>
             </ul>
           </div>
@@ -25,6 +34,10 @@
 
 <script>
 export default {
-  name: 'navbar'
+  name: 'navbar',
+  data () {
+    return {
+      gelogt: false}
+  }
 }
 </script>
