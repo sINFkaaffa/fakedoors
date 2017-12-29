@@ -20,7 +20,8 @@
             <label for="password">Password</label>
           </div>
           <div class="input-field col s6">
-            <select>
+            <v-select :value.sync="selectDimension" :options="dimension"></v-select>
+            <!--<select>
               <option value="" disabled selected>Choose your Dimension ID</option>
               <option value="1">C-137</option>
               <option value="2">C-132</option>
@@ -28,16 +29,17 @@
               <option value="4">35C</option>
               <option value="5">C-500A</option>
             </select>
-            <label>Dimension</label>
+            <label>Dimension</label>-->
           </div>
           <div class="input-field col s6">
-            <select>
+            <v-select :value.sync="selectPlanet" :options="planets"></v-select>
+            <!--<select>
               <option value="" disabled selected>Choose your Planet</option>
               <option value="1">Earth</option>
               <option value="2">Planet of Dogs</option>
               <option value="3">Gazorpazorpian</option>
             </select>
-            <label>Planet</label>
+            <label>Planet</label>-->
           </div>
         </div>
       </form>
@@ -62,13 +64,23 @@
 </template>
 
 <script>
+import vSelect from 'vue-select'
 export default {
-  name: 'register'
+  name: 'register',
+  components: {vSelect},
+  data() {
+    return {
+      selectDimension: 'Dimension',
+      selectPlanet: 'Planet',
+      dimension: ['C-137','C-132','J19ζ7','35C','C-500A'],
+      planets: ['Earth','Planet of Dogs','Gazorpazorpian']
+    }
+  }
 }
 
-$(document).ready(function() {
-$('select').material_select();
-});
+//$(document).ready(function() {
+//$('select').material_select();
+//});
 
-$('select').material_select('destroy');
+//$('select').material_select('destroy');
 </script>
