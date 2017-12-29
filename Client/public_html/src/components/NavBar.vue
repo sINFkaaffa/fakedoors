@@ -38,6 +38,6 @@ export default {
   data () {
     return {
       gelogt: false}
-  }
+  },
 }
 </script>

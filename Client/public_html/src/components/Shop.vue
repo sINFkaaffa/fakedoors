@@ -3,7 +3,7 @@
 	      <div class="shopitem section hoverable z-depth-1">
 					<a class="waves-effect waves-light btn"><i class="material-icons right">shopping_cart</i>add</a>
 					<img src="http://faykdoors.com/greenwooddoor.png" alt="no piture"/>
-	        <h5 class="shopitemName">The green one</h5> <h5 class="shopitemPrice">100 Schmeckels</h5>
+	        <h5 class="shopitemName">The green one {{count}}</h5> <h5 class="shopitemPrice">100 Schmeckels</h5>
 					<p>A green door with left handle and two oak deco windows.</p>
 	      </div>
 	      <div class="shopitem section hoverable z-depth-1">
@@ -44,9 +44,16 @@
 	      </div>
 </div>
 </template>
-
 <script>
+import store from '../store/indexStore'
+
 export default {
-  name: 'shop'
+  name: 'shop',
+  store: store,
+  computed: {
+    count () {
+	    return store.state.count
+    }
+  }
 }
 </script>
