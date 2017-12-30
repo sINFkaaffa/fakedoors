@@ -19,11 +19,17 @@
                 <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
               </li>
               <li>
-                <router-link v-bind:to="'/warenkorb'"> <i class="middle material-icons" alt="Shopping Cart">shopping_cart</i></router-link>
+                <router-link  v-bind:to="'/'" v-if="gelogt" >
+                  <i class="middle material-icons" alt="Shopping Cart" @click="logout">exit_to_app</i>
+                </router-link>
               </li>
               <li>
-                <router-link v-bind:to="'/'" v-if="gelogt"><i class="middle material-icons" alt="Shopping Cart">exit_to_app</i></router-link>
+                <router-link v-bind:to="'/warenkorb'">
+                  <i class="middle material-icons" alt="Shopping Cart">shopping_cart</i>
+                  <p id="navCartCount" v-if="cartLength!=0">{{cartLength}}</p>
+                </router-link>
               </li>
+
             </ul>
           </div>
         </nav>
@@ -33,11 +39,22 @@
 </template>
 
 <script>
+import store from '../store/indexStore'
+
 export default {
   name: 'navbar',
-  data () {
-    return {
-      gelogt: false}
+  store: store,
+  computed: {
+    cartLength () {
+	    return store.state.cartLength
+    },
+    gelogt(){
+      return store.state.isAuthenticated
+    }
   },
+  methods: {
+    logout: function(){store.commit('logout')}
+  },
+
 }
 </script>
