@@ -13,7 +13,7 @@
                 <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
               </li>
               <li>
-                <p id="benutzer" v-if="gelogt">Hello, Name</p>
+                <p id="benutzer" v-if="gelogt">Hello, {{customer[0].firstName}}</p>
               </li>
               <li>
                 <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
@@ -50,7 +50,10 @@ export default {
     },
     gelogt(){
       return store.state.isAuthenticated
-    }
+    },
+    customer(){
+      return store.state.customer
+    },
   },
   methods: {
     logout: function(){store.commit('logout')}

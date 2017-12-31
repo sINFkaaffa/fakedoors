@@ -4,17 +4,17 @@
       <form class="col s12">
         <div class="row">
           <div class="input-field s6">
-            <input id="last_name" type="text" class="validate" >
+            <input id="last_name" type="text" class="validate" v-model="loginName">
             <label for="last_name">Username</label>
           </div>
           <div class="input-field s6">
-            <input id="password" type="password" class="validate">
+            <input id="password" type="password" class="validate" v-model="loginPw">
             <label for="password">Password</label>
           </div>
         </div>
       </form>
-      <button class="btn waves-effect waves-light col s3 offset-s4" id="abort" type="submit">Abort</button>
-      <button class="btn waves-effect waves-light col s3 offset-s4" type="submit">Login</button>
+      <a class="btn waves-effect waves-light col s3 offset-s4" id="abort" type="submit" href="index.html">Abort</a>
+      <button class="btn waves-effect waves-light col s3 offset-s4" type="submit" v-on:click="einlogen">Login</button>
     </div>
   </div>
 </template>
@@ -23,10 +23,6 @@
 import store from '../store/indexStore'
 
 /*new Vue({
-
-/*
-store: store,
-
 computed: {
   isAuthenticated: function () {
     return this.$store.getters.isAuthenticated()
@@ -48,13 +44,23 @@ methods: {
     return {
       gelogt: false}
   },
-
-
-
-
 })*/
 
 export default {
-  name: 'login'
+  name: 'login',
+  store: store,
+  computed: {
+    loginName: {
+      get() {return store.state.loginName},
+      set(value) {store.commit('loginName',value)}
+    },
+    loginPw: {
+      get() {return store.state.loginPw},
+      set(value) {store.commit('loginPw',value)}
+    },
+  },
+  methods:{
+    einlogen: function(){store.commit('einlogen')},
+  },
 }
 </script>

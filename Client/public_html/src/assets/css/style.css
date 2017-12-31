@@ -299,7 +299,8 @@ body {
 #abort {
   float: left;
   margin-left: 0;
-  margin-right: 16.6%; }
+  margin-right: 16.6%;
+  background-color: #26c6da; }
 
 /* Variablen */
 /* Logo-Schrift */
@@ -308,14 +309,6 @@ body {
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-#register {
-  margin-top: -2%; }
-  #register button {
-    background-color: #26c6da;
-    float: left; }
-  #register input {
-    color: #3b92a5; }
-
 #payText {
   color: #3b92a5;
   padding-left: 1%; }
@@ -324,6 +317,7 @@ body {
   padding-left: 5%; }
 
 #registBtn {
-  margin-top: -5%; }
+  margin-top: -5%;
+  background-color: #26c6da; }
 
 /*# sourceMappingURL=style.css.map */
