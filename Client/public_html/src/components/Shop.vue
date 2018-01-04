@@ -13,7 +13,7 @@
 					<h5 class="shopitemName">The white one</h5> <h5 class="shopitemPrice">100 Schmeckels</h5>
 					<p>The white door has a small window and a steel left handle.</p>
 	      </div>
-	 
+
 </div>
 </template>
 <script>
@@ -25,18 +25,12 @@ export default {
   components: {btnAdd},
   store: store,
   computed: {
-    count () {
-	    return store.state.count
-    },
     shop(){
       return store.state.shop
     },
-    cart(){
-      return store.state.cart
-    }
   },
   methods: {
-    add: function(shopIndex,id){store.commit('add',shopIndex,id)}
+    add: function(shopIndex){store.commit('add',shopIndex)}
   }
 }
 </script>

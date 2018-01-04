@@ -35,6 +35,7 @@ export default new Vuex.Store({
       {itemId:"4", name:"green",price:260,st:0,total:0, image:"no", text:"Beschreibung 4"}
     ],
     cart: [],
+    shopIndexie: [],
     all: 0,
     cartLength: 0,
 
@@ -91,13 +92,25 @@ export default new Vuex.Store({
     },
 
 
-    add: (state,shopIndex,id) =>{
-      state.cart.push(state.shop[shopIndex])
-      state.cartLength = state.cart.length
-      var i = state.cart.length-1
-      state.cart[i].st = 1
-      state.cart[i].total = state.cart[i].price
-      state.all += state.cart[i].total
+    add: (state,shopIndex) =>{
+      var x = true
+
+      if(state.shopIndexie.length>0){
+        for(var j of state.shopIndexie){
+          if(j === shopIndex){
+            x = false
+          }
+        }
+      }
+      if(x){
+        state.cart.push(state.shop[shopIndex])
+        state.cartLength = state.cart.length
+        var i = state.cart.length-1
+        state.cart[i].st = 1
+        state.cart[i].total = state.cart[i].price
+        state.all += state.cart[i].total
+        state.shopIndexie.push(shopIndex)
+      }
     },
     remove: (state,cartIndex) =>{
       state.all -= state.cart[cartIndex].total
