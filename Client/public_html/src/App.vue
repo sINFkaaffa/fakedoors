@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div class="parallax">
-      <img src="src/assets/img/fakedoors_title.png" alt="fakedoors">
     </div>
     <main>
       <div id="root" class="z-depth-3">
