@@ -44,20 +44,6 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 * Design Framework: Materialize (http://materializecss.com/)
 
 #### NodeJS Server
-* *MySQL Zugangsdaten:* Host='localhost' User='root' Passwort='' *Datenbank wird automatisch erstellt!*
-* *Abhängigkeiten installieren:*
-```
-npm init
-```
-* *Starten:*
-```
-nodemon npm start
-```
-(_Port 3000_)
-* *Requests:* /login/[username]/[passwort], /register/[username]/[passwort], /products/[seite]], /purchases/[username]]
-
-
-#### NodeJS Server
 * **MySQL Zugangsdaten:** Host='localhost' User='root' Passwort='' *Datenbank wird automatisch erstellt!*
 * **Abhängigkeiten installieren:**
 ```
@@ -67,3 +53,5 @@ npm install
 ```
 nodemon npm start
 ```
+(_Port 3000_)
+* **Requests:** /login/[username]/[passwort], /register/[username]/[passwort], /products/[seite]], /purchases/[username]]
