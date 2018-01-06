@@ -116,6 +116,7 @@ export default new Vuex.Store({
       state.all -= state.cart[cartIndex].total
       state.cart.splice(cartIndex,1)
       state.cartLength = state.cart.length
+      state.shopIndexie.splice(cartIndex,1)
     },
     addSt: (state,cartIndex) => {
       state.all += state.cart[cartIndex].price
