@@ -4,8 +4,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-import NavBar from './components/NavBar'
-import Footer from './components/Footer'
+//import NavBar from './components/NavBar'
+//import Footer from './components/Footer'
 
 Vue.config.productionTip = false
 
@@ -16,18 +16,4 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
-})
-
-new Vue({
-  el: '#navbar',
-  router,
-  template: '<NavBar/>',
-  components: { NavBar }
-})
-
-new Vue({
-  el: '#footer',
-  router,
-  template: '<Footer/>',
-  components: { Footer }
 })
