@@ -29,6 +29,12 @@ export default {
       return store.state.shop
     },
   },
+  mounted: function() {
+    this.$http.get("localhost:3000/products/1").then( (data) => {
+      console.log(data)
+      this.store.state.shop = data;
+    })
+  },
   methods: {
     add: function(shopIndex){store.commit('add',shopIndex)}
   }
