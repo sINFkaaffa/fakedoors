@@ -55,10 +55,29 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 
 * **Requests:**
 	* **GET**
+		* / **Statisches Verzeichnis (index.html)**
 		* /products/[seite] z.B. "/products/2" ("Öffentllich")
-		* /purchases/[username] z.B. "/purchases/alex" (Nur für authentifizierte Benutzer)
+			* Parameter durch URL (Siehe Beispiel)
+			* Rückgabe: *JSON*
+		* /account **(Noch nicht implementiert)**
+			* Parameter durch Session
+			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Accountdaten*
+		* /purchases **(Noch nicht implementiert)**
+		 	* Parameter durch Session
+			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Bestellungen*
+		* /adresses **(Noch nicht implementiert)**
+			* Parameter durch Session
+			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Adressen*
+		* /paymethods **(Noch nicht implementiert)**
+			* Parameter durch Session
+			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Zahlungsmethoden*
+		* /pdf/[bestellungs_id] z.B. "/pdf/13374204242" **(Noch nicht implementiert)**
+			* Parameter durch URL (Siehe Beispiel) und Session
+			* Rückgabe: *PDF-Datei der Bestellung*
 	* **POST**
 		* /login
-			* Parameter: *user, email, pass*
+			* Parameter: *user, email, pass* **User oder Email UND Passwort werden benötigt!**
+			* Rückgabe: *Fehler* oder *"Success" String*
 		* /register
 			* Parameter: *user, email, first_name, last_name, pass, pass_repeat*
+			* Rückgabe: *Fehler* oder *"Success" String*

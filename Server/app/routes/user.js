@@ -1,18 +1,13 @@
 module.exports = function(app, database) {
-	app.post('/purchases', function(req, res, next) {
-		var id = req.body.userId;
-
-		if(!id) return next("No user ID given");
-
-		database.getPurchases(id, function(err, purchases) {
-			if(err) return next(err);
-			res.send(purchases);
-		});
+	app.get('/purchases', function(req, res, next) {
 	});
 
-	app.post('/adresses', function(req, res, next) {
+	app.get('/adresses', function(req, res, next) {
 	});
 
-	app.post('/paymethods', function(req, res, next) {
+	app.get('/paymethods', function(req, res, next) {
+	});
+
+	app.get('/pdf/:order_id', function(req, res, next) {
 	});
 }

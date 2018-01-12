@@ -18,16 +18,18 @@ CREATE TABLE `adresses` (
   `City` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ZIP` int(11) NOT NULL,
   `Dimension` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Planet` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Additional` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `doors` (
+CREATE TABLE `products` (
   `ID` int(11) NOT NULL,
   `Name` char(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Short description',
   `FullName` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Price` mediumint(9) NOT NULL,
   `Description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ImagePath` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
+  `ImagePath` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `paymethods` (
@@ -57,8 +59,8 @@ CREATE TABLE `users` (
 
 /* INSERTS */
 
-INSERT INTO `doors` (`ID`, `Name`, `FullName`, `Price`, `Description`, `ImagePath`) VALUES
-(12, 'ddddddd', 'test', 123, 'beschreibung', 'ordner/date.endung');
+INSERT INTO `products` (`ID`, `Name`, `FullName`, `Price`, `Description`, `ImagePath`, `Quantity`) VALUES
+(12, 'ddddddd', 'test', 123, 'beschreibung', 'ordner/date.endung', 13);
 
 INSERT INTO `purchases` (`ID`, `UserID`, `PaymentID`, `AdressID`, `Data`, `Time`) VALUES
 (1, 0, -1, -1, '', '2018-01-06 21:47:47');
@@ -73,7 +75,7 @@ INSERT INTO `users` (`ID`, `Username`, `Email`, `FirstName`, `LastName`, `Passwo
 ALTER TABLE `adresses`
   ADD PRIMARY KEY (`ID`);
 
-ALTER TABLE `doors`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`ID`);
 
 ALTER TABLE `paymethods`
@@ -89,7 +91,7 @@ ALTER TABLE `users`
 ALTER TABLE `adresses`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `doors`
+ALTER TABLE `products`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 ALTER TABLE `paymethods`

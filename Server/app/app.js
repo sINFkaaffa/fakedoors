@@ -8,9 +8,10 @@ var express = require('express');
 var debug = require('debug')('fakedoors:server');
 var http = require('http');
 var app = express();
-var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
 
 /**
  * Establish connection
@@ -29,11 +30,14 @@ app.use('/', express.static(path.join(__dirname, 'public'))) // Static directory
 /**
  * Session
  */
+var sessionStore = new MySQLStore({}, connection);
 
 app.use(session({
-  secret: '42 fortytwo 42',
-  resave: true,
-  saveUninitialized: false
+	secret: '42 fortytwo 42',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false,
+	cookie: { maxAge: 60000 }
 }));
 
 /**
