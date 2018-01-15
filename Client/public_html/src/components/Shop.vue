@@ -30,9 +30,12 @@ export default {
     },
   },
   mounted: function() {
-    this.$http.get("localhost:3000/products/1").then( (data) => {
+    axios.get("//localhost:3000/products/1").then( (data) => {
       console.log(data)
       this.store.state.shop = data;
+    })
+    .catch(function(err){
+      console.log(err)
     })
   },
   methods: {
