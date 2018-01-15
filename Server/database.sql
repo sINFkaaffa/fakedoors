@@ -8,6 +8,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
 /* CREATE TABLES */
 
 CREATE TABLE `adresses` (
@@ -28,6 +29,7 @@ CREATE TABLE `products` (
   `FullName` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Price` mediumint(9) NOT NULL,
   `Description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+
   `ImagePath` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -57,6 +59,7 @@ CREATE TABLE `users` (
   `Password` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Hashed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+
 /* INSERTS */
 
 INSERT INTO `products` (`ID`, `Name`, `FullName`, `Price`, `Description`, `ImagePath`, `Quantity`) VALUES
@@ -69,6 +72,7 @@ INSERT INTO `users` (`ID`, `Username`, `Email`, `FirstName`, `LastName`, `Passwo
 (1, 'alexboy', 'alex@roidl.de', 'Alexander', 'Roidl', 'c137'),
 (2, 'test', '', '', '', 'lol'),
 (3, 'alex', '', '', '', 'test');
+
 
 /* KEYS */
 
@@ -91,7 +95,9 @@ ALTER TABLE `users`
 ALTER TABLE `adresses`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
+
 ALTER TABLE `products`
+
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 ALTER TABLE `paymethods`

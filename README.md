@@ -15,6 +15,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 
 ### Features
 
+
 * User Stories: Warenkorb mit allen Bestellungen, Benutzerkonto usw.
 * Advanced Toolkit: Vue
 * Back-End: Node
