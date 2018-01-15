@@ -12,3 +12,5 @@ Client/public_html/*.suo
 Client/public_html/*.ntvs*
 Client/public_html/*.njsproj
 Client/public_html/*.sln
+
+Server/node_modules/
