@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import unorm from '../js/unorm'
+import sjcl from '../js/sjcl'
 
 Vue.use(Vuex)
 
@@ -69,16 +71,20 @@ export default new Vuex.Store({
     einlogen: state => {
       /* if(res.status === 200)
           state.customerId = res.body.customerId*/
+      state.pw = encrypt(state.pw, state.userName);
+      console.log(state.pw);
       state.isAuthenticated=true
     },
     registrieren: state => {
       /* if(res.status === 200)
           state.customerId = res.body.customerId*/
+      state.pw = encrypt(state.ps, state.userName);
+      console.log(state.pw);
       state.isAuthenticated=true
     },
 
 
-    add: (state,shopIndex) =>{
+    add: (state,shopIndex) => {
       var x = true
 
       if(state.shopIndexie.length>0){
@@ -125,3 +131,23 @@ export default new Vuex.Store({
     }
   }
 })
+
+
+var rounds = 10;
+function encrypt(pw_plaintext, user) {
+  pw_plaintext = unorm.nfc(pw_plaintext)
+  user = unorm.nfc(user.trim()).toLowerCase()
+
+// Determenistic unique salt
+  var salt = sjcl.codec.utf8String.toBits("fakedoors.com" + user);
+
+// PBKDF2 computation, result returned as hexadecimal encoding
+  var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) {
+        var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
+        this.encrypt = function () {
+            return hasher.encrypt.apply(hasher, arguments);
+        };
+    });
+
+    return sjcl.codec.hex.fromBits(key);
+}

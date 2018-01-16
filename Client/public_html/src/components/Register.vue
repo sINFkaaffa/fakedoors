@@ -94,9 +94,7 @@ export default {
   },
   methods:{
     registrieren: function(){store.commit('registrieren')},
-  },
+  }
 }
-
-
 
 </script>
