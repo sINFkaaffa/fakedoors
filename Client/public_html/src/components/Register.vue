@@ -21,25 +21,9 @@
           </div>
           <div class="input-field col s6">
             <v-select :value.sync="selectDimension" :options="dimension" v-model="dim" ></v-select>
-            <!--<select>
-              <option value="" disabled selected>Choose your Dimension ID</option>
-              <option value="1">C-137</option>
-              <option value="2">C-132</option>
-              <option value="3">J19ζ7</option>
-              <option value="4">35C</option>
-              <option value="5">C-500A</option>
-            </select>
-            <label>Dimension</label>-->
           </div>
           <div class="input-field col s6">
             <v-select :value.sync="selectPlanet" :options="planets" v-model="planet"></v-select>
-            <!--<select>
-              <option value="" disabled selected>Choose your Planet</option>
-              <option value="1">Earth</option>
-              <option value="2">Planet of Dogs</option>
-              <option value="3">Gazorpazorpian</option>
-            </select>
-            <label>Planet</label>-->
           </div>
         </div>
       </form>
@@ -113,9 +97,6 @@ export default {
   },
 }
 
-//$(document).ready(function() {
-//$('select').material_select();
-//});
 
-//$('select').material_select('destroy');
+
 </script>

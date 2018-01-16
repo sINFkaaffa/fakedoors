@@ -1,15 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueAxios from 'vue-axios'
-import { VueAuthenticate } from 'vue-authenticate'
-import axios from 'axios'
 
 Vue.use(Vuex)
-//Vue.use(VueAxios, axios)
-
-/*const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
-  baseUrl: 'http://localhost:8000'
-})*/
 
 export default new Vuex.Store({
   state: {
@@ -50,12 +42,6 @@ export default new Vuex.Store({
     ],
     reqOrderId: 0,
   },
-
-  /*getters: {
-    isAuthenticated() {
-      return vueAuth.isAuthenticated()
-    }
-  },*/
 
   mutations: {
     loginName: (state, name) => state.loginName = name,
@@ -137,19 +123,5 @@ export default new Vuex.Store({
     reqOrderIdBack: (state) =>{
       state.reqOrderId = -1
     }
-
-    /*isAuthenticated(state, payload) {
-      state.isAuthenticated = payload.isAuthenticated
-    }*/
-  },
-
-  /*actions: {
-    login(context, payload) {
-      vueAuth.login(payload.user, payload.requestOptions).then((response) => {
-        context.commit('isAuthenticated', {
-          isAuthenticated: vueAuth.isAuthenticated()
-        })
-      })
-    }
-  }*/
+  }
 })
