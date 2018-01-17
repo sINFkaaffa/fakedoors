@@ -41,7 +41,10 @@
           </form>
         </div>
           <a class="btn waves-effect waves-light col s3 offset-s9" id="abort" type="submit" href="index.html">Arbort</a>
-          <button class="btn waves-effect waves-light col s3 offset-s9" id="registBtn" type="submit" v-on:click="registrieren">Register</button>
+          <router-link v-bind:to="'/'" id="registBtn" class="waves-effect waves-light btn" >
+            <p@click="registrieren">Register</p></router-link>
+        <!--  <button class="btn waves-effect waves-light col s3 offset-s9" id="registBtn" type="submit" v-on:click="registrieren">Register</button>
+-->
     </div>
   </div>
 </template>

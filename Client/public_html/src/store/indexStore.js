@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loginName: "",
-    loginPw: "",
     firstName: "",
     lastName: "",
     userName: "",
@@ -22,16 +21,11 @@ export default new Vuex.Store({
       {customerId: 12, pwHash: 48, userName: "Siggi", lastName: "Huber", firstName: "Siegfried", dimension:"C-132", planet: "Earth", pay:"last Name"}
     ],
 
-    shop:[
-      {itemId:"1", name: "The red",price:100,st:0,total:0, image:"http://faykdoors.com/greenwooddoor.png", text:"Beschreibung 1"},
-      {itemId:"2", name:"blue",price:200,st:0,total:0, image:"no", text:"Beschreibung 2"},
-      {itemId:"3", name:"yellow",price:230,st:0,total:0, image:"no", text:"Beschreibung 3"},
-      {itemId:"4", name:"green",price:260,st:0,total:0, image:"no", text:"Beschreibung 4"}
-    ],
+//{itemId:"1", name: "The red",price:100,st:0,total:0, image:"http://faykdoors.com/greenwooddoor.png", text:"Beschreibung 1"}
+    shop:[],
     cart: [],
     shopIndexie: [],
     all: 0,
-    cartLength: 0,
 
     orders: [
       {orderId:"1", date: "01.10.17", itemQuantity: 4, orderTotal: 400, customerId: "12" },
@@ -47,7 +41,6 @@ export default new Vuex.Store({
 
   mutations: {
     loginName: (state, name) => state.loginName = name,
-    loginPw: (state, pw) => state.loginPw = pw,
     firstName: (state, name) => state.firstName = name,
     lastName: (state, name) => state.lastName = name,
     userName: (state, name) => state.userName = name,
@@ -59,7 +52,6 @@ export default new Vuex.Store({
     logout: state => {
       state.isAuthenticated=false
       state.loginName=""
-      state.loginPw=""
       state.firstName= ""
       state.lastName= ""
       state.userName= ""
@@ -69,16 +61,12 @@ export default new Vuex.Store({
       state.pay= ""
     },
     einlogen: state => {
-      /* if(res.status === 200)
-          state.customerId = res.body.customerId*/
       state.pw = encrypt(state.pw, state.userName);
       console.log(state.pw);
-      state.isAuthenticated=true
+      state.isAuthenticated=loginDB(state.pw,state.loginName);
     },
     registrieren: state => {
-      /* if(res.status === 200)
-          state.customerId = res.body.customerId*/
-      state.pw = encrypt(state.ps, state.userName);
+      state.pw = encrypt(state.pw, state.userName);
       console.log(state.pw);
       state.isAuthenticated=true
     },
@@ -86,7 +74,6 @@ export default new Vuex.Store({
 
     add: (state,shopIndex) => {
       var x = true
-
       if(state.shopIndexie.length>0){
         for(var j of state.shopIndexie){
           if(j === shopIndex){
@@ -96,31 +83,29 @@ export default new Vuex.Store({
       }
       if(x){
         state.cart.push(state.shop[shopIndex])
-        state.cartLength = state.cart.length
         var i = state.cart.length-1
-        state.cart[i].st = 1
-        state.cart[i].total = state.cart[i].price
-        state.all += state.cart[i].total
+        state.cart[i].St = 1
+        state.cart[i].Total = state.cart[i].Price
+        state.all += state.cart[i].Total
         state.shopIndexie.push(shopIndex)
       }
     },
     remove: (state,cartIndex) =>{
-      state.all -= state.cart[cartIndex].total
+      state.all -= state.cart[cartIndex].Total
       state.cart.splice(cartIndex,1)
-      state.cartLength = state.cart.length
       state.shopIndexie.splice(cartIndex,1)
     },
     addSt: (state,cartIndex) => {
-      state.all += state.cart[cartIndex].price
-      state.cart[cartIndex].st +=1
-      state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price
+      state.all += state.cart[cartIndex].Price
+      state.cart[cartIndex].St +=1
+      state.cart[cartIndex].Total = state.cart[cartIndex].St * state.cart[cartIndex].Price
     },
     removeSt: (state,cartIndex) => {
-      if(state.cart[cartIndex].st>0){
-        state.cart[cartIndex].st -= 1
-        state.all -= state.cart[cartIndex].price
+      if(state.cart[cartIndex].St>0){
+        state.cart[cartIndex].St -= 1
+        state.all -= state.cart[cartIndex].Price
       }
-      state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price
+      state.cart[cartIndex].Total = state.cart[cartIndex].St * state.cart[cartIndex].Price
     },
 
     orderDetail: (state, orderId) =>{
@@ -150,4 +135,14 @@ function encrypt(pw_plaintext, user) {
     });
 
     return sjcl.codec.hex.fromBits(key);
+}
+
+function loginDB(name, pw){
+    axios.post("//localhost:3000/login",["state.loginName","state.pw"]).then( (data) => {
+      console.log(data)
+    })
+    .catch(function(err){
+      console.log(err)
+    });
+  return true;
 }

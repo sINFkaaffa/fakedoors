@@ -46,7 +46,7 @@ export default {
   store: store,
   computed: {
     cartLength () {
-	    return store.state.cartLength
+	    return store.state.cart.length
     },
     gelogt(){
       return store.state.isAuthenticated

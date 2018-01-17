@@ -293,8 +293,9 @@ body {
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-#login button {
-  background-color: #26c6da; }
+#loginBtn {
+  background-color: #26c6da;
+  margin-left: 45%; }
 
 #abort {
   float: left;
@@ -317,7 +318,8 @@ body {
   padding-left: 5%; }
 
 #registBtn {
-  margin-top: -5%;
+  margin-top: -8%;
+  margin-left: 81%;
   background-color: #26c6da; }
 
 /*# sourceMappingURL=style.css.map */
