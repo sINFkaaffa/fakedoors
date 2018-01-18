@@ -16,10 +16,7 @@
       <a class="btn waves-effect waves-light col s3 offset-s4" id="abort" type="submit" href="index.html">Abort</a>
       <router-link v-bind:to="'/'" id="loginBtn" class="waves-effect waves-light btn" >
         <p@click="einlogen">Login</p></router-link>
-    </div
-    <p>
-      {{loginPw}}
-    </p>
+    </div>
   </div>
 </template>
 
@@ -31,8 +28,8 @@ export default {
   store: store,
   computed: {
     loginName: {
-      get() {return store.state.loginName},
-      set(value) {store.commit('loginName',value)}
+      get() {return store.state.userName},
+      set(value) {store.commit('userName',value)}
     },
     loginPw: {
       get() {return store.state.pw},

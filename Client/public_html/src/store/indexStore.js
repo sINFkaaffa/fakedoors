@@ -7,7 +7,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loginName: "",
     firstName: "",
     lastName: "",
     userName: "",
@@ -17,12 +16,11 @@ export default new Vuex.Store({
     pay: "",
     token:"",
     isAuthenticated: false,
-    customerId: 0,
+
     customer:[
       {customerId: 12, pwHash: 48, userName: "Siggi", lastName: "Huber", firstName: "Siegfried", dimension:"C-132", planet: "Earth", pay:"last Name"}
     ],
 
-//{itemId:"1", name: "The red",price:100,st:0,total:0, image:"http://faykdoors.com/greenwooddoor.png", text:"Beschreibung 1"}
     shop:[],
     cart: [],
     shopIndexie: [],
@@ -41,7 +39,6 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    loginName: (state, name) => state.loginName = name,
     firstName: (state, name) => state.firstName = name,
     lastName: (state, name) => state.lastName = name,
     userName: (state, name) => state.userName = name,
@@ -51,7 +48,7 @@ export default new Vuex.Store({
     pay: (state, name) => state.pay = name,
 
     logout: state => {
-      state.isAuthenticated=false
+      state.isAuthenticated = false
       state.loginName=""
       state.firstName= ""
       state.lastName= ""
@@ -63,13 +60,19 @@ export default new Vuex.Store({
     },
     einlogen: state => {
       state.pw = encrypt(state.pw, state.userName);
-      console.log(state.pw);
-      state.isAuthenticated=loginDB(state.loginName, state.pw);
+      state.token=loginDB(state.loginName, state.pw);
+      console.log(state.token);
+      if(state.token){
+        state.isAuthenticated=true
+      }
     },
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
-      console.log(state.pw);
-      state.isAuthenticated=registerDB(state.loginName, state.firstName, state.lastName, state.pw);
+      state.token=registerDB(state.loginName, state.firstName, state.lastName, state.pw);
+      console.log(state.token);
+      if(state.token){
+        state.isAuthenticated=true;
+      }
     },
 
 
@@ -124,41 +127,47 @@ function encrypt(pw_plaintext, user) {
   pw_plaintext = unorm.nfc(pw_plaintext)
   user = unorm.nfc(user.trim()).toLowerCase()
   var salt = sjcl.codec.utf8String.toBits("fakedoors.com" + user);  // Determenistic unique salt
-  var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) { // PBKDF2 computation, result returned as hexadecimal encoding
-        var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
-        this.encrypt = function () {
-            return hasher.encrypt.apply(hasher, arguments);
-        };
-    });
-    return sjcl.codec.hex.fromBits(key);
+  // PBKDF2 computation, result returned as hexadecimal encoding
+  var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) {
+    var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
+    this.encrypt = function () {
+      return hasher.encrypt.apply(hasher, arguments);
+    };
+  });
+  return sjcl.codec.hex.fromBits(key);
 }
 
 function loginDB(name, pw){
-    axios.post("//localhost:3000/login",{ username:name, pass:pw})
+  var tok;
+  axios.post("//localhost:3000/login",{ username:name, pass:pw})
     .then( (data) => {
-      console.log(data)
       console.log('login successfull')
+      console.log(data)
+      //tok=data.access_token
     })
     .catch(function(err){
       console.log(err)
     });
-  return true;
+  return tok=1;
 }
 
 function registerDB(user, firstname, lastname, pw){
+  var tok;
   axios.post('//localhost:3000/register', {
     username: user,
- 	  email: '',
- 	  firstName: firstname,
- 	  lastName: lastname,
+ 	  email: 'fakedoors@gmx.de',
+ 	  first_name: firstname,
+ 	  last_name: lastname,
  	  pass: pw,
  	  pass_repeat: pw
     })
     .then(function(response){
  	    console.log('register successfull')
+      console.log(data)
+      //tok = data.access_token
     })
     .catch(function(err){
       console.log(err)
     });
-  return true;
+  return tok=1;
 }
