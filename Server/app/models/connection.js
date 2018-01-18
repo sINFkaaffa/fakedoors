@@ -1,7 +1,7 @@
 // Dependencies
 var mysql = require('mysql');
 var importer = require('node-mysql-importer');
-var cfg = require('./cfg/mysql');
+var cfg = require('../cfg/mysql');
 
 // Prepare by configuring importer and MySQL
 var importerCfg = cfg;
@@ -35,7 +35,8 @@ connection.connect(function(err) {
 			// Execute install script
 			importer.importSQL(cfg.installScript).then(() => {
 				console.log(`Database ${db} was successfully installed.`);
-			}).catch( err => {
+			}).catch(err => {
+				connection.query(`DROP '${db}'`);
 				throw new Error("Database creating failed: ${err}");
 			});
 		} else connection.query("USE " + db); // Use existing DB

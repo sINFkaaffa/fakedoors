@@ -54,6 +54,7 @@ CREATE TABLE `users` (
   `Email` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `FirstName` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `LastName` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `IsAdmin` tinyint(1) NOT NULL,
   `Password` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Hashed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -65,10 +66,10 @@ INSERT INTO `products` (`ID`, `Name`, `FullName`, `Price`, `Description`, `Image
 INSERT INTO `purchases` (`ID`, `UserID`, `PaymentID`, `AdressID`, `Data`, `Time`) VALUES
 (1, 0, -1, -1, '', '2018-01-06 21:47:47');
 
-INSERT INTO `users` (`ID`, `Username`, `Email`, `FirstName`, `LastName`, `Password`) VALUES
-(1, 'alexboy', 'alex@roidl.de', 'Alexander', 'Roidl', 'c137'),
-(2, 'test', '', '', '', 'lol'),
-(3, 'alex', '', '', '', 'test');
+-- INSERT INTO `users` (`ID`, `Username`, `Email`, `FirstName`, `LastName`, `IsAdmin`, `Password`) VALUES
+-- (1, 'alexboy', 'alex@roidl.de', 'Alexander', 'Roidl', `0`, 'c137'),
+-- (2, 'test', '', '', '', `0`, 'lol'),
+-- (3, 'alex', '', '', '', `0`, 'test');
 
 /* KEYS */
 
@@ -92,16 +93,16 @@ ALTER TABLE `adresses`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `paymethods`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `purchases`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -44,40 +44,47 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 * Design Framework: Materialize (http://materializecss.com/)
 
 # Server
-* **MySQL Zugangsdaten:** Host='localhost' User='root' Passwort='' *Datenbank wird automatisch erstellt!* **Siehe Server/app/cfg/mysql.js**
+* **MySQL Zugangsdaten Konfiguration unter */Server/app/cfg/mysql.js*!**
+* **Empfohlen:**
+	Nodemon für beständiges Neustarten bei Änderungen während der Entwicklung
+	``` npm install -g nodemon ```
 
 * **Abhängigkeiten installieren:**
-	* ``` npm install -g nodemon ```
 	* ``` cd Server && npm install```
 
 * **Starten:**
-	* ``` cd Server && nodemon npm start``` (_Port 3000_)
+	* ``` cd Server ```
+	* Mit Nodemon:
+		* ``` nodemon npm start```
+	* Ohne Nodemon:
+		* ``` npm start```
 
 * **Requests:**
+	* (**POSTman Kollektion:** /Server/Fakedoors.postman_collection.json)
+
 	* **GET**
 		* / **Statisches Verzeichnis (index.html)**
-		* /products/[seite] z.B. "/products/2" ("Öffentllich")
-			* Parameter durch URL (Siehe Beispiel)
-			* Rückgabe: *JSON*
-		* /account **(Noch nicht implementiert)**
-			* Parameter durch Session
-			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Accountdaten*
-		* /purchases **(Noch nicht implementiert)**
-		 	* Parameter durch Session
-			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Bestellungen*
-		* /adresses **(Noch nicht implementiert)**
-			* Parameter durch Session
-			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Adressen*
-		* /paymethods **(Noch nicht implementiert)**
-			* Parameter durch Session
-			* Rückgabe: *Authentifizierungsfehler* oder *JSON mit Zahlungsmethoden*
-		* /pdf/[bestellungs_id] z.B. "/pdf/13374204242" **(Noch nicht implementiert)**
-			* Parameter durch URL (Siehe Beispiel) und Session
-			* Rückgabe: *PDF-Datei der Bestellung*
+		* **Öffentlich:**
+			* /products/[seite] z.B. "/products/2" ("Öffentllich")
+				* Parameter durch URL (Siehe Beispiel)
+				* Rückgabe: *JSON*
+		* **Geschützt:**
+			* **Token-Übergabe durch Header-Key "x-access-token"**
+			* /account **(Noch nicht implementiert)**
+				* Rückgabe: JSON
+			* /purchases
+				* Rückgabe: JSON
+			* /adresses
+				* Rückgabe: JSON
+			* /paymethods
+				* Rückgabe: JSON
+			* /pdf/[bestellungs_id] z.B. "/pdf/13374204242" **(Noch nicht implementiert)**
+				* Parameter durch URL (Siehe Beispiel)
+				* Rückgabe: PDF-Datei
 	* **POST**
 		* /login
-			* Parameter: *user, email, pass* **User oder Email UND Passwort werden benötigt!**
-			* Rückgabe: *Fehler* oder *"Success" String*
+			* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
+			* Rückgabe: JSON **(Enthält TOKEN)**
 		* /register
-			* Parameter: *user, email, first_name, last_name, pass, pass_repeat*
-			* Rückgabe: *Fehler* oder *"Success" String*
+			* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
+			* Rückgabe: JSON
