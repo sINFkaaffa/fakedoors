@@ -49,6 +49,17 @@ export default {
     orderDetail: function(orderId){store.commit('orderDetail', orderId)},
     reqOrderIdBack: function(){store.commit('reqOrderIdBack')},
   },
+  mounted: function(){
+    axios.get("//localhost:3000/purchases", {
+      headers: { 'x-access-key' : store.state.token }
+    })
+      .then( (data) => {
+      store.state.orders = data.data.data;
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+  },
 
 }
 </script>

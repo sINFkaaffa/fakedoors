@@ -1,5 +1,5 @@
 <template>
-<button v-on:click="addIndex"><i class="material-icons right">shopping_cart</i>add</button>
+  <button v-on:click="addIndex"><i class="material-icons right">shopping_cart</i>add</button>
 </template>
 
 <script>

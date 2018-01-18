@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    firstName: "",
+    firstName: "Siegfried",
     lastName: "",
     userName: "",
     pw: "",
@@ -16,10 +16,6 @@ export default new Vuex.Store({
     pay: "",
     token:"",
     isAuthenticated: false,
-
-    customer:[
-      {customerId: 12, pwHash: 48, userName: "Siggi", lastName: "Huber", firstName: "Siegfried", dimension:"C-132", planet: "Earth", pay:"last Name"}
-    ],
 
     shop:[],
     cart: [],
@@ -60,7 +56,7 @@ export default new Vuex.Store({
     },
     einlogen: state => {
       state.pw = encrypt(state.pw, state.userName);
-      state.token=loginDB(state.loginName, state.pw);
+      state.token=loginDB(state.loginName, state.pw); //Zuweisung wenn geht
       console.log(state.token);
       if(state.token){
         state.isAuthenticated=true
@@ -68,7 +64,7 @@ export default new Vuex.Store({
     },
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
-      state.token=registerDB(state.loginName, state.firstName, state.lastName, state.pw);
+      state.token=registerDB(state.loginName, state.firstName, state.lastName, state.pw); //Zuweisung wenn geht
       console.log(state.token);
       if(state.token){
         state.isAuthenticated=true;
@@ -114,6 +110,7 @@ export default new Vuex.Store({
 
     orderDetail: (state, orderId) =>{
       state.reqOrderId = orderId
+      //Request orderDetails
     },
     reqOrderIdBack: (state) =>{
       state.reqOrderId = -1
@@ -138,21 +135,22 @@ function encrypt(pw_plaintext, user) {
 }
 
 function loginDB(name, pw){
-  var tok;
+  var tok; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
   axios.post("//localhost:3000/login",{ username:name, pass:pw})
     .then( (data) => {
       console.log('login successfull')
       console.log(data)
-      //tok=data.access_token
+      //state.firstName=data.firstName
+      //state.token=data.x-access-key
     })
     .catch(function(err){
       console.log(err)
     });
-  return tok=1;
+  return tok=1; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
 }
 
 function registerDB(user, firstname, lastname, pw){
-  var tok;
+  var tok; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
   axios.post('//localhost:3000/register', {
     username: user,
  	  email: 'fakedoors@gmx.de',
@@ -164,10 +162,11 @@ function registerDB(user, firstname, lastname, pw){
     .then(function(response){
  	    console.log('register successfull')
       console.log(data)
-      //tok = data.access_token
+      //state.firstName=data.firstName
+      //state.token=data.x-access-key
     })
     .catch(function(err){
       console.log(err)
     });
-  return tok=1;
+  return tok=1; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
 }

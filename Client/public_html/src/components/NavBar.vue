@@ -13,19 +13,19 @@
                 <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
               </li>
               <li>
-                <p id="benutzer" v-if="gelogt">Hello, {{customer[0].firstName}}</p>
+                <p id="benutzer" v-if="gelogt">Hello, {{name}}</p>
               </li>
               <li>
                 <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
               </li>
               <li>
                 <router-link  v-bind:to="'/'" v-if="gelogt" >
-                  <i class="middle material-icons" alt="Shopping Cart" @click="logout">exit_to_app</i>
+                  <i class="middle material-icons" @click="logout">exit_to_app</i>
                 </router-link>
               </li>
               <li>
                 <router-link v-bind:to="'/warenkorb'">
-                  <i class="middle material-icons" alt="Shopping Cart">shopping_cart</i>
+                  <i class="middle material-icons">shopping_cart</i>
                   <p id="navCartCount" v-if="cartLength!=0">{{cartLength}}</p>
                 </router-link>
               </li>
@@ -51,8 +51,8 @@ export default {
     gelogt(){
       return store.state.isAuthenticated
     },
-    customer(){
-      return store.state.customer
+    name(){
+      return store.state.firstName
     },
   },
   methods: {
