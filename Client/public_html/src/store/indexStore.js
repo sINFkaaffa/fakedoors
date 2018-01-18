@@ -15,6 +15,7 @@ export default new Vuex.Store({
     dimension: "Dimension",
     planet: "Planet",
     pay: "",
+    token:"",
     isAuthenticated: false,
     customerId: 0,
     customer:[
@@ -63,12 +64,12 @@ export default new Vuex.Store({
     einlogen: state => {
       state.pw = encrypt(state.pw, state.userName);
       console.log(state.pw);
-      state.isAuthenticated=loginDB(state.pw,state.loginName);
+      state.isAuthenticated=loginDB(state.loginName, state.pw);
     },
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
       console.log(state.pw);
-      state.isAuthenticated=true
+      state.isAuthenticated=registerDB(state.loginName, state.firstName, state.lastName, state.pw);
     },
 
 
@@ -122,24 +123,39 @@ var rounds = 10;
 function encrypt(pw_plaintext, user) {
   pw_plaintext = unorm.nfc(pw_plaintext)
   user = unorm.nfc(user.trim()).toLowerCase()
-
-// Determenistic unique salt
-  var salt = sjcl.codec.utf8String.toBits("fakedoors.com" + user);
-
-// PBKDF2 computation, result returned as hexadecimal encoding
-  var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) {
+  var salt = sjcl.codec.utf8String.toBits("fakedoors.com" + user);  // Determenistic unique salt
+  var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) { // PBKDF2 computation, result returned as hexadecimal encoding
         var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
         this.encrypt = function () {
             return hasher.encrypt.apply(hasher, arguments);
         };
     });
-
     return sjcl.codec.hex.fromBits(key);
 }
 
 function loginDB(name, pw){
-    axios.post("//localhost:3000/login",["state.loginName","state.pw"]).then( (data) => {
+    axios.post("//localhost:3000/login",{ username:name, pass:pw})
+    .then( (data) => {
       console.log(data)
+      console.log('login successfull')
+    })
+    .catch(function(err){
+      console.log(err)
+    });
+  return true;
+}
+
+function registerDB(user, firstname, lastname, pw){
+  axios.post('//localhost:3000/register', {
+    username: user,
+ 	  email: '',
+ 	  firstName: firstname,
+ 	  lastName: lastname,
+ 	  pass: pw,
+ 	  pass_repeat: pw
+    })
+    .then(function(response){
+ 	    console.log('register successfull')
     })
     .catch(function(err){
       console.log(err)

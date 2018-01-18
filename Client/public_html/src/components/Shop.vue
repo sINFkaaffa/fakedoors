@@ -40,7 +40,7 @@ export default {
       set(value) {store.commit('pw',value)}
     },
   },
-  mounted: function() 
+  mounted: function(){
 	  	// axios.post('//localhost:3000/register', {
 		// 	user: 'bobmarley',
 		// 	email: 'zweiundvierzig@42.de',
@@ -52,12 +52,13 @@ export default {
 		// 	console.log('register successfull')
 		// });
 
-	  // axios.post('//localhost:3000/login', { user: 'alex42', pass: 'test' })
-	  //   .then(function(response){
-	  //     console.log('login successfull')
-	  //   });
+	   /*axios.post('//localhost:3000/login', { user: 'alex42', pass: 'test' })
+	     .then(function(response){
+	       console.log('login successfull')
+	     });
+       */
 
-    axios.get("//localhost:3000/products/1").then((res) => {
+  /*  axios.get("//localhost:3000/products/1").then((res) => {
 	  var storeData = [];
 
 	  var originalData = res.data;
@@ -74,14 +75,13 @@ export default {
 			  text: product.Description,
 			  image: product.ImagePath/*,
 			  quantity: product.Quantity // NOT IMPLEMENTED YET? */
-		  });
-	  });
-	  console.log(storeData);
+		//  });
+	  //});
+	 // console.log(storeData);
       //this.store.state.shop = data; // NOT WORKING???
 
     axios.get("//localhost:3000/products/1").then( (data) => {
-      store.state.shop = data.data;
-
+      store.state.shop = data.data.data;
     })
     .catch(function(err){
       console.log(err)
