@@ -1,28 +1,124 @@
-'use static';
-
 /**
  * Module dependencies.
  */
-
-var security = require('./security');
+var mysql	 = require('mysql');
+var security = require('../lib/security');
 
 require('../lib/string');
 
 /**
  * Configuration
  */
-
-const shopCfg = require('../cfg/shop');
+const shopCfg  = require('../cfg/shop');
 
 /**
  * Database Model
  */
-module.exports = class DatabaseModel {
+class DatabaseModel {
 	//========================
 	// Constructor
 	//========================
-	constructor(connection) {
-		this._connection = connection;
+	constructor(host, user, password, db) {
+		this._connection = mysql.createConnection({
+			host: host,
+			user: user,
+			password: password,
+			multipleStatements: true
+		});
+
+		this._database = db;
+	}
+
+
+	//========================
+	// Initialize
+	//========================
+	init(callback) {
+		// This is a seperate method to create better readable class structure
+		var connection = this._connection;
+		var database = this._database;
+
+		// Check if database exists already
+		connection.query(`SHOW DATABASES LIKE '${database}'`, function (err, result) {
+			if(!result.length) { // Doesn't exist
+				// Create database
+				connection.query(`
+					CREATE DATABASE ${database};
+					USE ${database}`,
+
+					function (err, result) {
+						// Create tables
+						connection.query(`
+							CREATE TABLE adresses (
+								ID int(11) AUTO_INCREMENT PRIMARY KEY,
+								UserID int(11),
+								Name varchar(64),
+								Street varchar(128),
+								City varchar(64),
+								ZIP int(11),
+								Dimension varchar(64),
+								Planet varchar(64),
+								Additional varchar(256)
+							);
+
+							CREATE TABLE products (
+							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
+							  Name char(64) COMMENT 'Short description',
+							  FullName varchar(128),
+							  Price mediumint(9),
+							  Description text,
+							  ImagePath tinytext,
+							  Quantity int(11)
+							);
+
+							CREATE TABLE paymethods (
+							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
+							  UserID int(11),
+							  Type enum('Paypal','Bank','Bitcoin','Bill'),
+							  Data mediumtext COMMENT 'JSON'
+							);
+
+							CREATE TABLE purchases (
+							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
+							  UserID int(11),
+							  PaymentID int(11),
+							  AdressID int(11),
+							  Data mediumtext COMMENT 'JSON (Product, Quantity)',
+							  Time datetime DEFAULT CURRENT_TIMESTAMP
+							);
+
+							CREATE TABLE users (
+							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
+							  Username varchar(64),
+							  Email varchar(128),
+							  FirstName varchar(64),
+							  LastName varchar(64),
+							  IsAdmin tinyint(1),
+							  Password varchar(512) COMMENT 'Hashed'
+						  )`);
+					}
+				)
+			}
+			else { // Already exists, so use it
+				connection.query(`USE ${database}`);
+			}
+		});
+	}
+
+
+	//========================
+	// Clear (all tables)
+	//========================
+	clear() {
+		this._connection.query(`
+			TRUNCATE TABLE users;
+			TRUNCATE TABLE products;
+			TRUNCATE TABLE adresses;
+			TRUNCATE TABLE purchases;
+			TRUNCATE TABLE paymethods`, function(err, fields) {
+				if(err) throw err;
+				console.log("All tables cleared");
+			});
 	}
 
 
@@ -87,28 +183,39 @@ module.exports = class DatabaseModel {
 	// Login user
 	//========================
 	loginUser(username, email, password, callback) {
-		// Check values
-		if(!((username || email) && password))
-			return callback("Empty values");
+		if(!password) return callback("Empty values"); // No password given
 
 		var connection = this._connection;
 
-		// Trim and escape
-		username = username.trim();
-		username = connection.escape(username);
+		var columnName;
 
-		// Check database for user (based either on name or email)
-		var sql = `SELECT ID,Password FROM users WHERE Username=${username}`;
-		if(email) {
-			// Trim and escape (again)
+		// Check/use username/pw
+		if(username) {
+			username = username.trim();
+			username = connection.escape(username);
+
+			columnName = "Username";
+		} else if(email) {
 			email = email.trim();
 			email = connection.escape(email);
 
-			sql += ` OR Email=${email}`;
+			columnName = "Email";
 		}
 
+		// Neither username nor email given
+		if(!columnName)
+			return callback("Empty values");
+
+		// Create SQL statement
+		var checkValue = username ? username : email;
+		var condition = `${columnName}=${checkValue}`;
+		var sql = `SELECT ID,Password FROM users WHERE ${condition}`;
+
+		// Run SQL statement
 		connection.query(sql, function(err, result, fields) {
-			var authError = "Wrong E-Mail or password"; // No special error to avoid abuse
+			if(err) throw err;
+
+			var authError = `Wrong ${columnName} or password`; // No special error to avoid abuse
 
 			// User not found
 			if(!result || !result.length) return callback(authError);
@@ -157,13 +264,32 @@ module.exports = class DatabaseModel {
 
 
 	//========================
+	// Get user by ID
+	//========================
+	getUserById(id, callback) {
+		var sql = `SELECT Username,Email,FirstName,LastName,IsAdmin FROM users WHERE ID=${id}`;
+		this._connection.query(sql, function(err, result) {
+			if(err) throw err;
+
+			callback(null, {
+				username: result[0].Username,
+				email: result[0].Email,
+				firstName: result[0].FirstName,
+				lastName: result[0].LastName,
+				admin: result[0].IsAdmin
+			});
+		});
+	}
+
+
+	//========================
 	// Get purchases
 	//========================
-	getPurchases(userId, callback) { // TODO: Extend
-		var sql = `SELECT * FROM purchases WHERE UserID='${userId}'`; // TODO: Use JOINs
-		this._connection.query(sql, function (err, result, fields) {
+	getPurchases(user, callback) { // TODO: Extend
+		var sql = `SELECT * FROM purchases WHERE UserID='${user.id}'`; // TODO: Use JOINs
+		this._connection.query(sql, function (err, result) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
 
@@ -171,11 +297,11 @@ module.exports = class DatabaseModel {
 	//========================
 	// Get adresses
 	//========================
-	getAdresses(userId, callback) { // TODO: Extend
-		var sql = `SELECT * FROM adresses WHERE UserID='${userId}'`; // TODO: Use JOINs
+	getAdresses(user, callback) { // TODO: Extend
+		var sql = `SELECT * FROM adresses WHERE UserID='${user.id}'`; // TODO: Use JOINs
 		this._connection.query(sql, function (err, result, fields) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
 
@@ -183,11 +309,28 @@ module.exports = class DatabaseModel {
 	//========================
 	// Get pay methods
 	//========================
-	getPayMethods(userId, callback) {
-		var sql = `SELECT * FROM paymethods WHERE UserID='${userId}'`;
+	getPayMethods(user, callback) {
+		var sql = `SELECT * FROM paymethods WHERE UserID='${user.id}'`;
 		this._connection.query(sql, function (err, result, fields) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
+}
+
+// Export function to provide config option with safe usage
+module.exports = function(cfg, callback) {
+	var host = cfg.host;
+	var user = cfg.user;
+	var password = cfg.password;
+	var db = cfg.database;
+
+	// Don't apply 'truthy' check on password to allow empty string
+	if(!(host && user && password != null && db))
+		throw new Error("Invalid configuration");
+
+	var database = new DatabaseModel(host, user, password, db);
+	database.init();
+
+	return database;
 }

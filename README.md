@@ -50,10 +50,12 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 	``` npm install -g nodemon ```
 
 * **Abhängigkeiten installieren:**
-	* ``` cd Server && npm install```
+	* ``` npm install```
+
+* **Datenbank füllen:**
+	* ``` npm run fill```
 
 * **Starten:**
-	* ``` cd Server ```
 	* Mit Nodemon:
 		* ``` nodemon npm start```
 	* Ohne Nodemon:
@@ -70,7 +72,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 				* Rückgabe: *JSON*
 		* **Geschützt:**
 			* **Token-Übergabe durch Header-Key "x-access-token"**
-			* /account **(Noch nicht implementiert)**
+			* /account
 				* Rückgabe: JSON
 			* /purchases
 				* Rückgabe: JSON
@@ -89,4 +91,3 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 
 			* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
 			* Rückgabe: JSON
-
