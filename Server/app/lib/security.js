@@ -1,16 +1,13 @@
 /**
  * Dependencies
  */
-var bcrypt 	= require('bcrypt');
-var jwt 	= require('jsonwebtoken');
-
-/**
- * Configuration
- */
 const securityCfg = require('../cfg/security');
 
+var bcrypt 		  = require('bcrypt');
+var jwt 		  = require('jsonwebtoken');
+
 /**
- * Security model
+ * Security functions
  */
 module.exports = {
 	//========================

@@ -1,8 +1,7 @@
 {
 	"info": {
 		"name": "Fakedoors",
-		"_postman_id": "6a0bd9b7-4f9e-bdc2-f250-fa096174d1bd",
-		"description": "",
+		"_postman_id": "fda8c363-f4fb-3c2b-4f18-061580d7d977",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -16,7 +15,29 @@
 						"value": "application/x-www-form-urlencoded"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "1alex_",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "pass",
+							"value": "passw",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "alex@roidl.org",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
 				"url": {
 					"raw": "localhost:3000/login",
 					"host": [
@@ -47,37 +68,31 @@
 						{
 							"key": "username",
 							"value": "alex_",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "email",
 							"value": "alex@roidl.de",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "first_name",
 							"value": "Alex",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "last_name",
 							"value": "Roidl",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "pass",
 							"value": "passw",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "pass_repeat",
 							"value": "passw",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -91,8 +106,7 @@
 					"path": [
 						"register"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -101,7 +115,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:3000/products/1",
 					"host": [
@@ -112,8 +129,7 @@
 						"products",
 						"1"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -127,7 +143,10 @@
 						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZXhwIjoxNDQwLCJpYXQiOjE1MTYyMjk2MDZ9.oI2bTlJJ7wQ-ATmuoopHCEdDO1UJqzSJrxh2uKo9Qo0"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:3000/purchases",
 					"host": [
@@ -137,8 +156,7 @@
 					"path": [
 						"purchases"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -152,7 +170,10 @@
 						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:3000/adresses",
 					"host": [
@@ -162,8 +183,7 @@
 					"path": [
 						"adresses"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -177,7 +197,10 @@
 						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:3000/paymethods",
 					"host": [
@@ -187,8 +210,7 @@
 					"path": [
 						"paymethods"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -202,7 +224,10 @@
 						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:3000/pdf/0",
 					"host": [
@@ -213,8 +238,7 @@
 						"pdf",
 						"0"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}
