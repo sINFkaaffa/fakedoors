@@ -14,37 +14,17 @@
         </div>
       </form>
       <a class="btn waves-effect waves-light col s3 offset-s4" id="abort" type="submit" href="index.html">Abort</a>
-      <button class="btn waves-effect waves-light col s3 offset-s4" type="submit" v-on:click="einlogen">Login</button>
-    </div>
+      <router-link v-bind:to="'/'" id="loginBtn" class="waves-effect waves-light btn" >
+        <p@click="einlogen">Login</p></router-link>
+    </div
+    <p>
+      {{loginPw}}
+    </p>
   </div>
 </template>
 
 <script>
 import store from '../store/indexStore'
-
-/*new Vue({
-computed: {
-  isAuthenticated: function () {
-    return this.$store.getters.isAuthenticated()
-  },
-  data() {
-    return {this.$data.userID}
-  }
-},
-methods: {
-  login() {
-    this.$store.dispatch('login', this.$data.userID, requestOptions)
-  }
-}
-  data(){
-    userID: 0
-  },
-
-  data () {
-    return {
-      gelogt: false}
-  },
-})*/
 
 export default {
   name: 'login',
@@ -55,8 +35,8 @@ export default {
       set(value) {store.commit('loginName',value)}
     },
     loginPw: {
-      get() {return store.state.loginPw},
-      set(value) {store.commit('loginPw',value)}
+      get() {return store.state.pw},
+      set(value) {store.commit('pw',value)}
     },
   },
   methods:{

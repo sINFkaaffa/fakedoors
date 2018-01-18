@@ -66,6 +66,7 @@ INSERT INTO `products` (`ID`, `Name`, `FullName`, `Price`, `Description`, `Image
 INSERT INTO `purchases` (`ID`, `UserID`, `PaymentID`, `AdressID`, `Data`, `Time`) VALUES
 (1, 0, -1, -1, '', '2018-01-06 21:47:47');
 
+
 -- INSERT INTO `users` (`ID`, `Username`, `Email`, `FirstName`, `LastName`, `IsAdmin`, `Password`) VALUES
 -- (1, 'alexboy', 'alex@roidl.de', 'Alexander', 'Roidl', `0`, 'c137'),
 -- (2, 'test', '', '', '', `0`, 'lol'),
@@ -94,6 +95,7 @@ ALTER TABLE `adresses`
 
 ALTER TABLE `products`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
 
 ALTER TABLE `paymethods`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;

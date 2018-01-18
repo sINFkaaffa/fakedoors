@@ -86,5 +86,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 			* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
 			* Rückgabe: JSON **(Enthält TOKEN)**
 		* /register
+
 			* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
 			* Rückgabe: JSON
+
