@@ -40,9 +40,48 @@ export default {
       set(value) {store.commit('pw',value)}
     },
   },
-  mounted: function() {
+  mounted: function() 
+	  	// axios.post('//localhost:3000/register', {
+		// 	user: 'bobmarley',
+		// 	email: 'zweiundvierzig@42.de',
+		// 	first_name: 'Alex',
+		// 	last_name: 'Roidl',
+		// 	pass: 'testpassword',
+		// 	pass_repeat: 'testpassword'
+		// }).then(function(response){
+		// 	console.log('register successfull')
+		// });
+
+	  // axios.post('//localhost:3000/login', { user: 'alex42', pass: 'test' })
+	  //   .then(function(response){
+	  //     console.log('login successfull')
+	  //   });
+
+    axios.get("//localhost:3000/products/1").then((res) => {
+	  var storeData = [];
+
+	  var originalData = res.data;
+	  console.log(originalData);
+
+	  // Iterate through responded data to fit client values
+	  res.data.forEach(function(product) {
+		  // Save new object to array
+		  storeData.push({
+			  itemId: product.ID,
+			  name: product.Name,
+			  //fullName: product.FullName, // NOT IMPLEMENTED YET?
+			  price: product.Price,
+			  text: product.Description,
+			  image: product.ImagePath/*,
+			  quantity: product.Quantity // NOT IMPLEMENTED YET? */
+		  });
+	  });
+	  console.log(storeData);
+      //this.store.state.shop = data; // NOT WORKING???
+
     axios.get("//localhost:3000/products/1").then( (data) => {
       store.state.shop = data.data;
+
     })
     .catch(function(err){
       console.log(err)
