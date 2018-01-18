@@ -2,245 +2,295 @@
 	"info": {
 		"name": "Fakedoors",
 		"_postman_id": "fda8c363-f4fb-3c2b-4f18-061580d7d977",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
+			"name": "Public",
+			"description": "",
+			"item": [
+				{
+					"name": "Accounting",
+					"description": "",
+					"item": [
 						{
-							"key": "username",
-							"value": "1alex_",
-							"description": "",
-							"type": "text"
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "1alex_",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "pass",
+											"value": "passw",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "alex@roidl.org",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:3000/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"login"
+									]
+								},
+								"description": "\t"
+							},
+							"response": []
 						},
 						{
-							"key": "pass",
-							"value": "passw",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "alex@roidl.org",
-							"description": "",
-							"type": "text"
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "alex_",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "alex@roidl.de",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "Alex",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Roidl",
+											"type": "text"
+										},
+										{
+											"key": "pass",
+											"value": "passw",
+											"type": "text"
+										},
+										{
+											"key": "pass_repeat",
+											"value": "passw",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:3000/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
 						}
-					]
-				},
-				"url": {
-					"raw": "localhost:3000/login",
-					"host": [
-						"localhost"
 					],
-					"port": "3000",
-					"path": [
-						"login"
-					]
+					"_postman_isSubFolder": true
 				},
-				"description": "\t"
-			},
-			"response": []
-		},
-		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "username",
-							"value": "alex_",
-							"type": "text"
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
 						},
-						{
-							"key": "email",
-							"value": "alex@roidl.de",
-							"type": "text"
-						},
-						{
-							"key": "first_name",
-							"value": "Alex",
-							"type": "text"
-						},
-						{
-							"key": "last_name",
-							"value": "Roidl",
-							"type": "text"
-						},
-						{
-							"key": "pass",
-							"value": "passw",
-							"type": "text"
-						},
-						{
-							"key": "pass_repeat",
-							"value": "passw",
-							"type": "text"
+						"url": {
+							"raw": "localhost:3000/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"1"
+							]
 						}
-					]
-				},
-				"url": {
-					"raw": "localhost:3000/register",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"register"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Products",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2Mjk3NTg4LCJleHAiOjE1MTYzODM5ODh9.VNDENCtaoM84AOqRV4ZqSM-B7jvWPX_6Ywg-jeYdU5w"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/account",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3000/products/1",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"products",
-						"1"
-					]
+				{
+					"name": "Purchases",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZXhwIjoxNDQwLCJpYXQiOjE1MTYyMjk2MDZ9.oI2bTlJJ7wQ-ATmuoopHCEdDO1UJqzSJrxh2uKo9Qo0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adresses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/adresses",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"adresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay methods",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/paymethods",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"paymethods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PDF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3000/pdf/0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pdf",
+								"0"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Purchases",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZXhwIjoxNDQwLCJpYXQiOjE1MTYyMjk2MDZ9.oI2bTlJJ7wQ-ATmuoopHCEdDO1UJqzSJrxh2uKo9Qo0"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3000/purchases",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"purchases"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Adresses",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3000/adresses",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"adresses"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Pay methods",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3000/paymethods",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"paymethods"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PDF",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3000/pdf/0",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"pdf",
-						"0"
-					]
-				}
-			},
-			"response": []
+			"name": "Admin",
+			"description": "",
+			"item": []
 		}
 	]
 }

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app/server.js"
+    "start": "node ./app/server.js",
+    "fill": "node ./app/generator.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

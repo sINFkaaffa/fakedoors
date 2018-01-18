@@ -33,7 +33,7 @@ class DatabaseModel {
 	//========================
 	// Initialize
 	//========================
-	init() {
+	init(callback) {
 		// This is a seperate method to create better readable class structure
 		var connection = this._connection;
 		var database = this._database;
@@ -95,7 +95,7 @@ class DatabaseModel {
 							  LastName varchar(64),
 							  IsAdmin tinyint(1),
 							  Password varchar(512) COMMENT 'Hashed'
-						  	)`);
+						  )`);
 					}
 				)
 			}
@@ -103,6 +103,22 @@ class DatabaseModel {
 				connection.query(`USE ${database}`);
 			}
 		});
+	}
+
+
+	//========================
+	// Clear (all tables)
+	//========================
+	clear() {
+		this._connection.query(`
+			TRUNCATE TABLE users;
+			TRUNCATE TABLE products;
+			TRUNCATE TABLE adresses;
+			TRUNCATE TABLE purchases;
+			TRUNCATE TABLE paymethods`, function(err, fields) {
+				if(err) throw err;
+				console.log("All tables cleared");
+			});
 	}
 
 
@@ -248,13 +264,32 @@ class DatabaseModel {
 
 
 	//========================
+	// Get user by ID
+	//========================
+	getUserById(id, callback) {
+		var sql = `SELECT Username,Email,FirstName,LastName,IsAdmin FROM users WHERE ID=${id}`;
+		this._connection.query(sql, function(err, result) {
+			if(err) throw err;
+
+			callback(null, {
+				username: result[0].Username,
+				email: result[0].Email,
+				firstName: result[0].FirstName,
+				lastName: result[0].LastName,
+				admin: result[0].IsAdmin
+			});
+		});
+	}
+
+
+	//========================
 	// Get purchases
 	//========================
-	getPurchases(userId, callback) { // TODO: Extend
-		var sql = `SELECT * FROM purchases WHERE UserID='${userId}'`; // TODO: Use JOINs
-		this._connection.query(sql, function (err, result, fields) {
+	getPurchases(user, callback) { // TODO: Extend
+		var sql = `SELECT * FROM purchases WHERE UserID='${user.id}'`; // TODO: Use JOINs
+		this._connection.query(sql, function (err, result) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
 
@@ -262,11 +297,11 @@ class DatabaseModel {
 	//========================
 	// Get adresses
 	//========================
-	getAdresses(userId, callback) { // TODO: Extend
-		var sql = `SELECT * FROM adresses WHERE UserID='${userId}'`; // TODO: Use JOINs
+	getAdresses(user, callback) { // TODO: Extend
+		var sql = `SELECT * FROM adresses WHERE UserID='${user.id}'`; // TODO: Use JOINs
 		this._connection.query(sql, function (err, result, fields) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
 
@@ -274,17 +309,17 @@ class DatabaseModel {
 	//========================
 	// Get pay methods
 	//========================
-	getPayMethods(userId, callback) {
-		var sql = `SELECT * FROM paymethods WHERE UserID='${userId}'`;
+	getPayMethods(user, callback) {
+		var sql = `SELECT * FROM paymethods WHERE UserID='${user.id}'`;
 		this._connection.query(sql, function (err, result, fields) {
 			if(err) throw err;
-			callback(result);
+			callback(null, result);
 		});
 	}
 }
 
 // Export function to provide config option with safe usage
-module.exports = function(cfg) {
+module.exports = function(cfg, callback) {
 	var host = cfg.host;
 	var user = cfg.user;
 	var password = cfg.password;
@@ -296,5 +331,6 @@ module.exports = function(cfg) {
 
 	var database = new DatabaseModel(host, user, password, db);
 	database.init();
+
 	return database;
 }
