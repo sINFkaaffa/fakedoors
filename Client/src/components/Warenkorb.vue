@@ -9,10 +9,10 @@
           <btnRemove class="waves-effect waves-light btn cartItemBtnRemove"
             v-bind:cartIndex="index" v-on:remove="remove"></btnRemove>
         	<img src="i.image" alt="no piture"/>
-        	<h5 class="cartitemName">{{i.Name}}</h5>
-        	<h5 class="cartitemTextCount">Quantity: {{i.St}}</h5>
-        	<h6 class="cartitemPrice">a {{i.Price}} SCM</h6>
-        	<h5 class="cartitemTotal">Total: {{i.Total}} SCM</h5>
+        	<h5 class="cartitemName">{{i.name}}</h5>
+        	<h5 class="cartitemTextCount">Quantity: {{i.st}}</h5>
+        	<h6 class="cartitemPrice">a {{i.price}} SCM</h6>
+        	<h5 class="cartitemTotal">Total: {{i.total}} SCM</h5>
         </div>
     </div>
     <div class="cartNoItem" v-if="cart.length===0">
