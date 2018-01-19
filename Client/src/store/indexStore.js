@@ -123,6 +123,7 @@ function encrypt(pw_plaintext, user) {
   pw_plaintext = unorm.nfc(pw_plaintext)
   user = unorm.nfc(user.trim()).toLowerCase()
   var salt = sjcl.codec.utf8String.toBits("fakedoors.com" + user);  // Determenistic unique salt
+
   // PBKDF2 computation, result returned as hexadecimal encoding
   var key = sjcl.misc.pbkdf2(pw_plaintext, salt, rounds, 32 * 8, function(key) {
     var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);

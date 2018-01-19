@@ -6,6 +6,7 @@ import Warenkorb from '@/components/Warenkorb'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Orders from '@/components/Orders'
+import User from '@/components/User'
 
 
 Vue.use(Router)
@@ -36,6 +37,11 @@ export default new Router({
       path: '/orders',
       name: 'orders',
       component: Orders
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User
     }
   ]
 })

@@ -13,7 +13,8 @@
                 <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
               </li>
               <li>
-                <p id="benutzer" v-if="gelogt">Hello, {{name}}</p>
+                <!--<p id="benutzer" v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</p>-->
+                <router-link v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</router-link>
               </li>
               <li>
                 <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>

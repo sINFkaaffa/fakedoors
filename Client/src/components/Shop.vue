@@ -27,7 +27,7 @@ export default {
   computed: {
     shop(){
       return store.state.shop
-    },
+    }
   },
   mounted: function(){
     axios.get("//localhost:3000/products/1")
