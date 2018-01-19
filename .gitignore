@@ -1,17 +1,17 @@
-Client/public_html/.DS_Store
-Client/public_html/node_modules/
-Client/public_html//dist/
-Client/public_html/npm-debug.log*
-Client/public_html/yarn-debug.log*
-Client/public_html/yarn-error.log*
+Client/.DS_Store
+Client/node_modules/
+Client/dist/
+Client/npm-debug.log*
+Client/yarn-debug.log*
+Client/pyarn-error.log*
 
 # Editor directories and files
-Client/public_html/.idea
-Client/public_html/.vscode
-Client/public_html/*.suo
-Client/public_html/*.ntvs*
-Client/public_html/*.njsproj
-Client/public_html/*.sln
+Client/.idea
+Client/.vscode
+Client/*.suo
+Client/*.ntvs*
+Client/*.njsproj
+Client/*.sln
 
 Server/node_modules/
 Server/package-lock.json
