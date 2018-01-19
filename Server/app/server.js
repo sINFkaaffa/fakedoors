@@ -10,7 +10,7 @@ var path 		= require('path');
 
 var security	= require('./lib/security');
 
-var database 	= require('./models/database')(mySQLCfg);
+var database 	= require('./handler/database')(mySQLCfg);
 
 /**
  * Middleware

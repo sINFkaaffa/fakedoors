@@ -22,6 +22,17 @@ module.exports = {
 	},
 	products: {
 		min: 300,
-		max: 300
+		max: 300,
+
+		price: {
+			min: 5,
+			max: 1000,
+			digits: 1
+		},
+
+		quantity: {
+			min: 0,
+			max: 200
+		}
 	}
 }

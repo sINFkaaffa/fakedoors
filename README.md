@@ -52,8 +52,13 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 * **Abhängigkeiten installieren:**
 	* ``` npm install```
 
-* **Datenbank füllen:**
-	* ``` npm run fill```
+* **Generator:**
+	* **Konfiguration:**
+		* ``` /app/cfg/generator.js```
+	* **Datenbank befüllen:**
+		* ``` npm run fill```
+	* **Datenbank leeren:**
+		* ``` npm run empty```
 
 * **Starten:**
 	* Mit Nodemon:

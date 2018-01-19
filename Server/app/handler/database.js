@@ -1,24 +1,26 @@
 /**
  * Module dependencies.
  */
-var mysql	 = require('mysql');
-var security = require('../lib/security');
+const shopCfg  		= require('../cfg/shop');
+
+const EventEmitter  = require('events').EventEmitter;
+
+var mysql	 		= require('mysql');
+var security 		= require('../lib/security');
 
 require('../lib/string');
 
-/**
- * Configuration
- */
-const shopCfg  = require('../cfg/shop');
 
 /**
  * Database Model
  */
-class DatabaseModel {
+class DatabaseModel extends EventEmitter {
 	//========================
 	// Constructor
 	//========================
 	constructor(host, user, password, db) {
+		super();
+
 		this._connection = mysql.createConnection({
 			host: host,
 			user: user,
@@ -29,12 +31,18 @@ class DatabaseModel {
 		this._database = db;
 	}
 
+	escape(str) {
+		return this._connection.escape(str);
+	}
+
 
 	//========================
 	// Initialize
 	//========================
 	init(callback) {
-		// This is a seperate method to create better readable class structure
+		// This was made a seperate method to create better readable class structure
+		var self = this;
+
 		var connection = this._connection;
 		var database = this._database;
 
@@ -95,30 +103,31 @@ class DatabaseModel {
 							  LastName varchar(64),
 							  IsAdmin tinyint(1),
 							  Password varchar(512) COMMENT 'Hashed'
-						  )`);
+						  )`, function(err, results) {
+							  self.emit('ready'); // Fire ready event
+						  });
 					}
 				)
 			}
 			else { // Already exists, so use it
-				connection.query(`USE ${database}`);
+				connection.query(`USE ${database}`, function(err, result) {
+					self.emit('ready'); // Fire ready event
+				});
 			}
 		});
 	}
 
 
 	//========================
-	// Clear (all tables)
+	// Empty (all tables)
 	//========================
-	clear() {
+	empty() {
 		this._connection.query(`
 			TRUNCATE TABLE users;
 			TRUNCATE TABLE products;
 			TRUNCATE TABLE adresses;
 			TRUNCATE TABLE purchases;
-			TRUNCATE TABLE paymethods`, function(err, fields) {
-				if(err) throw err;
-				console.log("All tables cleared");
-			});
+			TRUNCATE TABLE paymethods`);
 	}
 
 
@@ -183,28 +192,12 @@ class DatabaseModel {
 	// Login user
 	//========================
 	loginUser(username, email, password, callback) {
-		if(!password) return callback("Empty values"); // No password given
+		if(!((username || email) && password)) return callback("Empty values");
 
 		var connection = this._connection;
 
-		var columnName;
-
-		// Check/use username/pw
-		if(username) {
-			username = username.trim();
-			username = connection.escape(username);
-
-			columnName = "Username";
-		} else if(email) {
-			email = email.trim();
-			email = connection.escape(email);
-
-			columnName = "Email";
-		}
-
-		// Neither username nor email given
-		if(!columnName)
-			return callback("Empty values");
+		var columnName = "Username";
+		if(email) columnName = "Email";
 
 		// Create SQL statement
 		var checkValue = username ? username : email;
@@ -235,17 +228,37 @@ class DatabaseModel {
 
 
 	//========================
+	// Add product
+	//========================
+	addProduct(user, name, fullName, price, description, imagePath, quantity, callback) {
+		if(user && !user.admin) {
+			if(typeof callback === 'function')
+				callback("User must be an admin to do that");
+			return;
+		}
+
+		var connection = this._connection;
+
+		// Prepare values
+		name = connection.escape(name.trim());
+		fullName = connection.escape(fullName.trim());
+		price = connection.escape(price.trim());
+		description = connection.escape(description.trim());
+		imagePath = connection.escape(imagePath.trim());
+		quantity = connection.escape(quantity.trim());
+
+		// Run query
+		var sql = `INSERT INTO products (ID, Name, FullName, Price, Description, ImagePath, Quantity) VALUES (null, ${name}, ${fullName}, ${price}, ${description}, ${imagePath}, ${quantity})`;
+		connection.query(sql, function(err, result) {
+			if(err) throw err;
+		});
+	}
+
+
+	//========================
 	// Get products
 	//========================
 	getProducts(page, callback) {
-		// Check value
-		if(page == null) throw new Error("Empty values");
-
-		// Validate value
-		page = parseInt(page);
-		if(isNaN(page)) throw new Error("Page must be an integer");
-		if(!page) throw new Error("Page must be greater than zero");
-
 		// Calculations
 		var itemsPerPage = shopCfg.itemsPerPage;
 
@@ -255,10 +268,28 @@ class DatabaseModel {
 		var end = (id + 1) * itemsPerPage;
 
 		// Get products
-		var sql = `SELECT * FROM products WHERE ID BETWEEN '${start}' AND '${end}'`;
+		var sql =
+			`SELECT ID, Name, FullName, Price, Description, ImagePath, Quantity
+			 FROM products
+			 WHERE ID BETWEEN '${start}' AND '${end}'`;
+
 		this._connection.query(sql, function (err, result, fields) {
 			if (err) throw err;
-			callback(null, result);
+
+			var products = [];
+
+			result.forEach(function(product) {
+				products.push({
+					id: product.ID,
+            		name: product.Name,
+					fullName: product.FullName,
+					price: product.Price,
+					description: product.Description,
+					imagePath: product.ImagePath,
+					quantity: product.Quantity
+				})
+			});
+			callback(null, products);
 		});
 	}
 

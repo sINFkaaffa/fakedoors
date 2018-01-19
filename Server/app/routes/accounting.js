@@ -5,11 +5,16 @@ module.exports = function(app, database) {
 	app.post('/login', function (req, res) {
 		var username 	= req.body.username;
 		var email 		= req.body.email;
-		var pass 		= req.body.pass;
+		var password 	= req.body.pass;
 
 		console.log("/login POST request");
 
-		database.loginUser(username, email, pass, function(err, data) {
+		if(username)
+			username = database.escape(username.trim());
+		if(email)
+			email = database.escape(email.trim());
+
+		database.loginUser(username, email, password, function(err, data) {
 			if(err) {
 				res.json({
 					success: false,
