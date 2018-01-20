@@ -1,3 +1,5 @@
+var response = require('../handler/response');
+
 module.exports = function(app, database) {
 	//========================
 	// Login
@@ -16,7 +18,7 @@ module.exports = function(app, database) {
 
 		database.loginUser(username, email, password, function(err, data) {
 			if(err) {
-				res.json({
+				res.status(403).json({
 					success: false,
 					message: err
 				})
@@ -44,7 +46,7 @@ module.exports = function(app, database) {
 
 		console.log("/register POST request");
 
-		database.addUser(username, email, firstName, lastName, pass, passRepeat, function(err) {
+		response(database).register(username, email, firstName, lastName, pass, passRepeat, function(err, data) {
 			if(err) {
 				res.json({
 					success: false,

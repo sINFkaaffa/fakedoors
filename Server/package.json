@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./app/server.js",
-    "fill": "node ./app/generator.js",
-    "empty": "node ./app/generator.js reset"
+	"reset": "node ./app/server.js reset",
+	"safe": "node ./app/server.js safe",
+
+	"generate": "node ./app/generator.js",
+	"root": "node ./app/generator.js root",
+	"empty": "node ./app/generator.js empty"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

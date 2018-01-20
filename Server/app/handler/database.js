@@ -1,15 +1,14 @@
 /**
  * Module dependencies.
  */
+const sql 			= require('../cfg/sql');
 const shopCfg  		= require('../cfg/shop');
-
 const EventEmitter  = require('events').EventEmitter;
 
 var mysql	 		= require('mysql');
 var security 		= require('../lib/security');
 
 require('../lib/string');
-
 
 /**
  * Database Model
@@ -31,6 +30,10 @@ class DatabaseModel extends EventEmitter {
 		this._database = db;
 	}
 
+
+	//========================
+	// Escape
+	//========================
 	escape(str) {
 		return this._connection.escape(str);
 	}
@@ -56,54 +59,7 @@ class DatabaseModel extends EventEmitter {
 
 					function (err, result) {
 						// Create tables
-						connection.query(`
-							CREATE TABLE adresses (
-								ID int(11) AUTO_INCREMENT PRIMARY KEY,
-								UserID int(11),
-								Name varchar(64),
-								Street varchar(128),
-								City varchar(64),
-								ZIP int(11),
-								Dimension varchar(64),
-								Planet varchar(64),
-								Additional varchar(256)
-							);
-
-							CREATE TABLE products (
-							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
-							  Name char(64) COMMENT 'Short description',
-							  FullName varchar(128),
-							  Price mediumint(9),
-							  Description text,
-							  ImagePath tinytext,
-							  Quantity int(11)
-							);
-
-							CREATE TABLE paymethods (
-							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
-							  UserID int(11),
-							  Type enum('Paypal','Bank','Bitcoin','Bill'),
-							  Data mediumtext COMMENT 'JSON'
-							);
-
-							CREATE TABLE purchases (
-							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
-							  UserID int(11),
-							  PaymentID int(11),
-							  AdressID int(11),
-							  Data mediumtext COMMENT 'JSON (Product, Quantity)',
-							  Time datetime DEFAULT CURRENT_TIMESTAMP
-							);
-
-							CREATE TABLE users (
-							  ID int(11) AUTO_INCREMENT PRIMARY KEY,
-							  Username varchar(64),
-							  Email varchar(128),
-							  FirstName varchar(64),
-							  LastName varchar(64),
-							  IsAdmin tinyint(1),
-							  Password varchar(512) COMMENT 'Hashed'
-						  )`, function(err, results) {
+						connection.query(sql.tables.create, function(err, results) {
 							  self.emit('ready'); // Fire ready event
 						  });
 					}
@@ -118,70 +74,93 @@ class DatabaseModel extends EventEmitter {
 	}
 
 
+
 	//========================
-	// Empty (all tables)
+	// Create tables
 	//========================
-	empty() {
-		this._connection.query(`
-			TRUNCATE TABLE users;
-			TRUNCATE TABLE products;
-			TRUNCATE TABLE adresses;
-			TRUNCATE TABLE purchases;
-			TRUNCATE TABLE paymethods`);
+	createTables(callback) {
+		this._connection.query(sql.tables.create, function(err, result) {
+			if(typeof callback === 'function')
+				callback(err);
+		});
+	}
+
+
+	//========================
+	// Delete tables
+	//========================
+	deleteTables(callback) {
+		this._connection.query(sql.tables.drop, function(err, result) {
+			if(typeof callback === 'function')
+				callback(err);
+		});
+	}
+
+
+	//========================
+	// Empty tables
+	//========================
+	emptyTables(callback) {
+		this._connection.query(sql.tables.empty, function(err, result) {
+			if(typeof callback === 'function')
+				return callback(err);
+		});
 	}
 
 
 	//========================
 	// Add user
 	//========================
-	addUser(username, email, firstName, lastName, password, passwordRepeat, callback) {
-		// Check values
-		if(!(username && email && firstName && lastName && password && passwordRepeat))
-			return callback("Empty values");
-
-		if(password != passwordRepeat)
-			return callback("Passwords don't match");
-
-		// Trim values
-		username = username.trim();
-		email = email.trim();
-		firstName = firstName.trim();
-		lastName = lastName.trim();
+	addUser(username, email, firstName, lastName, admin, password, callback) {
+		// Shortcut
+		function _callback(err, data) { if(typeof callback === 'function') callback(err, data); }
 
 		// Validate values (No need to escape them anymore)
 		var usernameRegEx = /^[_a-zA-Z0-9]+$/;
 		var nameRegEx = /^[a-zA-Z]+$/;
 
+		if(username.length < 4)
+			return _callback("Invalid username. Use at least seven characters");
+
+		if(firstName.length < 2)
+			return _callback("Invalid first name. Use at least three characters");
+
+		if(lastName.length < 2)
+			return _callback("Invalid last name. Use at least three characters");
+
 		if(!username.match(usernameRegEx))
-			return callback("Invalid username. Only letters, numbers and underscores allowed");
+			return _callback("Invalid username. Only letters, numbers and underscores allowed");
 
 		if(username.charAt(0) == '_')
-			return callback("Invalid username. First character has to be a letter or number");
+			return _callback("Invalid username. First character has to be a letter or number");
 
 		if(!email.isEmail())
-			return callback("Invalid email format");
+			return _callback("Invalid email format");
 
 		if(!firstName.match(nameRegEx))
-			return callback("Invalid first name. Only letters allowed");
+			return _callback("Invalid first name. Only letters allowed");
 
 		if(!lastName.match(nameRegEx))
-			return callback("Invalid last name. Only letters allowed");
+			return _callback("Invalid last name. Only letters allowed");
+
+		// Bool to 0/1 string
+		admin = (admin ? 1 : 0) + '';
 
 		// Check if user existsname
 		var connection = this._connection;
 
-		var sql = `SELECT 1 FROM users WHERE Username='${username}'`;
-		connection.query(sql, function (err, result, fields) {
+		var _sql = `SELECT 1 FROM users WHERE Username='${username}'`;
+		connection.query(_sql, function (err, result, fields) {
 			if(result && result.length > 0)
-				return callback("Username already exists");
+				return _callback("Username already exists");
 
 			// Doesn't exist yet -> hash password
 			security.hashPassword(password, function(hash) {
 				// Insert user into database
-				var sql = `INSERT INTO users (ID, Username, Email, FirstName, LastName, IsAdmin, Password) VALUES (NULL, '${username}', '${email}', '${firstName}', '${lastName}', '0', '${hash}')`;
-				connection.query(sql, function(err, result, fields) {
+				var __sql = sql.users.add(username, email, firstName, lastName, admin, hash);
+				connection.query(__sql, function(err, result, fields) {
 					if(err) throw err;
-					callback();
+					_callback(null, result.insertId);
 				});
 			});
 		});
@@ -202,10 +181,10 @@ class DatabaseModel extends EventEmitter {
 		// Create SQL statement
 		var checkValue = username ? username : email;
 		var condition = `${columnName}=${checkValue}`;
-		var sql = `SELECT ID,Password FROM users WHERE ${condition}`;
+		var _sql = `SELECT ID,Password FROM users WHERE ${condition}`;
 
 		// Run SQL statement
-		connection.query(sql, function(err, result, fields) {
+		connection.query(_sql, function(err, result, fields) {
 			if(err) throw err;
 
 			var authError = `Wrong ${columnName} or password`; // No special error to avoid abuse
@@ -216,12 +195,37 @@ class DatabaseModel extends EventEmitter {
 			// Compare passwords
 			security.comparePassword(password, result[0].Password, function(success) {
 				if(success) {
-					//console.log(result);
 					var token = security.createToken(result[0].ID);
 					return callback(null, { token: token });
 				}
 				// Passwords don't match
 				callback(authError);
+			});
+		});
+	}
+
+
+	//========================
+	// Get user by ID
+	//========================
+	getUserById(id, callback) {
+		if(typeof callback !== 'function')
+			throw new Error("Callback parameter invalid");
+
+		var connection = this._connection;
+		id = connection.escape(id);
+
+		connection.query(sql.users.fromId(id), function(err, result) {
+			if(err || !result.length)
+				return callback("User not found", {});
+
+			callback(null, {
+				id: id,
+				username: result[0].Username,
+				email: result[0].Email,
+				firstName: result[0].FirstName,
+				lastName: result[0].LastName,
+				admin: result[0].IsAdmin
 			});
 		});
 	}
@@ -248,8 +252,8 @@ class DatabaseModel extends EventEmitter {
 		quantity = connection.escape(quantity.trim());
 
 		// Run query
-		var sql = `INSERT INTO products (ID, Name, FullName, Price, Description, ImagePath, Quantity) VALUES (null, ${name}, ${fullName}, ${price}, ${description}, ${imagePath}, ${quantity})`;
-		connection.query(sql, function(err, result) {
+		var _sql = sql.products.add(name, fullName, price, description, imagePath, quantity);
+		connection.query(_sql, function(err, result) {
 			if(err) throw err;
 		});
 	}
@@ -268,12 +272,12 @@ class DatabaseModel extends EventEmitter {
 		var end = (id + 1) * itemsPerPage;
 
 		// Get products
-		var sql =
+		var _sql =
 			`SELECT ID, Name, FullName, Price, Description, ImagePath, Quantity
 			 FROM products
 			 WHERE ID BETWEEN '${start}' AND '${end}'`;
 
-		this._connection.query(sql, function (err, result, fields) {
+		this._connection.query(_sql, function (err, result, fields) {
 			if (err) throw err;
 
 			var products = [];
@@ -295,30 +299,11 @@ class DatabaseModel extends EventEmitter {
 
 
 	//========================
-	// Get user by ID
-	//========================
-	getUserById(id, callback) {
-		var sql = `SELECT Username,Email,FirstName,LastName,IsAdmin FROM users WHERE ID=${id}`;
-		this._connection.query(sql, function(err, result) {
-			if(err) throw err;
-
-			callback(null, {
-				username: result[0].Username,
-				email: result[0].Email,
-				firstName: result[0].FirstName,
-				lastName: result[0].LastName,
-				admin: result[0].IsAdmin
-			});
-		});
-	}
-
-
-	//========================
 	// Get purchases
 	//========================
 	getPurchases(user, callback) { // TODO: Extend
-		var sql = `SELECT * FROM purchases WHERE UserID='${user.id}'`; // TODO: Use JOINs
-		this._connection.query(sql, function (err, result) {
+		var _sql = `SELECT * FROM purchases WHERE UserID='${user.id}'`; // TODO: Use JOINs
+		this._connection.query(_sql, function (err, result) {
 			if(err) throw err;
 			callback(null, result);
 		});
@@ -326,13 +311,35 @@ class DatabaseModel extends EventEmitter {
 
 
 	//========================
-	// Get adresses
+	// Get addresses
 	//========================
-	getAdresses(user, callback) { // TODO: Extend
-		var sql = `SELECT * FROM adresses WHERE UserID='${user.id}'`; // TODO: Use JOINs
-		this._connection.query(sql, function (err, result, fields) {
+	getAddresses(user, callback) { // TODO: Extend
+		var _sql = `SELECT * FROM addresses WHERE UserID='${user.id}'`; // TODO: Use JOINs
+		this._connection.query(_sql, function (err, result, fields) {
 			if(err) throw err;
 			callback(null, result);
+		});
+	}
+
+
+	//========================
+	// Add address
+	//========================
+	addAddress(user, address, callback) {
+		if(user && address.userId != user.id && !user.admin) {
+			if(typeof callback === 'function')
+				callback("User must be an admin to do that");
+			return;
+		}
+
+		var name = address.firstName + " " + address.lastName;
+		var street = address.street + " " + address.nr;
+
+		var _sql = sql.addresses.add(address.userId, name, street, address.city, address.zip, address.dimension, address.planet, address.additional);
+		this._connection.query(_sql, function(err, result) {
+			callback(err, {
+				id: result.insertId
+			});
 		});
 	}
 
@@ -341,8 +348,8 @@ class DatabaseModel extends EventEmitter {
 	// Get pay methods
 	//========================
 	getPayMethods(user, callback) {
-		var sql = `SELECT * FROM paymethods WHERE UserID='${user.id}'`;
-		this._connection.query(sql, function (err, result, fields) {
+		var _sql = `SELECT * FROM paymethods WHERE UserID='${user.id}'`;
+		this._connection.query(_sql, function (err, result, fields) {
 			if(err) throw err;
 			callback(null, result);
 		});

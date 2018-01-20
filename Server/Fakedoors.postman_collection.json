@@ -11,118 +11,6 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Accounting",
-					"description": "",
-					"item": [
-						{
-							"name": "Login",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "username",
-											"value": "1alex_",
-											"description": "",
-											"type": "text"
-										},
-										{
-											"key": "pass",
-											"value": "passw",
-											"description": "",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "alex@roidl.org",
-											"description": "",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "localhost:3000/login",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"login"
-									]
-								},
-								"description": "\t"
-							},
-							"response": []
-						},
-						{
-							"name": "Register",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
-									}
-								],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "username",
-											"value": "alex_",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "alex@roidl.de",
-											"type": "text"
-										},
-										{
-											"key": "first_name",
-											"value": "Alex",
-											"type": "text"
-										},
-										{
-											"key": "last_name",
-											"value": "Roidl",
-											"type": "text"
-										},
-										{
-											"key": "pass",
-											"value": "passw",
-											"type": "text"
-										},
-										{
-											"key": "pass_repeat",
-											"value": "passw",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "localhost:3000/register",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"register"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
 					"name": "Products",
 					"request": {
 						"method": "GET",
@@ -148,6 +36,174 @@
 			]
 		},
 		{
+			"name": "Accounting",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": "Required!"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "alex_37",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "d",
+									"description": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "pass",
+									"value": "passw",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						},
+						"description": "\t"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": "Required!"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "alex_37",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Alex",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Roidl",
+									"type": "text"
+								},
+								{
+									"key": "pass",
+									"value": "passw",
+									"type": "text"
+								},
+								{
+									"key": "pass_repeat",
+									"value": "passw",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "alex@roidl.de",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDgwMjE5LCJleHAiOjE1MTY1NjY2MTl9.cRSnPdUUig-Br-SU-40h9baUYXH5bizpODMhA8nxH3o"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "planet",
+									"value": "C-132",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "dimension",
+									"value": "Test",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "4",
+									"description": "Own user id if not not provided",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/adresses/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"adresses",
+								"add"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "User",
 			"description": "",
 			"item": [
@@ -158,7 +214,8 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2Mjk3NTg4LCJleHAiOjE1MTYzODM5ODh9.VNDENCtaoM84AOqRV4ZqSM-B7jvWPX_6Ywg-jeYdU5w"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDgwNjIzLCJleHAiOjE1MTY1NjcwMjN9.1MMOTwNYo2e2ApEjLo6xWXqSTOfuJet-OvhOGychzVI",
+								"description": "Authentification"
 							}
 						],
 						"body": {},
@@ -183,13 +240,11 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZXhwIjoxNDQwLCJpYXQiOjE1MTYyMjk2MDZ9.oI2bTlJJ7wQ-ATmuoopHCEdDO1UJqzSJrxh2uKo9Qo0"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDc1NTE1LCJleHAiOjE1MTY1NjE5MTV9.hx7TxmQ8xuNl2mV3X4SRkMdJl32DqM5Xze8X0oOnpFs",
+								"description": "Authentification"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "localhost:3000/purchases",
 							"host": [
@@ -204,27 +259,25 @@
 					"response": []
 				},
 				{
-					"name": "Adresses",
+					"name": "Addresses",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDc1NTE1LCJleHAiOjE1MTY1NjE5MTV9.hx7TxmQ8xuNl2mV3X4SRkMdJl32DqM5Xze8X0oOnpFs",
+								"description": "Authentification"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "localhost:3000/adresses",
+							"raw": "localhost:3000/addresses",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"adresses"
+								"addresses"
 							]
 						}
 					},
@@ -237,13 +290,11 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDc1NTE1LCJleHAiOjE1MTY1NjE5MTV9.hx7TxmQ8xuNl2mV3X4SRkMdJl32DqM5Xze8X0oOnpFs",
+								"description": "Authentification"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "localhost:3000/paymethods",
 							"host": [
@@ -264,13 +315,11 @@
 						"header": [
 							{
 								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTE2MjM3MjAzfQ.QHm0wSAZ22686PZ0sbKIGb_HoVgdXW0D9A9JOOqD96U"
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NDc1NTE1LCJleHAiOjE1MTY1NjE5MTV9.hx7TxmQ8xuNl2mV3X4SRkMdJl32DqM5Xze8X0oOnpFs",
+								"description": "Authentification"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "localhost:3000/pdf/0",
 							"host": [

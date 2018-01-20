@@ -30,16 +30,8 @@ function safeName(value) {
 	return value;
 }
 
-function printHeader(msg) {
-	const char = "=";
-	const length = 38;
-
-	var line = '';
-	for(var i = 0; i < length; i++) line += char;
-
-	console.log(line);
-	console.log(' ' + msg);
-	console.log(line);
+function log(text, mode) {
+	console.log("[GENERATOR" + (mode ? ":MODE-" + mode.toUpperCase() : '') + "] " + text);
 }
 
 function english(str) {
@@ -166,23 +158,49 @@ function english(str) {
   * Modes
   */
 
-function defaultMode() { // Generate everything
-	printHeader("Generator booting up [MODE: Default]");
+function _default() { // Generate everything
+	log("Booting up");
 
 	generate.products();
 	generate.names();
 	//generate.adresses();
 	//generate.purchases();
 
-	printHeader("Generating finished!");
+	log("Finished!");
 }
 
-function resetMode() { // Empty tables
-	 printHeader("Generator booting up [MODE: Reset]");
+function _empty() { // Empty tables
+	 log("Booting up", "Empty");
 
-	 database.empty();
+	 database.emptyTables(function(err) {
+		 var msg = "Finished!";
+		 if(err) msg = `Error: "${err}"`;
+		 else log(msg, "Reset");
+	 });
+}
 
-	 printHeader("Resetting finished!");
+function _reset() { // Reset tables
+	 log("Booting up", "Reset");
+
+	 database.deleteTables(function(err) {
+		 if(!err)
+			 database.createTables(() => {
+				 log("Finished!", "Reset");
+			 });
+		 else log(`Error: "${err}"`, "Reset");
+	 });
+}
+
+function _root() {
+	log("Booting up", "Root");
+
+	database.addUser("root", "root@fakedoors.com", "Root", "Root", true, "root", function(err, data) {
+		if(!err)
+			database.createTables(() => {
+				log("Finished!", "Root");
+			});
+		else log(`Error: "${err}"`, "Root");
+	})
 }
 
 
@@ -197,14 +215,21 @@ database.on("ready", () => {
 
 	// No additional arguments
 	if(params.length <= 2 || params[2] == 'default') { // Default mode
-		defaultMode();
+		_default();
 	} else {
 		params = params.slice(2); // Only safe relevant params
 
 		switch(params[0]) {
-			case 'reset': {
-				resetMode();
+			case 'empty': {
+				_empty();
 				break;
+			}
+			case 'reset': {
+				_reset();
+				break;
+			}
+			case 'root': {
+				_root();
 			}
 		}
 	}

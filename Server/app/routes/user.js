@@ -1,3 +1,5 @@
+var response = require('../handler/response');
+
 module.exports = function(app, database) {
 	//========================
 	// Account
@@ -5,15 +7,17 @@ module.exports = function(app, database) {
 	app.get('/account', function(req, res) {
 		var userId = req.decoded.id;
 
-		console.log("/purchases GET request");
+		console.log("/account GET request");
 
 		database.getUserById(userId, function(err, data) {
 			if(err) {
-				res.json({
+				res.status(403).json({
 					success: false,
 					message: err
-				})
+				});
 			} else {
+				delete data.id;
+
 				res.json({
 					success: true,
 					message: '',
@@ -33,7 +37,7 @@ module.exports = function(app, database) {
 
 		database.getPurchases(userId, function(err, data) {
 			if(err) {
-				res.json({
+				res.status(403).json({
 					success: false,
 					message: err
 				})
@@ -49,16 +53,16 @@ module.exports = function(app, database) {
 
 
 	//========================
-	// Adresses
+	// Addresses
 	//========================
-	app.get('/adresses', function(req, res, next) {
+	app.get('/addresses', function(req, res, next) {
 		var userId = req.decoded.id;
 
-		console.log("/adresses GET request");
+		console.log("/addresses GET request");
 
-		database.getAdresses(userId, function(err, data) {
+		database.getAddresses(userId, function(err, data) {
 			if(err) {
-				res.json({
+				res.status(403).json({
 					success: false,
 					message: err
 				})
@@ -69,6 +73,55 @@ module.exports = function(app, database) {
 					data: data
 				});
 			}
+		});
+	});
+
+
+	//========================
+	// Add address
+	//========================
+	app.post('/addresses/add', function(req, res, next) {
+		var userId = req.decoded.id;
+
+		console.log("/addresses/add POST request");
+
+		var address = {
+			userId: req.body.userId,
+			firstName: '',
+			lastName: '',
+			street: '',
+			nr: '',
+			city: '',
+			zip: '',
+			planet: req.body.planet,
+			dimension: req.body.dimension,
+			additional: ''
+		};
+		// escape address
+		for(var key in address) {
+			if(address[key] != null)
+				address[key] = database.escape(address[key].trim())
+		}
+
+		// Save address for right user
+		database.getUserById(userId, function(err, user) {
+			if(!address.userId) address.userId = userId;
+			database.addAddress(user, address,
+				function(err, data) {
+					if(err) {
+						res.status(403).json({
+							success: false,
+							message: err
+						})
+					} else {
+						res.json({
+							success: true,
+							message: 'Address successfully added',
+							data: data
+						});
+					}
+				}
+			);
 		});
 	});
 
@@ -83,7 +136,7 @@ module.exports = function(app, database) {
 
 		database.getPayMethods(userId, function(err, data) {
 			if(err) {
-				res.json({
+				res.status(403).json({
 					success: false,
 					message: err
 				})

@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 const mySQLCfg	= require('./cfg/mysql');
+const sql = require('./cfg/sql');
 
 var express 	= require('express');
 var http 		= require('http');
@@ -11,6 +12,43 @@ var path 		= require('path');
 var security	= require('./lib/security');
 
 var database 	= require('./handler/database')(mySQLCfg);
+
+/**
+ * Get arguments
+ */
+var args = process.argv.slice(2); // Only use extra params
+while(args[0] == 'npm') args = args.slice(2); // Cut off npm params if provided
+
+
+/**
+ * Start modes (based off arguments)
+ */
+if(args.length > 0) {
+	switch(args[0]) {
+		// Reset mode
+		case 'safe': {
+			database.on("ready", function() {
+				// Delete and re-create all tables
+				database.deleteTables(function(err) {
+					var pre = "[RESET-MODE] ";
+					if(!err) database.createTables(() => {
+						console.log("[DATABASE:RESET-MODE] Re-created all tables")
+					})
+					else console.log(`[DATABASE:RESET-MODE] Error re-creating all tables: "${err}"`);
+				})
+			});
+			break;
+		}
+	}
+}
+
+/**
+ * Database
+ */
+database.on("ready", () => {
+	console.log("[DATABASE] Successfully connected");
+});
+
 
 /**
  * Middleware

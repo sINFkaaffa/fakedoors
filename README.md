@@ -56,7 +56,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 	* **Konfiguration:**
 		* ``` /app/cfg/generator.js```
 	* **Datenbank befüllen:**
-		* ``` npm run fill```
+		* ``` npm run generate```
 	* **Datenbank leeren:**
 		* ``` npm run empty```
 
@@ -65,6 +65,8 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 		* ``` nodemon npm start```
 	* Ohne Nodemon:
 		* ``` npm start```
+	* Sicherer Modus:
+		* (```nodemon```) ```  npm start safe```
 
 * **Requests:**
 	* (**POSTman Kollektion:** /Server/Fakedoors.postman_collection.json)
@@ -89,10 +91,15 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 				* Parameter durch URL (Siehe Beispiel)
 				* Rückgabe: PDF-Datei
 	* **POST**
-		* /login
-			* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
-			* Rückgabe: JSON **(Enthält TOKEN)**
-		* /register
-
-			* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
-			* Rückgabe: JSON
+		* **Öffentlich:**
+			* /login
+				* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
+				* Rückgabe: JSON **(Enthält TOKEN)**
+			* /register
+				* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
+				* Rückgabe: JSON
+		* **Geschützt:**
+			* **Token-Übergabe durch Header-Key "x-access-token"**
+			* /adresses/add
+				* Parameter: **planet, dimension(, userId)** *(userId nur für Admins)*
+				* Rückgabe: JSON

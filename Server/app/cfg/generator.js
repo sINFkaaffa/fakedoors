@@ -27,7 +27,7 @@ module.exports = {
 		price: {
 			min: 5,
 			max: 1000,
-			digits: 1
+			digits: 2
 		},
 
 		quantity: {
