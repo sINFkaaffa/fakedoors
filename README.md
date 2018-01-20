@@ -91,6 +91,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 				* Parameter durch URL (Siehe Beispiel)
 				* Rückgabe: PDF-Datei
 	* **POST**
+		* **HEADER:** ```Content-Type``` ```application/x-www-form-urlencoded```
 		* **Öffentlich:**
 			* /login
 				* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
