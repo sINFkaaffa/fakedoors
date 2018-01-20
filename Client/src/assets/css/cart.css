@@ -6,16 +6,6 @@
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-#navCartIcon {
-  z-index: -1; }
-
-#navCartCount {
-  position: fixed;
-  right: 1.8%;
-  top: -2%;
-  color: #3b92a5;
-  font-weight: bold; }
-
 .cartContainer {
   width: 150%;
   margin-left: -25%; }

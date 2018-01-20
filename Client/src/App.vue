@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
-    <div class="parallax">
-    </div>
+    <div class="parallax"></div>
     <main>
       <div id="root" class="z-depth-3">
   	    <div class="container">
@@ -22,19 +21,18 @@ import Footer from './components/Footer'
 export default {
   name: 'app',
   components: {
-    NavBar,
-    Footer
+    NavBar, Footer
   }
 }
 </script>
-
 <style>
+/*
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
-  /*color: #2c3e50;*/
+  /*text-align: center;
+  /*color: #2c3e50;
   margin-top: 0;
 }
 
@@ -49,5 +47,5 @@ export default {
 
 .fade-enter, .fade-leave-active {
   opacity: 0
-}
+}*/
 </style>

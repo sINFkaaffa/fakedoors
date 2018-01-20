@@ -9,36 +9,63 @@
 .shopContainer {
   width: 100%; }
 
-.shopitem {
+.shopItem {
   background: #3b92a5;
-  color: #aafad7;
-  margin: 2% -15%;
-  padding-bottom: 2%; }
-  .shopitem p {
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: 11%; }
-  .shopitem a {
-    background-color: #26c6da;
-    margin-top: 1%; }
-  .shopitem img {
-    float: left;
-    width: 6%;
-    height: 12%;
-    margin: -0.5% 3% 0% 2%;
-    display: block; }
+  margin: 2% auto;
+  padding-bottom: 2%;
+  color: #aafad7; }
+  @media screen and (min-width: 1000px) {
+    .shopItem {
+      margin: 2% -15%; } }
+  .shopItem img {
+    display: none; }
+    @media screen and (min-width: 1000px) {
+      .shopItem img {
+        display: block;
+        margin: -0.5% 3% 0% 2%;
+        float: left;
+        width: 6%;
+        height: 12%; } }
 
-.shopitemBtn {
-  background-color: #26c6da;
-  margin-top: 1%; }
+.shopItemBtn {
+  background-color: #26c6da; }
+  @media screen and (min-width: 1000px) {
+    .shopItemBtn {
+      margin-top: -6.5%;
+      margin-left: 80%; } }
 
-.shopitemName {
-  float: left;
-  width: 45%; }
+.shopItemName {
+  margin-left: 5%;
+  margin-right: 2%;
+  font-size: 14pt; }
+  @media screen and (min-width: 1000px) {
+    .shopItemName {
+      margin-left: 0;
+      float: left;
+      width: 45%;
+      font-size: 20pt; } }
 
-.shopitemPrice {
-  float: left;
+.shopItemPrice {
+  margin-top: 2%;
   margin-right: 5%;
-  width: 21%; }
+  margin-left: 20%;
+  float: left;
+  width: 30%;
+  font-size: 13pt; }
+  @media screen and (min-width: 1000px) {
+    .shopItemPrice {
+      margin-top: 0;
+      margin-left: 0;
+      width: 21%;
+      font-size: 20pt; } }
+
+.shopItemDescrip {
+  display: none; }
+  @media screen and (min-width: 1000px) {
+    .shopItemDescrip {
+      display: block;
+      margin-top: -2%;
+      margin-left: 11%;
+      font-size: 13pt; } }
 
 /*# sourceMappingURL=shop.css.map */

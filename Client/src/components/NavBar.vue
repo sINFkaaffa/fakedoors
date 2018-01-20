@@ -1,42 +1,40 @@
 <template>
-  <div id="navbar">
-    <header>
-      <div class="navbar-fixed">
-        <nav>
-          <div class="nav-wrapper cyan lighten-1">
-            <router-link v-bind:to="'/'" class="brand-logo" id="logo">Fakedoors.com</router-link>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li>
-                <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
-              </li>
-              <li>
-                <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
-              </li>
-              <li>
-                <!--<p id="benutzer" v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</p>-->
-                <router-link v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</router-link>
-              </li>
-              <li>
-                <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
-              </li>
-              <li>
-                <router-link  v-bind:to="'/'" v-if="gelogt" >
-                  <i class="middle material-icons" @click="logout">exit_to_app</i>
-                </router-link>
-              </li>
-              <li>
-                <router-link v-bind:to="'/warenkorb'">
-                  <i class="middle material-icons">shopping_cart</i>
-                  <p id="navCartCount" v-if="cartLength!=0">{{cartLength}}</p>
-                </router-link>
-              </li>
+ <div>
 
-            </ul>
-          </div>
-        </nav>
+
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper cyan lighten-1">
+        <router-link v-bind:to="'/'" class="brand-logo" id="logo">Fakedoors.com</router-link>
+        <ul id="nav-mobile" class="right navbarSmallMenu">
+          <li>
+            <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
+          </li>
+          <li>
+            <router-link  v-bind:to="'/'" v-if="gelogt" >
+              <i class="middle material-icons" @click="logout">exit_to_app</i>
+            </router-link>
+          </li>
+          <li>
+            <router-link v-bind:to="'/warenkorb'">
+              <i class="middle material-icons">shopping_cart</i>
+              <p id="navCartCount" v-if="cartLength!=0">{{cartLength}}</p>
+            </router-link>
+          </li>
+        </ul>
       </div>
-    </header>
+    </nav>
   </div>
+ </div>
 </template>
 
 <script>

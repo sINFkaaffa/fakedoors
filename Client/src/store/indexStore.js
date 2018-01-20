@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     firstName: "",
     lastName: "",
-    userName: "Klaus",
+    userName: "",
     pw: "",
     dimension: "Dimension",
     planet: "Planet",

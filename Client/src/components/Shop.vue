@@ -1,19 +1,12 @@
 <template>
   <div class="shopContainer">
-	 <div class="shopitem section hoverable z-depth-1" v-for="(i,index) in shop" >
-    <btnAdd class="waves-effect waves-light btn shopitemBtn" v-bind:shopIndex="index" v-on:add="add"></btnAdd>
+	 <div class="shopItem section hoverable z-depth-1" v-for="(i,index) in shop" >
 		<img src="i.ImagePath" alt="no picture"/>
-	  <h5 class="shopitemName">{{i.fullName}}</h5> <h5 class="shopitemPrice">{{i.price}} SCM</h5>
-		<p>{{i.description}}</p>
+	  <p class="shopItemName">{{i.fullName}}</p> <p class="shopItemPrice">{{i.price}} SCM</p>
+    <btnAdd class="shopItemBtn waves-effect waves-light btn" v-bind:shopIndex="index" v-on:add="add"></btnAdd>
+		<p class="shopItemDescrip">{{i.description}}</p>
 	 </div>
-
-	  <div class="shopitem section hoverable z-depth-1">
-			<a class="waves-effect waves-light btn"><i class="material-icons right">shopping_cart</i>add</a>
-			<img src="http://elevweb.skit.no/2005erol/fakedoors/images/doors/door6.png" alt="no piture"/>
-			<h5 class="shopitemName">The white one</h5> <h5 class="shopitemPrice">100 Schmeckels</h5>
-			<p>The white door has a small window and a steel left handle.</p>
-	  </div>
-  </div>
+ </div>
 </template>
 
 <script>
