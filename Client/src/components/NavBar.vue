@@ -5,7 +5,7 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper cyan lighten-1">
-        <router-link v-bind:to="'/'" class="brand-logo" id="logo">Fakedoors.com</router-link>
+        <router-link v-bind:to="'/'" id="logo">Fakedoors.com</router-link> <!--class="brand-logo"--> 
         <ul id="nav-mobile" class="right navbarSmallMenu">
           <li>
             <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
