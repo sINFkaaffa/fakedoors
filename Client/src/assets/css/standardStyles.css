@@ -70,7 +70,9 @@ C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/bin/sass:13:in `<top (requ
 C:/Program Files (x86)/Koala/bin/sass:22:in `load'
 C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 */
+
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...ormation-phone}\": expected media query list, was \"{\"\A         on line 12 of C:/Users/Karin/Desktop/wt_projekt/Client/src/assets/sass/shop.sass\A         from line 46 of C:\Users\Karin\Desktop\wt_projekt\Client\src\assets\sass\standardStyles.sass\A \A 7: .shopitem\A 8:   background: $colorDark\A 9:   color: $colorLight\A 10:   margin: 2% -15%\A 11:   padding-bottom: 2%\A 12:   @media #{$information-phone}{\A 13:     background-color: red\A 14:   }\A 15:   p\A 16:     margin-top: 1%\A 17:     margin-bottom: 1%"; }
+  content: "Error: Invalid CSS after \"...ormation-phone}\": expected media query list, was \"{\"\A         on line 12 of C:/Users/Karin/Desktop/wt_projekt/Client/src/assets/sass/shop.sass\A         from line 46 of C:\Users\Karin\Desktop\wt_projekt\Client\src\assets\sass\standardStyles.sass\A \A 7: .shopitem\A 8:   background: $colorDark\A 9:   color: $colorLight\A 10:   margin: 2% -15%\A 11:   padding-bottom: 2%\A 12:   @media #{$information-phone}{\A 13:     background-color: red\A 14:   }\A 15:   p\A 16:     margin-top: 1%\A 17:     margin-bottom: 1%";
+}

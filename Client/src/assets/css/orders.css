@@ -1,45 +1,58 @@
 /* bestellhistorie Styles */
+
 /* Variablen */
+
 /* Logo-Schrift */
+
 @font-face {
   font-family: "get schwifty";
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
+
 .orderContainer {
   width: 134%;
-  margin-left: -17%; }
+  margin-left: -17%;
+}
 
 .orderitem {
   background: #3b92a5;
   margin-top: 2%;
   padding-bottom: 2%;
-  color: #aafad7; }
-  .orderitem a {
-    background-color: #26c6da;
-    margin-top: 1%;
-    margin-right: 2%; }
+  color: #aafad7;
+}
+
+.orderitem a {
+  background-color: #26c6da;
+  margin-top: 1%;
+  margin-right: 2%;
+}
 
 .orderitemDetailBtn {
   background-color: #26c6da;
   margin-top: 1%;
-  margin-right: 2%; }
+  margin-right: 2%;
+}
 
 .orderitemText {
   float: left;
   width: 15%;
-  margin-left: 5%; }
+  margin-left: 5%;
+}
 
 .orderitemDate, .orderitemCounts {
   float: left;
   margin-right: 7%;
-  width: 10%; }
+  width: 10%;
+}
 
 .orderitemTotalAll {
   float: left;
   margin-right: 4%;
   margin-left: 1%;
-  width: 18%; }
+  width: 18%;
+}
 
 .orderitemDetail {
   background: #aafad7;
@@ -47,26 +60,33 @@
   color: #3b92a5;
   width: 100%;
   margin-left: auto;
-  margin-right: auto; }
-  .orderitemDetail img {
-    float: left;
-    width: 6%;
-    margin-left: 6%;
-    margin-right: 3%;
-    margin-top: -0.5%;
-    display: block; }
-  .orderitemDetail p {
-    margin-top: 2.5%;
-    margin-left: 14%; }
+  margin-right: auto;
+}
+
+.orderitemDetail img {
+  float: left;
+  width: 6%;
+  margin-left: 6%;
+  margin-right: 3%;
+  margin-top: -0.5%;
+  display: block;
+}
+
+.orderitemDetail p {
+  margin-top: 2.5%;
+  margin-left: 14%;
+}
 
 .orderitemDetailName {
   float: left;
-  width: 22%; }
+  width: 22%;
+}
 
 .orderitemDetailPrice {
   float: left;
   margin-right: 8%;
   width: 25%;
-  display: block; }
+  display: block;
+}
 
 /*# sourceMappingURL=orders.css.map */

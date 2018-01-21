@@ -1,11 +1,12 @@
 <template>
- <div>
+<div>
 
 
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper cyan lighten-1">
-        <router-link v-bind:to="'/'" id="logo">Fakedoors.com</router-link> <!--class="brand-logo"--> 
+        <router-link v-bind:to="'/'" id="logo">Fakedoors.com</router-link>
+        <!--class="brand-logo"-->
         <ul id="nav-mobile" class="right navbarSmallMenu">
           <li>
             <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
@@ -20,7 +21,7 @@
             <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
           </li>
           <li>
-            <router-link  v-bind:to="'/'" v-if="gelogt" >
+            <router-link v-bind:to="'/'" v-if="gelogt">
               <i class="middle material-icons" @click="logout">exit_to_app</i>
             </router-link>
           </li>
@@ -34,7 +35,7 @@
       </div>
     </nav>
   </div>
- </div>
+</div>
 </template>
 
 <script>
@@ -44,18 +45,20 @@ export default {
   name: 'navbar',
   store: store,
   computed: {
-    cartLength () {
-	    return store.state.cart.length
+    cartLength() {
+      return store.state.cart.length
     },
-    gelogt(){
+    gelogt() {
       return store.state.isAuthenticated
     },
-    name(){
+    name() {
       return store.state.userName
     },
   },
   methods: {
-    logout: function(){store.commit('logout')}
+    logout: function() {
+      store.commit('logout')
+    }
   },
 
 }

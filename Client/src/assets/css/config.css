@@ -1,9 +1,12 @@
 /* Variablen */
+
 /* Logo-Schrift */
+
 @font-face {
   font-family: "get schwifty";
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
 
 /*# sourceMappingURL=config.css.map */

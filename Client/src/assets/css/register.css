@@ -1,20 +1,27 @@
 /* Variablen */
+
 /* Logo-Schrift */
+
 @font-face {
   font-family: "get schwifty";
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
+
 #payText {
   color: #3b92a5;
-  padding-left: 1%; }
+  padding-left: 1%;
+}
 
 .payment {
-  padding-left: 5%; }
+  padding-left: 5%;
+}
 
 #registBtn {
   margin-top: -8%;
   margin-left: 81%;
-  background-color: #26c6da; }
+  background-color: #26c6da;
+}
 
 /*# sourceMappingURL=register.css.map */

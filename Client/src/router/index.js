@@ -9,11 +9,10 @@ import Orders from '@/components/Orders'
 import User from '@/components/User'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'shop',
       component: Shop
@@ -44,4 +43,4 @@ export default new Router({
       component: User
     }
   ]
-})
+});

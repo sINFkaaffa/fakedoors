@@ -1,49 +1,72 @@
 /* shop styles */
+
 /* Variablen */
+
 /* Logo-Schrift */
+
 @font-face {
   font-family: "get schwifty";
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
+
 .shopContainer {
-  width: 100%; }
+  width: 100%;
+}
 
 .shopItem {
   background: #3b92a5;
   margin: 2% auto;
   padding-bottom: 2%;
-  color: #aafad7; }
-  @media screen and (min-width: 1000px) {
-    .shopItem {
-      margin: 2% -15%; } }
+  color: #aafad7;
+}
+
+@media screen and (min-width: 1000px) {
+  .shopItem {
+    margin: 2% -15%;
+  }
+}
+
+.shopItem img {
+  display: none;
+}
+
+@media screen and (min-width: 1000px) {
   .shopItem img {
-    display: none; }
-    @media screen and (min-width: 1000px) {
-      .shopItem img {
-        display: block;
-        margin: -0.5% 3% 0% 2%;
-        float: left;
-        width: 6%;
-        height: 12%; } }
+    display: block;
+    margin: -0.5% 3% 0% 2%;
+    float: left;
+    width: 6%;
+    height: 12%;
+  }
+}
 
 .shopItemBtn {
-  background-color: #26c6da; }
-  @media screen and (min-width: 1000px) {
-    .shopItemBtn {
-      margin-top: -6.5%;
-      margin-left: 80%; } }
+  background-color: #26c6da;
+}
+
+@media screen and (min-width: 1000px) {
+  .shopItemBtn {
+    margin-top: -6.5%;
+    margin-left: 80%;
+  }
+}
 
 .shopItemName {
   margin-left: 5%;
   margin-right: 2%;
-  font-size: 14pt; }
-  @media screen and (min-width: 1000px) {
-    .shopItemName {
-      margin-left: 0;
-      float: left;
-      width: 45%;
-      font-size: 20pt; } }
+  font-size: 14pt;
+}
+
+@media screen and (min-width: 1000px) {
+  .shopItemName {
+    margin-left: 0;
+    float: left;
+    width: 45%;
+    font-size: 20pt;
+  }
+}
 
 .shopItemPrice {
   margin-top: 2%;
@@ -51,21 +74,29 @@
   margin-left: 20%;
   float: left;
   width: 30%;
-  font-size: 13pt; }
-  @media screen and (min-width: 1000px) {
-    .shopItemPrice {
-      margin-top: 0;
-      margin-left: 0;
-      width: 21%;
-      font-size: 20pt; } }
+  font-size: 13pt;
+}
+
+@media screen and (min-width: 1000px) {
+  .shopItemPrice {
+    margin-top: 0;
+    margin-left: 0;
+    width: 21%;
+    font-size: 20pt;
+  }
+}
 
 .shopItemDescrip {
-  display: none; }
-  @media screen and (min-width: 1000px) {
-    .shopItemDescrip {
-      display: block;
-      margin-top: -2%;
-      margin-left: 11%;
-      font-size: 13pt; } }
+  display: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .shopItemDescrip {
+    display: block;
+    margin-top: -2%;
+    margin-left: 11%;
+    font-size: 13pt;
+  }
+}
 
 /*# sourceMappingURL=shop.css.map */

@@ -1,13 +1,19 @@
 /* Error-Ansicht Styles */
+
 /* Variablen */
+
 /* Logo-Schrift */
+
 @font-face {
   font-family: "get schwifty";
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
+
 .bodyError {
-  background-color: black; }
+  background-color: black;
+}
 
 .error {
   background-image: url("../img/error.jpg");
@@ -19,6 +25,7 @@
   font-size: 350%;
   padding-top: 20%;
   text-shadow: 3px 0px #5BB44F, -3px 0px #5BB44F, 0 5px 10px black;
-  text-align: center; }
+  text-align: center;
+}
 
 /*# sourceMappingURL=error.css.map */
