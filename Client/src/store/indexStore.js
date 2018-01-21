@@ -14,7 +14,7 @@ export default new Vuex.Store({
     dimension: "Dimension",
     planet: "Planet",
     pay: "",
-    token:"",
+    token: "",
     isAuthenticated: false,
 
     shop: [],
@@ -22,14 +22,46 @@ export default new Vuex.Store({
     shopIndexie: [],
     all: 0,
 
-    orders: [
-      { orderId: "1", date: "01.10.17", itemQuantity: 4, orderTotal: 400, customerId: "12" },
-      { orderId: "2", date: "05.11.17", itemQuantity: 2, orderTotal: 200, customerId: "12" },
-      { orderId: "3", date: "17.12.17", itemQuantity: 1, orderTotal: 100, customerId: "12" }
+    orders: [{
+        orderId: "1",
+        date: "01.10.17",
+        itemQuantity: 4,
+        orderTotal: 400,
+        customerId: "12"
+      },
+      {
+        orderId: "2",
+        date: "05.11.17",
+        itemQuantity: 2,
+        orderTotal: 200,
+        customerId: "12"
+      },
+      {
+        orderId: "3",
+        date: "17.12.17",
+        itemQuantity: 1,
+        orderTotal: 100,
+        customerId: "12"
+      }
     ],
-    orderDetails: [
-      { itemId: "2", name: "blue", price: 200,st: 1, total: 100, image: "no", text: "Beschreibung 2" },
-      { itemId: "4", name: "green", price: 260,st: 2, total: 200, image: "no", text: "Beschreibung 4" }
+    orderDetails: [{
+        itemId: "2",
+        name: "blue",
+        price: 200,
+        st: 1,
+        total: 100,
+        image: "no",
+        text: "Beschreibung 2"
+      },
+      {
+        itemId: "4",
+        name: "green",
+        price: 260,
+        st: 2,
+        total: 200,
+        image: "no",
+        text: "Beschreibung 4"
+      }
     ],
     reqOrderId: 0,
   },
@@ -65,7 +97,8 @@ export default new Vuex.Store({
 
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
-      state.token = registerDB(state.loginName, state.firstName, state.lastName, state.pw); //Zuweisung wenn geht
+      registerDB(state.loginName, state.firstName, state.lastName, state.pw); //Zuweisung wenn geht
+      state.token = loginDB(state.loginName, state.pw);
       addAddress(state.planet, stat.dimension, state.token);
       console.log(state.token);
       if (state.token) {
@@ -127,15 +160,16 @@ export default new Vuex.Store({
 });
 
 var rounds = 10;
+
 function encrypt(pwPlainText, user) {
   pwPlainText = unorm.nfc(pwPlainText);
   user = unorm.nfc(user.trim()).toLowerCase();
-  var salt = sjcl.codec.utf8String.toBits('fakedoors.com' + user);  // Determenistic unique salt
+  var salt = sjcl.codec.utf8String.toBits('fakedoors.com' + user); // Determenistic unique salt
 
   // PBKDF2 computation, result returned as hexadecimal encoding
-  var key = sjcl.misc.pbkdf2(pwPlainText, salt, rounds, 32 * 8, function (key) {
+  var key = sjcl.misc.pbkdf2(pwPlainText, salt, rounds, 32 * 8, function(key) {
     var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
-    this.encrypt = function () {
+    this.encrypt = function() {
       return hasher.encrypt.apply(hasher, arguments);
     };
   });
@@ -163,67 +197,67 @@ function loginDB(name, pw) {
 
 function loginDB(name, pw) {
   var tokenTest;
-  axios(
-    {
+  axios({
       url: '//localhost:3000/login',
       method: 'post',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       data: {
         username: user,
         email: 'fakedoors@gmx.de',
         pass: pw,
       },
-    }
-  )
-  .then((data) => {
-    console.log('login successfull');
-    console.log(data);
+    })
+    .then((data) => {
+      console.log('login successfull');
+      console.log(data);
 
-    //state.firstName=data.firstName
-    //state.token=data.x-access-key
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
+      //state.firstName=data.firstName
+      //state.token=data.x-access-key
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 
   return tokenTest = 1;
 }
 
 function registerDB(user, firstname, lastname, pw) {
-  var tok;
-  axios(
-    {
-    url: '//localhost:3000/register',
-    method: 'post',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    data: {
-      username: user,
-      email: 'fakedoors@gmy.de',
-      first_name: firstname,
-      last_name: lastname,
-      passw: pw,
-      pass_repeat: pw,
-    },
-  }).then(function (response) {
-    console.log('register successfull');
-    console.log(data);
+  axios({
+      url: '//localhost:3000/register',
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        username: user,
+        email: 'fakedoors@gmy.de',
+        first_name: firstname,
+        last_name: lastname,
+        passw: pw,
+        pass_repeat: pw,
+      },
+    }).then(function(response) {
+      console.log('register successfull');
+      console.log(data);
 
-    //state.firstName=data.firstName
-    //state.token=data.x-access-key
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
-
-  return tok = 1;
+      //state.firstName=data.firstName
+      //state.token=data.x-access-key
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 function addAddress(planet, dim, token) {
-  axios(
-    {
+  axios({
     url: '//localhost:3000/adresses/add',
     method: 'post',
-    headers: { 'x-access-token': token, 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: {
+      'x-access-token': token,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     planet: planet,
     dimension: dim,
   });
