@@ -59,18 +59,44 @@ export default {
     },
   },
   mounted: function() {
-    axios.get("//localhost:3000/purchases", {
+    if(store.state.noSendingRequestLogin){
+      store.state.orders =[{
+          orderId: "1",
+          date: "01.10.17",
+          itemQuantity: 4,
+          orderTotal: 400,
+          customerId: "12"
+        },
+        {
+          orderId: "2",
+          date: "05.11.17",
+          itemQuantity: 2,
+          orderTotal: 200,
+          customerId: "12"
+        },
+        {
+          orderId: "3",
+          date: "17.12.17",
+          itemQuantity: 1,
+          orderTotal: 100,
+          customerId: "12"
+        }
+      ]
+    }else {
+      // TODO Request!!!!
+      axios.get("//localhost:3000/purchases", {
         headers: {
           'x-access-key': store.state.token
         }
-      })
-      .then((data) => {
+        })
+        .then((data) => {
         store.state.orders = data.data.data;
-      })
-      .catch(function(err) {
+        })
+        .catch(function(err) {
         console.log(err)
       })
-  },
+    }
+},
 
 }
 </script>

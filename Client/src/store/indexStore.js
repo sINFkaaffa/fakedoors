@@ -25,51 +25,13 @@ export default new Vuex.Store({
     allTotal: 0,
     allDoors: 0,
 
-// TODO request schreiben und hardcoded inhalt auskommentieren
+// TODO request in Orders.vue schreiben und hardcoded inhalt auskommentieren
 // request muss u.a. auch purchaseID
-    orders: [{
-        orderId: "1",
-        date: "01.10.17",
-        itemQuantity: 4,
-        orderTotal: 400,
-        customerId: "12"
-      },
-      {
-        orderId: "2",
-        date: "05.11.17",
-        itemQuantity: 2,
-        orderTotal: 200,
-        customerId: "12"
-      },
-      {
-        orderId: "3",
-        date: "17.12.17",
-        itemQuantity: 1,
-        orderTotal: 100,
-        customerId: "12"
-      }
-    ],
+    orders: [],
 
     // TODO request schreiben und hardcoded inhalt auskommentieren
-    orderDetails: [{
-        itemId: "2",
-        name: "blue",
-        price: 200,
-        st: 1,
-        total: 100,
-        image: "no",
-        text: "Beschreibung 2"
-      },
-      {
-        itemId: "4",
-        name: "green",
-        price: 260,
-        st: 2,
-        total: 200,
-        image: "no",
-        text: "Beschreibung 4"
-      }
-    ],
+    orderDetails: [],
+
     reqOrderId: 0,
   },
 
@@ -116,8 +78,8 @@ export default new Vuex.Store({
         state.token=1;
       }
       else{
-      registerDB(state.loginName, state.firstName, state.lastName, state.pw);
-      state.token = loginDB(state.loginName, state.pw);
+        registerDB(state.loginName, state.firstName, state.lastName, state.pw);
+        state.token = loginDB(state.loginName, state.pw);
       }
       console.log(state.token);
       if (state.token) {
@@ -170,8 +132,30 @@ export default new Vuex.Store({
 // TODO hier orderDetails  Request
     orderDetail: (state, orderId) => {
       state.reqOrderId = orderId;
+      if(state.noSendingRequestLogin){
+        state.orderDetails = [{
+            itemId: "2",
+            name: "blue",
+            price: 200,
+            st: 1,
+            total: 100,
+            image: "no",
+            text: "Beschreibung 2"
+          },
+          {
+            itemId: "4",
+            name: "green",
+            price: 260,
+            st: 2,
+            total: 200,
+            image: "no",
+            text: "Beschreibung 4"
+          }
+        ]
+      }else{
+        // TODO hier orderDetails  Request
+      }
 
-      //Request orderDetails
     },
 
     reqOrderIdBack: (state) => {
@@ -184,7 +168,7 @@ export default new Vuex.Store({
   },
 });
 
-var rounds = 10;
+var rounds = 1000;
 
 function encrypt(pwPlainText, user) {
   pwPlainText = unorm.nfc(pwPlainText);
