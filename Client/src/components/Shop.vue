@@ -4,6 +4,8 @@
     <img src="i.ImagePath" alt="no picture" />
     <p class="shopItemName">{{i.fullName}}</p>
     <p class="shopItemPrice">{{i.price}} SCM</p>
+    <!-- new template,btnAdd notice the index of the button,
+      so the button can tell which door was selected and should push in the cart-->
     <btnAdd class="shopItemBtn waves-effect waves-light btn" v-bind:shopIndex="index" v-on:add="add"></btnAdd>
     <p class="shopItemDescrip">{{i.description}}</p>
   </div>

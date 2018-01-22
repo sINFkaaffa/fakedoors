@@ -2,6 +2,7 @@
 <div id="warenkorb">
   <div class="cartContainer">
     <div class="section hoverable z-depth-1 cartitem" v-for="(i,index) in cart" v-if="cart.length>0">
+      <!-- the three new templates, notice which button of which door was selected and add or remove the right door--> 
       <btnAddSt class="waves-effect waves-light btn cartItemBtnAddSt" v-bind:cartIndex="index" v-on:addSt="addSt"></btnAddSt>
       <btnRemoveSt class="waves-effect waves-light btn cartItemBtnRemoveSt" v-bind:cartIndex="index" v-on:removeSt="removeSt"></btnRemoveSt>
       <btnRemove class="waves-effect waves-light btn cartItemBtnRemove" v-bind:cartIndex="index" v-on:remove="remove"></btnRemove>

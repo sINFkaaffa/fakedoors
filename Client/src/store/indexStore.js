@@ -7,8 +7,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // noSendingRequestLogin true means, that no request would be access, because the backend can't answere
     noSendingRequestLogin: true,
 
+    // Variables of register & login
     firstName: "",
     lastName: "",
     userName: "",
@@ -16,10 +18,12 @@ export default new Vuex.Store({
     dimension: "Dimension",
     planet: "Planet",
     pay: "",
-    token: "",
     isAuthenticated: false,
+    token: "",
 
+    // Variable of the first page
     shop: [],
+    // Variables of shopping cart
     cart: [],
     shopIndexie: [],
     allTotal: 0,
@@ -27,22 +31,23 @@ export default new Vuex.Store({
 
     // TODO request in Orders.vue schreiben und hardcoded inhalt auskommentieren
     // request muss u.a. auch purchaseID
+    // Variables of orders
     orders: [],
-
     // TODO request schreiben und hardcoded inhalt auskommentieren
     orderDetails: [],
-
     reqOrderId: 0,
   },
 
   mutations: {
-    firstName: (state, name) => state.firstName = name,
-    lastName: (state, name) => state.lastName = name,
-    userName: (state, name) => state.userName = name,
-    pw: (state, name) => state.pw = name,
+    // Mutations of register & login
+    // v-model-mutations
+    firstName: (state, firstName) => state.firstName = firstName,
+    lastName: (state, lastName) => state.lastName = lastName,
+    userName: (state, userName) => state.userName = userName,
+    pw: (state, pw) => state.pw = pw,
     dim: (state, dim) => state.dimension = dim,
     planet: (state, planet) => state.planet = planet,
-    pay: (state, name) => state.pay = name,
+    pay: (state, payment) => state.pay = payment,
 
     logout: state => {
       state.isAuthenticated = false;
@@ -88,6 +93,9 @@ export default new Vuex.Store({
       addAddress(state.planet, stat.dimension, state.token);
     },
 
+    // mutation of the first page,
+    /* The add-Button check, if the add-Btn of the selected door is in the shooping cart,
+    because only new doors could be add in the shopping cart. So in the shopping cart are only different doors.*/
     add: (state, shopIndex) => {
       var x = true;
       if (state.shopIndexie.length > 0) {
@@ -109,6 +117,8 @@ export default new Vuex.Store({
       }
     },
 
+    // mutation of the shopping cart buttons
+    // The remove-Btn remove the door complete
     remove: (state, cartIndex) => {
       state.allTotal -= state.cart[cartIndex].total;
       state.allDoors -= state.cart[cartIndex].st;
@@ -116,6 +126,7 @@ export default new Vuex.Store({
       state.shopIndexie.splice(cartIndex, 1);
     },
 
+    // IF you want more then one of a door, you can click on arrow-buttons and the will rise or remove the quantity of one door
     addSt: (state, cartIndex) => {
       state.allTotal += state.cart[cartIndex].price;
       state.allDoors += 1;
@@ -134,6 +145,8 @@ export default new Vuex.Store({
     },
 
 // TODO hier orderDetails  Request
+    // mutations of orders
+    // mutations to ask for the details of an history order
     orderDetail: (state, orderId) => {
       state.reqOrderId = orderId;
       if(state.noSendingRequestLogin){
@@ -162,10 +175,12 @@ export default new Vuex.Store({
 
     },
 
+    // mutation to close the order details
     reqOrderIdBack: (state) => {
       state.reqOrderId = -1;
     },
 
+    // mutation for the pdf-print of the order
     print: (state) => {
       if(!noSendingRequestLogin){
         printDB(cart, allDoors, allTotal, token)
@@ -174,6 +189,9 @@ export default new Vuex.Store({
   },
 });
 
+
+// TODO Es wäre echt super/übersichtlicher, wenn wir diese Functionen in eine eigene Datei bekommen
+// Functions for the mutations
 var rounds = 1000;
 
 function encrypt(pwPlainText, user) {
