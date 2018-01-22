@@ -112,8 +112,13 @@ export default new Vuex.Store({
 
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
+      if(state.noSendingRequestLogin){
+        state.token=1;
+      }
+      else{
       registerDB(state.loginName, state.firstName, state.lastName, state.pw);
       state.token = loginDB(state.loginName, state.pw);
+      }
       console.log(state.token);
       if (state.token) {
         state.isAuthenticated = true;
