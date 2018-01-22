@@ -255,8 +255,6 @@ function registerDB(user, firstname, lastname, pw) {
       console.log('register successfull');
       console.log(data);
 
-      //state.firstName=data.firstName
-      //state.token=data.x-access-key
     })
     .catch(function(err) {
       console.log(err);

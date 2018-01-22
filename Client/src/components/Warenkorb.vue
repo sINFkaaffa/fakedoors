@@ -2,15 +2,15 @@
 <div id="warenkorb">
   <div class="cartContainer">
     <div class="section hoverable z-depth-1 cartitem" v-for="(i,index) in cart" v-if="cart.length>0">
-      <!-- the three new templates, notice which button of which door was selected and add or remove the right door--> 
+      <img src="i.image" alt="no piture" />
+      <p class="cartitemName">{{i.name}}</p>
+      <p class="cartitemTextCount">Quantity: {{i.st}}</p>
+      <p class="cartitemPrice">a {{i.price}} SCM</p>
+      <p class="cartitemTotal">Total: {{i.total}} SCM</p>
+      <!-- the three new templates, notice which button of which door was selected and add or remove the right door-->
       <btnAddSt class="waves-effect waves-light btn cartItemBtnAddSt" v-bind:cartIndex="index" v-on:addSt="addSt"></btnAddSt>
       <btnRemoveSt class="waves-effect waves-light btn cartItemBtnRemoveSt" v-bind:cartIndex="index" v-on:removeSt="removeSt"></btnRemoveSt>
       <btnRemove class="waves-effect waves-light btn cartItemBtnRemove" v-bind:cartIndex="index" v-on:remove="remove"></btnRemove>
-      <img src="i.image" alt="no piture" />
-      <h5 class="cartitemName">{{i.name}}</h5>
-      <h5 class="cartitemTextCount">Quantity: {{i.st}}</h5>
-      <h6 class="cartitemPrice">a {{i.price}} SCM</h6>
-      <h5 class="cartitemTotal">Total: {{i.total}} SCM</h5>
     </div>
   </div>
   <div class="cartNoItem" v-if="cart.length===0">
@@ -18,12 +18,12 @@
   </div>
 
   <div class="cartFoot" v-if="cart.length>0">
-    <h5 id="cartTotalAll">Total: {{all}} Schmeckels</h5>
+    <p id="cartTotalAll">Total: {{all}} Schmeckels</p>
     <div id="btn">
-      <router-link v-bind:to="'/'" class="waves-effect waves-light btn">
+      <router-link v-bind:to="'/'" class="waves-effect waves-light btn shoppingBtn">
         <i class="material-icons right">shopping_cart</i>More shopping</router-link>
       <a class="waves-effect waves-light btn" id="cartBill" v-if="!noSendingRequestLogin"><i class="material-icons right">local_printshop</i>Bill</a>
-      <router-link v-bind:to="'/login'" v-if="!isAuthenticated" class="waves-effect waves-light btn">
+      <router-link v-bind:to="'/login'" v-if="!isAuthenticated" class="waves-effect waves-light btn payBtn">
         <i class="material-icons right">credit_card</i>Pay</router-link>
       <a class="waves-effect waves-light btn" v-if="isAuthenticated" href="error.html"><i class="material-icons right">credit_card</i>Pay</a>
     </div>

@@ -1,21 +1,22 @@
 <template>
 <div id="bookinghistory" class="orderContainer">
   <div class="section hoverable z-depth-1 orderitem" v-for="(i,index) in orders" v-if="orders.length>0">
+    <p class="orderitemText">Order of </p>
+    <p class="orderitemDate">{{i.date}}</p>
+    <p class="orderitemCounts">{{i.itemQuantity}} Doors</p>
+    <p class="orderitemTotalAll">Total: {{i.orderTotal}} SCM</p>
     <btnOrderDetail class="waves-effect waves-light btn orderitemDetailBtn" v-bind:orderId="i.orderId" v-on:orderDetail="orderDetail" v-if="!(i.orderId===reqOrderId)"></btnOrderDetail>
     <button class="waves-effect waves-light btn orderitemDetailBtn" v-if="(i.orderId===reqOrderId)" v-on:click="reqOrderIdBack"><i class="material-icons center">arrow_upward</i></button>
     <a class="waves-effect waves-light btn orderitemDetailBtn" v-if="!noSendingRequestLogin">
       <i class="material-icons center" @click="print" >print</i></a>
-    <h5 class="orderitemText">Order of </h5>
-    <h5 class="orderitemDate">{{i.date}}</h5>
-    <h5 class="orderitemCounts">{{i.itemQuantity}} Doors</h5>
-    <h5 class="orderitemTotalAll">Total: {{i.orderTotal}} SCM</h5>
 
     <div class="section z-depth-1 orderitemDetail" v-if="(i.orderId===reqOrderId)" v-for="j in orderDetails">
       <img src="http://faykdoors.com/greenwooddoor.png" alt="no piture" />
-      <h5 class="orderitemDetailName">{{j.name}}</h5>
-      <h5 class="orderitemDetailPrice">Quantity {{j.st}}x a {{j.price}} SCM</h5>
-      <h5>Total: {{j.total}} SCM</h5>
-      <p>{{j.text}}</p>
+      <p class="orderitemDetailName">{{j.name}}</p>
+      <p class="orderitemDetailSt">Quantity {{j.st}}</p>
+      <p>x a {{j.price}} SCM</p>
+      <p class="orderitemDetailTotal">Total: {{j.total}} SCM</p>
+      <p class="orderitemDetailDescrib">{{j.text}}</p>
     </div>
   </div>
 
