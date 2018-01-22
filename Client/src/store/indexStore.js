@@ -103,19 +103,22 @@ export default new Vuex.Store({
         var i = state.cart.length - 1;
         state.cart[i].st = 1;
         state.cart[i].total = state.cart[i].price;
-        state.all += state.cart[i].total;
+        state.allTotal += state.cart[i].total;
+        state.allDoors += 1;
         state.shopIndexie.push(shopIndex);
       }
     },
 
     remove: (state, cartIndex) => {
-      state.all -= state.cart[cartIndex].total;
+      state.allTotal -= state.cart[cartIndex].total;
+      state.allDoors -= state.cart[cartIndex].st;
       state.cart.splice(cartIndex, 1);
       state.shopIndexie.splice(cartIndex, 1);
     },
 
     addSt: (state, cartIndex) => {
-      state.all += state.cart[cartIndex].price;
+      state.allTotal += state.cart[cartIndex].price;
+      state.allDoors += 1;
       state.cart[cartIndex].st += 1;
       state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price;
     },
@@ -124,6 +127,7 @@ export default new Vuex.Store({
       if (state.cart[cartIndex].st > 0) {
         state.cart[cartIndex].st -= 1;
         state.allTotal -= state.cart[cartIndex].price;
+        state.allDoors -= 1;
       }
 
       state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price;

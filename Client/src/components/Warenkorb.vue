@@ -52,7 +52,7 @@ export default {
       return store.state.cart
     },
     all() {
-      return store.state.all
+      return store.state.allTotal
     },
     isAuthenticated() {
       return store.state.isAuthenticated
