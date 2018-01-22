@@ -21,7 +21,7 @@
     <div id="btn">
       <router-link v-bind:to="'/'" class="waves-effect waves-light btn">
         <i class="material-icons right">shopping_cart</i>More shopping</router-link>
-      <a class="waves-effect waves-light btn" id="cartBill"><i class="material-icons right">local_printshop</i>Bill</a>
+      <a class="waves-effect waves-light btn" id="cartBill" v-if="!noSendingRequestLogin"><i class="material-icons right">local_printshop</i>Bill</a>
       <router-link v-bind:to="'/login'" v-if="!isAuthenticated" class="waves-effect waves-light btn">
         <i class="material-icons right">credit_card</i>Pay</router-link>
       <a class="waves-effect waves-light btn" v-if="isAuthenticated" href="error.html"><i class="material-icons right">credit_card</i>Pay</a>
@@ -56,8 +56,12 @@ export default {
     },
     isAuthenticated() {
       return store.state.isAuthenticated
+    },
+    noSendingRequestLogin(){
+      return store.state.noSendingRequestLogin
     }
   },
+
   methods: {
     remove: function(cartIndex) {
       store.commit('remove', cartIndex)
@@ -67,6 +71,9 @@ export default {
     },
     removeSt: function(cartIndex) {
       store.commit('removeSt', cartIndex)
+    },
+    print: function() {
+      store.commit('print')
     },
   }
 }

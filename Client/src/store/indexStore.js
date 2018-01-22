@@ -25,8 +25,8 @@ export default new Vuex.Store({
     allTotal: 0,
     allDoors: 0,
 
-// TODO request in Orders.vue schreiben und hardcoded inhalt auskommentieren
-// request muss u.a. auch purchaseID
+    // TODO request in Orders.vue schreiben und hardcoded inhalt auskommentieren
+    // request muss u.a. auch purchaseID
     orders: [],
 
     // TODO request schreiben und hardcoded inhalt auskommentieren
@@ -123,7 +123,7 @@ export default new Vuex.Store({
     removeSt: (state, cartIndex) => {
       if (state.cart[cartIndex].st > 0) {
         state.cart[cartIndex].st -= 1;
-        state.all -= state.cart[cartIndex].price;
+        state.allTotal -= state.cart[cartIndex].price;
       }
 
       state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price;
@@ -163,7 +163,9 @@ export default new Vuex.Store({
     },
 
     print: (state) => {
-      //printDB(cart[], allDoors, allTotal, token)
+      if(!noSendingRequestLogin){
+        printDB(cart, allDoors, allTotal, token)
+      }
     },
   },
 });
@@ -185,24 +187,6 @@ function encrypt(pwPlainText, user) {
 
   return sjcl.codec.hex.fromBits(key);
 }
-
-/*
-function loginDB(name, pw) {
-  var tok; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
-  axios.post('//localhost:3000/login', { username: name, pass: pw })
-    .then((data) => {
-      console.log('login successfull');
-      console.log(data);
-
-      //state.firstName=data.firstName
-      //state.token=data.x-access-key
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-
-  return tok = 1; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
-}*/
 
 function loginDB(name, pw) {
   var token;
@@ -274,29 +258,7 @@ function addAddress(planet, dim, token) {
     console.log(err)});
 }
 
-/*
-function registerDB(user, firstname, lastname, pw) {
-  var tok; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
-  axios.post('//localhost:3000/register', {
-    username: user,
-    email: 'fakedoors@gmx.de',
-    first_name: firstname,
-    last_name: lastname,
-    pass: pw,
-    pass_repeat: pw,
-  })
-    .then(function (response) {
-      console.log('register successfull');
-      console.log(data);
-
-      //state.firstName=data.firstName
-      //state.token=data.x-access-key
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-
-  return tok = 1; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
-}*/
-
 //TODO neue reqeust PDF drucken & vlt
+function printDB(cart, allDoors, allTotal, token){
+  // TODO
+}
