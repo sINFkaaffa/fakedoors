@@ -7,6 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    noSendingRequestLogin: true,
+
     firstName: "",
     lastName: "",
     userName: "",
@@ -93,8 +95,16 @@ export default new Vuex.Store({
 
     einlogen: state => {
       state.pw = encrypt(state.pw, state.userName);
-      state.token = loginDB(state.loginName, state.pw);
+      console.log(state.noSendingRequestLogin)
+      if(state.noSendingRequestLogin){
+        state.token=1;
+      }
+      else{
+        state.token = loginDB(state.loginName, state.pw);
+      }
+
       console.log(state.token);
+
       if (state.token) {
         state.isAuthenticated = true;
       }
@@ -102,7 +112,7 @@ export default new Vuex.Store({
 
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
-      registerDB(state.loginName, state.firstName, state.lastName, state.pw); 
+      registerDB(state.loginName, state.firstName, state.lastName, state.pw);
       state.token = loginDB(state.loginName, state.pw);
       console.log(state.token);
       if (state.token) {
@@ -206,7 +216,7 @@ function loginDB(name, pw) {
 }*/
 
 function loginDB(name, pw) {
-  var tokenTest;
+  var token;
   axios({
       url: '//localhost:3000/login',
       method: 'post',
@@ -222,13 +232,13 @@ function loginDB(name, pw) {
     .then((data) => {
       console.log('login successfull');
       console.log(data);
-      //tokenTest = data.token;
+      //token = data.token;
     })
     .catch(function(err) {
       console.log(err);
     });
 
-  return tokenTest=1;
+  return token;
 }
 
 function registerDB(user, firstname, lastname, pw) {
