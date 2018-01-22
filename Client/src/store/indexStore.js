@@ -93,7 +93,7 @@ export default new Vuex.Store({
 
     einlogen: state => {
       state.pw = encrypt(state.pw, state.userName);
-      state.token = loginDB(state.loginName, state.pw); //Zuweisung wenn geht
+      state.token = loginDB(state.loginName, state.pw);
       console.log(state.token);
       if (state.token) {
         state.isAuthenticated = true;
@@ -102,13 +102,13 @@ export default new Vuex.Store({
 
     registrieren: state => {
       state.pw = encrypt(state.pw, state.userName);
-      registerDB(state.loginName, state.firstName, state.lastName, state.pw); //Zuweisung wenn geht
+      registerDB(state.loginName, state.firstName, state.lastName, state.pw); 
       state.token = loginDB(state.loginName, state.pw);
-      addAddress(state.planet, stat.dimension, state.token);
       console.log(state.token);
       if (state.token) {
         state.isAuthenticated = true;
       }
+      addAddress(state.planet, stat.dimension, state.token);
     },
 
     add: (state, shopIndex) => {
@@ -162,7 +162,7 @@ export default new Vuex.Store({
     reqOrderIdBack: (state) => {
       state.reqOrderId = -1;
     },
-    
+
     print: (state) => {
       //printDB(cart[], allDoors, allTotal, token)
     },
@@ -214,7 +214,7 @@ function loginDB(name, pw) {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
-        username: user,
+        username: name,
         email: 'fakedoors@gmx.de',
         pass: pw,
       },
@@ -222,16 +222,13 @@ function loginDB(name, pw) {
     .then((data) => {
       console.log('login successfull');
       console.log(data);
-      tokenTest = data.token;
-
-      //state.firstName=data.firstName
-      //state.token=data.x-access-key
+      //tokenTest = data.token;
     })
     .catch(function(err) {
       console.log(err);
     });
 
-  return tokenTest;
+  return tokenTest=1;
 }
 
 function registerDB(user, firstname, lastname, pw) {
@@ -271,8 +268,11 @@ function addAddress(planet, dim, token) {
     },
     planet: planet,
     dimension: dim,
-  });
-
+  }).then(function(response) {
+    console.log('register successfull');
+  })
+  .catch(function(err) {
+    console.log(err)});
 }
 
 /*
