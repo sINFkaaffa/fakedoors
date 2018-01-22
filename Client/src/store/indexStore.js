@@ -20,8 +20,11 @@ export default new Vuex.Store({
     shop: [],
     cart: [],
     shopIndexie: [],
-    all: 0,
+    allTotal: 0,
+    allDoors: 0,
 
+// TODO request schreiben und hardcoded inhalt auskommentieren
+// request muss u.a. auch purchaseID
     orders: [{
         orderId: "1",
         date: "01.10.17",
@@ -44,6 +47,8 @@ export default new Vuex.Store({
         customerId: "12"
       }
     ],
+
+    // TODO request schreiben und hardcoded inhalt auskommentieren
     orderDetails: [{
         itemId: "2",
         name: "blue",
@@ -147,6 +152,7 @@ export default new Vuex.Store({
       state.cart[cartIndex].total = state.cart[cartIndex].st * state.cart[cartIndex].price;
     },
 
+// TODO hier orderDetails  Request
     orderDetail: (state, orderId) => {
       state.reqOrderId = orderId;
 
@@ -155,6 +161,10 @@ export default new Vuex.Store({
 
     reqOrderIdBack: (state) => {
       state.reqOrderId = -1;
+    },
+    
+    print: (state) => {
+      //printDB(cart[], allDoors, allTotal, token)
     },
   },
 });
@@ -212,6 +222,7 @@ function loginDB(name, pw) {
     .then((data) => {
       console.log('login successfull');
       console.log(data);
+      tokenTest = data.token;
 
       //state.firstName=data.firstName
       //state.token=data.x-access-key
@@ -220,7 +231,7 @@ function loginDB(name, pw) {
       console.log(err);
     });
 
-  return tokenTest = 1;
+  return tokenTest;
 }
 
 function registerDB(user, firstname, lastname, pw) {
@@ -288,3 +299,5 @@ function registerDB(user, firstname, lastname, pw) {
 
   return tok = 1; // nicht nötig wenn request functionieren, dann ist direkte zuweisung möglich
 }*/
+
+//TODO neue reqeust PDF drucken & vlt

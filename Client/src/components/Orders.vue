@@ -3,7 +3,7 @@
   <div class="section hoverable z-depth-1 orderitem" v-for="(i,index) in orders" v-if="orders.length>0">
     <btnOrderDetail class="waves-effect waves-light btn orderitemDetailBtn" v-bind:orderId="i.orderId" v-on:orderDetail="orderDetail" v-if="!(i.orderId===reqOrderId)"></btnOrderDetail>
     <button class="waves-effect waves-light btn orderitemDetailBtn" v-if="(i.orderId===reqOrderId)" v-on:click="reqOrderIdBack"><i class="material-icons center">arrow_upward</i></button>
-    <a class="waves-effect waves-light btn orderitemDetailBtn"><i class="material-icons center">print</i></a>
+    <a class="waves-effect waves-light btn orderitemDetailBtn"><i class="material-icons center" @click="print">print</i></a>
     <h5 class="orderitemText">Order of </h5>
     <h5 class="orderitemDate">{{i.date}}</h5>
     <h5 class="orderitemCounts">{{i.itemQuantity}} Doors</h5>
@@ -53,6 +53,9 @@ export default {
     },
     reqOrderIdBack: function() {
       store.commit('reqOrderIdBack')
+    },
+    print: function() {
+      store.commit('print')
     },
   },
   mounted: function() {
