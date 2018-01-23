@@ -6,9 +6,6 @@
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-.cartContainer {
-  width: 100%; }
-
 .cartitem {
   background: #3b92a5;
   color: #aafad7;
@@ -18,9 +15,6 @@
       margin: 2% -19%;
       padding-bottom: 2%;
       font-size: 18pt; } }
-  .cartitem a {
-    background-color: #26c6da;
-    margin-top: 0.5%; }
   .cartitem img {
     display: none; }
     @media screen and (min-width: 1000px) {
@@ -124,7 +118,7 @@
   margin-left: 67%; }
   @media screen and (min-width: 1000px) {
     #cartBill {
-      margin-top: -6%;
+      margin-top: -11%;
       margin-right: 5%; } }
 
 .cartNoItem {

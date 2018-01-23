@@ -6,9 +6,6 @@
   src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
-.orderContainer {
-  width: 100%; }
-
 .orderitem {
   background: #3b92a5;
   margin: 2% 0;
