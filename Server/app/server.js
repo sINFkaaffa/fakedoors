@@ -1,17 +1,23 @@
 /**
- * Module dependencies.
+ * Module dependencies
  */
-const mySQLCfg	= require('./cfg/mysql');
-const sql = require('./cfg/sql');
+const mySQLCfg		= require('./cfg/mysql');
 
-var express 	= require('express');
-var http 		= require('http');
-var bodyParser 	= require('body-parser');
-var path 		= require('path');
+var express 		= require('express');
+var http 			= require('http');
+var bodyParser 		= require('body-parser');
+var path 			= require('path');
 
-var security	= require('./lib/security');
+var security		= require('./lib/security');
 
-var database 	= require('./handler/database')(mySQLCfg);
+var database 		= require('./handler/database')(mySQLCfg);
+
+const sql 			= require('./handler/sql');
+const response		= require('./handler/response')(database);
+
+
+var app = express();
+
 
 /**
  * Get arguments
@@ -30,10 +36,9 @@ if(args.length > 0) {
 			database.on("ready", function() {
 				// Delete and re-create all tables
 				database.deleteTables(function(err) {
-					var pre = "[RESET-MODE] ";
 					if(!err) database.createTables(() => {
 						console.log("[DATABASE:RESET-MODE] Re-created all tables")
-					})
+					});
 					else console.log(`[DATABASE:RESET-MODE] Error re-creating all tables: "${err}"`);
 				})
 			});
@@ -42,19 +47,10 @@ if(args.length > 0) {
 	}
 }
 
-/**
- * Database
- */
-database.on("ready", () => {
-	console.log("[DATABASE] Successfully connected");
-});
-
 
 /**
  * Middleware
  */
-var app = express();
-
 // Used for parsing incoming request bodies
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -66,24 +62,21 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization, x-access-token');
     res.setHeader('Access-Control-Allow-Credentials', true);
 
 	// Intercept OPTIONS method
 	if ('OPTIONS' == req.method) {
-		res.send(200);
+		res.sendStatus(200);
 	} else next();
 });
+
 
 /**
  * Routes
  */
-var accountingRouter = require('./routes/accounting');
-var publicRouter 	 = require('./routes/public');
-var userRouter  	 = require('./routes/user');
-
-accountingRouter(app, database);
-publicRouter(app, database);
+require('./routes/accounting')(app, response);
+require('./routes/public')(app, response);
 
 // Protection middleware
 app.use(function(req, res, next) {
@@ -109,7 +102,9 @@ app.use(function(req, res, next) {
 	}
 });
 
-userRouter(app, database);
+require('./routes/protected')(app, response);
+require('./routes/admin')(app, response);
+
 
 /**
  * Create HTTP server
@@ -119,10 +114,19 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+
 /**
  * Listen on provided port
  */
 server.listen(port);
-server.on('listening', function() {
+server.on('listening', () => {
 	console.log("Party started on Port " + port + "!");
+});
+
+
+/**
+ * Database ready
+ */
+database.on("ready", () => {
+	console.log("[DATABASE] Successfully connected");
 });

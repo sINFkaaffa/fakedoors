@@ -1,4 +1,7 @@
 module.exports = {
+	root: {
+		password: 'root'
+	},
 	users: {
 		max: 200,
 		nameMinLength: 8,

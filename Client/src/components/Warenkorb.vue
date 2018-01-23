@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="cartNoItem" v-if="cart.length===0">
-    <h5>No Items were selected</h5>
+    <h5>No items selected yet</h5>
   </div>
 
   <div class="cartFoot" v-if="cart.length>0">
@@ -26,7 +26,7 @@
           <i class="material-icons right">credit_card</i>Pay</router-link>
       <a class="waves-effect waves-light btn payBtn" v-if="isAuthenticated" href="error.html">
         <i class="material-icons right">credit_card</i>Pay</a>
-      <a class="waves-effect waves-light btn" id="cartBill" v-if="!noSendingRequestLogin"><i class="material-icons right">local_printshop</i>Bill</a>
+      <a class="waves-effect waves-light btn" id="cartBill"><i class="material-icons right">local_printshop</i>Bill</a>
     </div>
   </div>
 </div>
@@ -57,10 +57,7 @@ export default {
       return store.state.allTotal
     },
     isAuthenticated() {
-      return store.state.isAuthenticated
-    },
-    noSendingRequestLogin(){
-      return store.state.noSendingRequestLogin
+      return store.state.token != ""
     }
   },
 

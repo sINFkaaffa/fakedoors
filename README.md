@@ -58,7 +58,11 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 	* **Datenbank befüllen:**
 		* ``` npm run generate```
 	* **Datenbank leeren:**
-		* ``` npm run empty```
+		* ``` npm run emptydb```
+	* **Datenbank zurücksetzen:**
+		* ``` npm run resetdb```
+	* **Root-User anlegen:** (Standartpasswort: "root")
+		* ``` npm run root```
 
 * **Starten:**
 	* Mit Nodemon:
@@ -83,24 +87,37 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 				* Rückgabe: JSON
 			* /purchases
 				* Rückgabe: JSON
-			* /adresses
+			* /purchases/[bestellungs_id]
+				* Parameter durch URL
+				* Rückgabe: JSON
+			* /purchases/[bestellungs_id]/pdf
+				* Parameter durch URL
+				* Rückgabe: PDF-Datei
+			* /addresses
 				* Rückgabe: JSON
 			* /paymethods
 				* Rückgabe: JSON
-			* /pdf/[bestellungs_id] z.B. "/pdf/13374204242" **(Noch nicht implementiert)**
-				* Parameter durch URL (Siehe Beispiel)
-				* Rückgabe: PDF-Datei
+
 	* **POST**
 		* **HEADER:** ```Content-Type``` ```application/x-www-form-urlencoded```
 		* **Öffentlich:**
 			* /login
-				* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
+				* Parameter: *username, email, password* **User oder Email UND Passwort werden benötigt!**
 				* Rückgabe: JSON **(Enthält TOKEN)**
 			* /register
-				* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
+				* Parameter: *username, email, first_name, last_name, password, password_repeat*
 				* Rückgabe: JSON
 		* **Geschützt:**
 			* **Token-Übergabe durch Header-Key "x-access-token"**
 			* /adresses/add
-				* Parameter: **planet, dimension(, userId)** *(userId nur für Admins)*
+				* Parameter: **(firstName, )(lastName, )street, street_nr, city, zip, planet, dimension(, userId)** *(userId nur für Admins)*
+				* Rückgabe: JSON
+			* /paymethods/add
+				* Parameter: **type, data**
+				* Rückgabe: JSON
+			* /products/add (Nur für Admins)
+				* Parameter: **name, full_name, price, description, image_path, quantity**
+				* Rückgabe: JSON
+			* /purchases/new
+				* Parameter: address_id, paymethod_id, data
 				* Rückgabe: JSON

@@ -9,19 +9,19 @@
         <!--class="brand-logo"-->
         <ul id="nav-mobile" class="right navbarSmallMenu">
           <li>
-            <router-link v-bind:to="'/login'" v-if="!gelogt">Login</router-link>
+            <router-link v-bind:to="'/login'" v-if="!geloggt">Login</router-link>
           </li>
           <li>
-            <router-link v-bind:to="'/register'" v-if="!gelogt">Registration</router-link>
+            <router-link v-bind:to="'/register'" v-if="!geloggt">Registration</router-link>
           </li>
           <li>
-            <router-link v-bind:to="'/user'" v-if="gelogt">Hello, {{name}}</router-link>
+            <router-link v-bind:to="'/user'" v-if="geloggt">Hello, {{name}}</router-link>
           </li>
           <li>
-            <router-link v-bind:to="'/orders'" v-if="gelogt">History</router-link>
+            <router-link v-bind:to="'/orders'" v-if="geloggt">History</router-link>
           </li>
           <li>
-            <router-link v-bind:to="'/'" v-if="gelogt">
+            <router-link v-bind:to="'/'" v-if="geloggt">
               <i class="middle material-icons" @click="logout">exit_to_app</i>
             </router-link>
           </li>
@@ -48,8 +48,8 @@ export default {
     cartLength() {
       return store.state.allDoors
     },
-    gelogt() {
-      return store.state.isAuthenticated
+    geloggt() {
+      return store.state.token != ""
     },
     name() {
       return store.state.userName

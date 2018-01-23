@@ -7,11 +7,6 @@ const mySQLCfg	= require('./cfg/mysql');
 var database 	= require('./handler/database')(mySQLCfg);
 var random 		= require('./lib/random');
 
-/**
- * Data
- */
-
-
 
 /**
  * Basic functions
@@ -72,7 +67,14 @@ function english(str) {
 
 			fullName += " door";
 
-			database.addProduct(null, name, fullName, price, description, imagePath, quantity);
+			database.addProduct(null, {
+				name: name,
+				fullName: fullName,
+				price: price,
+				description: description,
+				imagePath: imagePath,
+				quantity: quantity
+			});
 		}
 	 },
 
@@ -175,7 +177,7 @@ function _empty() { // Empty tables
 	 database.emptyTables(function(err) {
 		 var msg = "Finished!";
 		 if(err) msg = `Error: "${err}"`;
-		 else log(msg, "Reset");
+		 else log(msg, "Empty");
 	 });
 }
 
@@ -194,7 +196,7 @@ function _reset() { // Reset tables
 function _root() {
 	log("Booting up", "Root");
 
-	database.addUser("root", "root@fakedoors.com", "Root", "Root", true, "root", function(err, data) {
+	database.addUser("root", "root@fakedoors.com", "Root", "Root", true, cfg.root.password, true, function(err, data) {
 		if(!err)
 			database.createTables(() => {
 				log("Finished!", "Root");

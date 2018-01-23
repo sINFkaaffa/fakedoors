@@ -1,24 +1,20 @@
-var response = require('../handler/response');
-
-module.exports = function(app, database) {
+module.exports = function(app, responseHandler) {
 	//========================
 	// Login
 	//========================
 	app.post('/login', function (req, res) {
 		var username 	= req.body.username;
 		var email 		= req.body.email;
-		var password 	= req.body.pass;
+		var password 	= req.body.password;
+		var clientHash  = req.body.client_hash;
 
 		console.log("/login POST request");
+		console.log(username);
+		console.log(password);
 
-		if(username)
-			username = database.escape(username.trim());
-		if(email)
-			email = database.escape(email.trim());
-
-		database.loginUser(username, email, password, function(err, data) {
+		responseHandler.login(username, email, password, clientHash, function(err, data) {
 			if(err) {
-				res.status(403).json({
+				res.json({
 					success: false,
 					message: err
 				})
@@ -41,12 +37,13 @@ module.exports = function(app, database) {
 		var email 		= req.body.email;
 		var firstName 	= req.body.first_name;
 		var lastName 	= req.body.last_name;
-		var pass 		= req.body.pass;
-		var passRepeat 	= req.body.pass_repeat;
+		var pass 		= req.body.password;
+		var passRepeat 	= req.body.password_repeat;
+		var clientHash  = req.body.client_hash;
 
 		console.log("/register POST request");
 
-		response(database).register(username, email, firstName, lastName, pass, passRepeat, function(err, data) {
+		responseHandler.register(username, email, firstName, lastName, pass, passRepeat, clientHash, function(err, data) {
 			if(err) {
 				res.json({
 					success: false,

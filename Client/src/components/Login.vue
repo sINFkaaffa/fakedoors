@@ -14,8 +14,8 @@
       </div>
     </form>
     <a class="btn waves-effect waves-light col s3 offset-s4" id="abort" href="index.html">Abort</a>
-    <router-link v-bind:to="'/'" id="loginBtn" class="waves-effect waves-light btn">
-      <p@click="einlogen">Login</p>
+    <router-link v-bind:to="'/user'" id="loginBtn" class="waves-effect waves-light btn">
+      <p@click="einloggen">Login</p>
     </router-link>
   </div>
 </div>
@@ -46,8 +46,8 @@ export default {
     },
   },
   methods: {
-    einlogen: function() {
-      store.commit('einlogen')
+    einloggen: function() {
+      store.commit('einloggen')
     },
   },
 }
