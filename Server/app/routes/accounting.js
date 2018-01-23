@@ -9,8 +9,6 @@ module.exports = function(app, responseHandler) {
 		var clientHash  = req.body.client_hash;
 
 		console.log("/login POST request");
-		console.log(username);
-		console.log(password);
 
 		responseHandler.login(username, email, password, clientHash, function(err, data) {
 			if(err) {

@@ -1,7 +1,6 @@
 var pdf 			= require('html-pdf');
 var pug			  	= require('pug');
 var path		  	= require('path');
-var fs = require('fs');
 
 module.exports = function(app, responseHandler) {
 	//========================
