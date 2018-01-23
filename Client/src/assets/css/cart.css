@@ -94,7 +94,8 @@
 
 .payBtn {
   margin-top: 2%;
-  margin-left: 65%; }
+  margin-left: 65%;
+  color: white; }
   @media screen and (min-width: 1000px) {
     .payBtn {
       margin-top: -6%;

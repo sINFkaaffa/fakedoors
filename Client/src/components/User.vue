@@ -1,14 +1,14 @@
 <template>
-<div>
+<div id="user">
   <div class="divider"></div>
   <div class="section">
-    <p>Username: {{userName}}</p>
+    <p>User Name: {{userName}}</p>
   </div>
   <div class="section">
-    <p>Firstname: {{firstName}}</p>
+    <p>First Name: {{firstName}}</p>
   </div>
   <div class="section">
-    <p>Lastname: {{lastName}}</p>
+    <p>Last Name: {{lastName}}</p>
   </div>
   <div class="section">
     <p>Dimension: {{dim}}</p>

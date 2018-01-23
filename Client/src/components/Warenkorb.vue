@@ -24,7 +24,8 @@
         <i class="material-icons right">shopping_cart</i>More shopping</router-link>
       <router-link v-bind:to="'/login'" v-if="!isAuthenticated" class="waves-effect waves-light btn payBtn">
           <i class="material-icons right">credit_card</i>Pay</router-link>
-      <a class="waves-effect waves-light btn payBtn" v-if="isAuthenticated" href="error.html"><i class="material-icons right">credit_card</i>Pay</a>
+      <a class="waves-effect waves-light btn payBtn" v-if="isAuthenticated" href="error.html">
+        <i class="material-icons right">credit_card</i>Pay</a>
       <a class="waves-effect waves-light btn" id="cartBill" v-if="!noSendingRequestLogin"><i class="material-icons right">local_printshop</i>Bill</a>
     </div>
   </div>
