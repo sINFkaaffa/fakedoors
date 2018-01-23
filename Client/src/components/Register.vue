@@ -12,7 +12,7 @@
           <label for="last_name">Last Name</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate" v-model="userName">
+          <input id="user_name" type="text" class="validate" v-model="userName">
           <label for="last_name">Username</label>
         </div>
         <div class="input-field col s6">
@@ -40,7 +40,7 @@
         </p>
       </form>
     </div>
-    <a class="btn waves-effect waves-light col s3 offset-s9" id="abort" type="submit" href="index.html">Arbort</a>
+    <a class="btn waves-effect waves-light col s3 offset-s9" id="abort" href="index.html">Arbort</a>
     <router-link v-bind:to="'/'" id="registBtn" class="waves-effect waves-light btn">
       <p@click="registrieren">Register</p>
     </router-link>

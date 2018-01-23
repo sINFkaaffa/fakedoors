@@ -18,7 +18,7 @@ export default new Vuex.Store({
     dimension: "Dimension",
     planet: "Planet",
     pay: "",
-    isAuthenticated: false,
+    isAuthenticated: true,
     token: "",
 
     // Variable of the first page
