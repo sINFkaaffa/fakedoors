@@ -19,6 +19,7 @@
   <div class="section">
     <p>Paymethod: {{pay}}</p>
   </div>
+  <img src="/src/assets/img/rick-and-morty-adult-swim.jpg" alt="Rick and Morty" class="userImg"/>
   <div class="divider"></div>
 </div>
 </template>
