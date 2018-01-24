@@ -1,0 +1,113 @@
+/* shopping cart styles */
+@import "config"
+
+.cartitem
+  background: $colorDark
+  color: $colorLight
+  margin: 2% auto
+  @media #{$information-phone}
+    margin: 2% -19%
+    padding-bottom: 2%
+    font-size: 18pt
+  img
+    display: none
+    @media #{$information-phone}
+      display: block
+      margin-top: -1%
+      margin-left: 2%
+      float: left
+      width: 4%
+      font-size: 12pt
+
+.cartItemBtnRemove
+    background-color: $colorMedium
+    margin-left: 42%
+    @media #{$information-phone}
+      margin-top: 0.5%
+      margin-left: 33%
+
+
+.cartItemBtnAddSt,
+    background-color: $colorMedium
+    margin-top: 0.5%
+    margin-left: 2%
+    width: 1%
+    padding-left: 1%
+    @media #{$information-phone}
+      margin-left: -46%
+
+.cartItemBtnRemoveSt
+    background-color: $colorMedium
+    margin-top: 0.5%
+    width: 1%
+    padding-left: 1%
+    @media #{$information-phone}
+
+.cartitemName
+  margin-left: 2%
+  float: left
+  width: 45%
+  @media #{$information-phone}
+    width: 22%
+
+.cartitemTextCount
+  float: left
+  margin-left: -1%
+
+.cartitemPrice
+  display: none
+  @media #{$information-phone}
+    display: block
+    float: left
+    width: 14%
+    margin-left: 12%
+
+.cartitemTotal
+  float: left
+  margin-left: 2%
+  @media #{$information-phone}
+    margin-left: 0%
+    margin-right: 2%
+    width: 20%
+
+.cartFoot
+  margin-left: -17%
+  a
+    background-color: $colorMedium
+
+.shoppingBtn
+  margin-left: 15%
+  @media #{$information-phone}
+    margin-left: -2%
+    margin-right: 42
+
+.payBtn
+  margin-top: 2%
+  margin-left: 65%
+  color: white
+  @media #{$information-phone}
+    margin-top: -6%
+    margin-left: 87%
+
+#cartTotalAll
+  background-color: $colorDark
+  margin-left: 67%
+  margin-bottom: 2%
+  width: 32.5%
+  padding: 1%
+  box-shadow: 2px 2px 5px grey
+  color: $colorLight
+  font-size: 13pt
+  @media #{$information-phone}
+    font-size: 20pt
+
+#cartBill
+  margin-top: 2%
+  margin-left: 67%
+  @media #{$information-phone}
+    margin-top: -11%
+    margin-right: 5%
+
+.cartNoItem
+  color: $colorDark
+  text-align: center

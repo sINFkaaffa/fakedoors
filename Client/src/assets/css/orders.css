@@ -1,0 +1,119 @@
+/* bestellhistorie Styles */
+/* Variablen */
+/* Logo-Schrift */
+@font-face {
+  font-family: "get schwifty";
+  src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+.orderitem {
+  background: #3b92a5;
+  margin: 2% 0;
+  color: #aafad7; }
+  @media screen and (min-width: 1000px) {
+    .orderitem {
+      margin: 2% -15%;
+      padding-bottom: 2%; } }
+  .orderitem a {
+    background-color: #26c6da;
+    margin-top: 0%;
+    margin-right: 2%; }
+
+.orderitemDetailBtn {
+  background-color: #26c6da;
+  margin-left: 12%; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetailBtn {
+      margin-top: 0%;
+      margin-right: 2%;
+      margin-left: 0; } }
+
+.orderitemText {
+  display: none; }
+  @media screen and (min-width: 1000px) {
+    .orderitemText {
+      display: block;
+      margin-left: 5%;
+      float: left;
+      width: 15%;
+      font-size: 20pt; } }
+
+.orderitemDate, .orderitemCounts {
+  float: left;
+  font-size: 13pt;
+  margin-right: 2%;
+  margin-left: 2%; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDate, .orderitemCounts {
+      margin-right: 7%;
+      margin-left: 0;
+      width: 10%;
+      font-size: 20pt; } }
+
+.orderitemTotalAll {
+  float: left;
+  font-size: 13pt; }
+  @media screen and (min-width: 1000px) {
+    .orderitemTotalAll {
+      margin-right: 4%;
+      margin-left: 1%;
+      width: 20%;
+      font-size: 20pt; } }
+
+.orderitemDetail {
+  background: #aafad7;
+  margin-top: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  padding-bottom: 2%;
+  color: #3b92a5; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetail {
+      margin-top: 0;
+      font-size: 20pt; } }
+  .orderitemDetail img {
+    display: none; }
+    @media screen and (min-width: 1000px) {
+      .orderitemDetail img {
+        display: block;
+        margin-top: -0.5%;
+        margin-right: 3%;
+        margin-left: 6%;
+        float: left;
+        width: 6%; } }
+
+.orderitemDetailName {
+  float: left;
+  width: 22%;
+  margin-left: 2%; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetailName {
+      margin-left: 0;
+      width: 15%; } }
+
+.orderitemDetailSt {
+  float: left;
+  width: 25%; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetailSt {
+      display: block;
+      margin-right: 2%;
+      width: 13%; } }
+
+.orderitemDetailTotal {
+  margin-left: 55%; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetailTotal {
+      margin-top: -4%;
+      margin-left: 70%; } }
+
+.orderitemDetailDescrib {
+  display: none; }
+  @media screen and (min-width: 1000px) {
+    .orderitemDetailDescrib {
+      display: block;
+      margin-top: 2.5%;
+      font-size: 12pt; } }
+
+/*# sourceMappingURL=orders.css.map */

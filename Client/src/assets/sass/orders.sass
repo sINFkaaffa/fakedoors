@@ -1,0 +1,103 @@
+/* bestellhistorie Styles */
+@import "config"
+
+.orderitem
+  background: $colorDark
+  margin: 2% 0
+  color: $colorLight
+  @media #{$information-phone}
+    margin: 2% -15%
+    padding-bottom: 2%
+
+  a
+    background-color: $colorMedium
+    margin-top: 0%
+    margin-right: 2%
+
+.orderitemDetailBtn
+  background-color: $colorMedium
+  margin-left: 12%
+  @media #{$information-phone}
+    margin-top: 0%
+    margin-right: 2%
+    margin-left: 0
+
+.orderitemText
+  display: none
+  @media #{$information-phone}
+    display: block
+    margin-left: 5%
+    float: left
+    width: 15%
+    font-size: 20pt
+
+.orderitemDate, .orderitemCounts
+  float: left
+  font-size: 13pt
+  margin-right: 2%
+  margin-left: 2%
+  @media #{$information-phone}
+    margin-right: 7%
+    margin-left: 0
+    width: 10%
+    font-size: 20pt
+
+.orderitemTotalAll
+  float: left
+  font-size: 13pt
+  @media #{$information-phone}
+    margin-right: 4%
+    margin-left: 1%
+    width: 20%
+    font-size: 20pt
+
+.orderitemDetail
+  background: $colorLight
+  margin-top: 1%
+  margin-right: auto
+  margin-left: auto
+  width: 100%
+  padding-bottom: 2%
+  color: $colorDark
+  @media #{$information-phone}
+    margin-top: 0
+    font-size: 20pt
+
+  img
+    display: none
+    @media #{$information-phone}
+      display: block
+      margin-top: -0.5%
+      margin-right: 3%
+      margin-left: 6%
+      float: left
+      width: 6%
+
+.orderitemDetailName
+  float: left
+  width: 22%
+  margin-left: 2%
+  @media #{$information-phone}
+    margin-left: 0
+    width: 15%
+
+.orderitemDetailSt
+  float: left
+  width: 25%
+  @media #{$information-phone}
+    display: block
+    margin-right: 2%
+    width: 13%
+
+.orderitemDetailTotal
+  margin-left: 55%
+  @media #{$information-phone}
+    margin-top: -4%
+    margin-left: 70%
+
+.orderitemDetailDescrib
+  display: none
+  @media #{$information-phone}
+    display: block
+    margin-top: 2.5%
+    font-size: 12pt

@@ -1,0 +1,20 @@
+# Miscellaneous
+Client/.DS_Store
+Client/node_modules/
+Client/dist/
+Client/npm-debug.log*
+Client/yarn-debug.log*
+Client/yarn-error.log*
+Client/build/*
+
+# Editor directories and files
+Client/.idea
+Client/.vscode
+Client/*.suo
+Client/*.ntvs*
+Client/*.njsproj
+Client/*.sln
+
+# Server
+Server/node_modules/
+Server/package-lock.json
