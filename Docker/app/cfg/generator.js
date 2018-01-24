@@ -30,7 +30,7 @@ module.exports = {
 		price: {
 			min: 5,
 			max: 1000,
-			digits: 0
+			digits: 2
 		},
 
 		quantity: {
