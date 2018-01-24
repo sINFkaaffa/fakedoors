@@ -1,3 +1,5 @@
+Note: Epsilon_02 = sINFsibrae
+
 # Fakedoors.com
 
 Webtechnologie-Projekt 2017 von
