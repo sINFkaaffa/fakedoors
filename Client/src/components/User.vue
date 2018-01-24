@@ -1,97 +1,97 @@
 <template>
-<div id="user">
-  <div class="divider"></div>
-  <div class="section">
-    <p>User Name: {{userName}}</p>
-  </div>
-  <div class="section">
-    <p>First Name: {{firstName}}</p>
-  </div>
-  <div class="section">
-    <p>Last Name: {{lastName}}</p>
-  </div>
-  <div class="section">
-    <p>Dimension: {{dim}}</p>
-  </div>
-  <div class="section">
-    <p>Planet: {{planet}}</p>
-  </div>
-  <div class="section">
-    <p>Paymethod: {{pay}}</p>
-  </div>
-  <img src="/src/assets/img/rick-and-morty-adult-swim.jpg" alt="Rick and Morty" class="userImg"/>
-  <div class="divider"></div>
-</div>
+	<div id="user">
+
+		<div class="section">
+			<p>User Name: {{userName}}</p>
+		</div>
+
+		<div class="section">
+			<p>First Name: {{firstName}}</p>
+		</div>
+
+		<div class="section">
+			<p>Last Name: {{lastName}}</p>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="section">
+			<p>Dimension: {{dimension}}</p>
+		</div>
+
+		<div class="section">
+			<p>Planet: {{planet}}</p>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="section">
+			<p>Paymethod: {{payMethod}}</p>
+		</div>
+
+		<img src="/src/assets/img/rick-and-morty-adult-swim.jpg" alt="Rick and Morty" class="userImg"/>
+
+	</div>
 </template>
 
 <script>
-import store from '../store/indexStore'
+	import store from '../store/indexStore'
 
-export default {
-  name: 'User',
-  store: store,
-  computed: {
-    firstName: {
-      get() {
-        return store.state.firstName
-      },
-      set(value) {
-        store.commit('firstName', value)
-      }
-    },
-    lastName: {
-      get() {
-        return store.state.lastName
-      },
-      set(value) {
-        store.commit('lastName', value)
-      }
-    },
-    userName: {
-      get() {
-        return store.state.userName
-      },
-      set(value) {
-        store.commit('userName', value)
-      }
-    },
-    pw: {
-      get() {
-        return store.state.pw
-      },
-      set(value) {
-        store.commit('pw', value)
-      }
-    },
-    dim: {
-      get() {
-        return store.state.dimension
-      },
-      set(value) {
-        store.commit('dim', value)
-      }
-    },
-    planet: {
-      get() {
-        return store.state.planet
-      },
-      set(value) {
-        store.commit('planet', value)
-      }
-    },
-    pay: {
-      get() {
-        return store.state.pay
-      },
-      set(value) {
-        store.commit('pay', value)
-      }
-    },
-  },
-}
+	import accountHandler from '../handler/account'
+
+	export default {
+		name: 'User',
+		store: store,
+
+		data: function() {
+			return {
+				userName: '',
+				email: '',
+				firstName: '',
+				lastName: '',
+				planet: '',
+				dimension: '',
+				payMethod: ''
+			};
+		},
+
+		mounted: function() {
+			var self = this;
+			var token = store.state.token;
+
+			accountHandler.getInfo(token, (success, msg, info) => {
+				// Successfully retrieved users account
+				if(success) {
+					// Save properties
+					self.userName = info.username;
+					self.email = info.email;
+					self.firstName = info.firstName;
+					self.lastName = info.lastName;
+
+					// Get address
+					accountHandler.getAddress(token, (success, msg, address) => {
+						if(address) {
+							self.planet = address.planet;
+							self.dimension = address.dimension;
+						}
+					});
+
+					// Get pay method
+					accountHandler.getPayMethod(token, (success, msg, payMethod) => {
+						if(payMethod)
+							self.payMethod = payMethod.type;
+					});
+				}
+				else { // Authentification failed
+					alert("Login required");
+					this.$router.push('/login');
+				}
+			})
+		}
+	}
 </script>
 <style>
-.section {
-  padding-left: 150px;
-}
+	.section {
+		padding-left: 150px;
+	}
 </style>

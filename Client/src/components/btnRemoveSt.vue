@@ -1,5 +1,7 @@
 <template>
-<button v-on:click="removeSt"><i class="small material-icons">arrow_drop_down</i></button>
+	<button v-on:click="removeSt">
+		<i class="small material-icons">arrow_drop_down</i>
+	</button>
 </template>
 
 <script>

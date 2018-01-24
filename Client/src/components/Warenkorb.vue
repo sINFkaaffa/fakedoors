@@ -22,9 +22,9 @@
     <div id="btn">
       <router-link v-bind:to="'/'" class="waves-effect waves-light btn shoppingBtn">
         <i class="material-icons right">shopping_cart</i>More shopping</router-link>
-      <router-link v-bind:to="'/login'" v-if="!isAuthenticated" class="waves-effect waves-light btn payBtn">
+      <router-link v-bind:to="'/login'" v-if="!loggedIn" class="waves-effect waves-light btn payBtn">
           <i class="material-icons right">credit_card</i>Pay</router-link>
-      <a class="waves-effect waves-light btn payBtn" v-if="isAuthenticated" href="error.html">
+      <a class="waves-effect waves-light btn payBtn" v-if="loggedIn" href="error.html">
         <i class="material-icons right">credit_card</i>Pay</a>
       <a class="waves-effect waves-light btn" id="cartBill"><i class="material-icons right">local_printshop</i>Bill</a>
     </div>
@@ -56,7 +56,7 @@ export default {
     all() {
       return store.state.allTotal
     },
-    isAuthenticated() {
+    loggedIn() {
       return store.state.token != ""
     }
   },

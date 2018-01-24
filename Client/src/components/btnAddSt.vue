@@ -1,5 +1,7 @@
 <template>
-<button v-on:click="addSt"><i class="small material-icons">arrow_drop_up</i></button>
+	<button v-on:click="addSt">
+		<i class="small material-icons">arrow_drop_up</i>
+	</button>
 </template>
 
 <script>

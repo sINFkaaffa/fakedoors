@@ -1,21 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import unorm from '../js/unorm';
-import sjcl from '../js/sjcl';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		// Variables of register & login
-		firstName: "",
-		lastName: "",
-		userName: "",
-		pw: "",
-		dimension: "Dimension",
-		planet: "Planet",
-		pay: "",
-		token: "",
+		// Used for authentification
+		token: null,
 
 		// Variable of the first page
 		shop: [],
@@ -35,59 +26,7 @@ export default new Vuex.Store({
 	},
 
 	mutations: {
-		// Mutations of register & login
-		// v-model-mutations
-		firstName: (state, firstName) => state.firstName = firstName,
-		lastName: (state, lastName) => state.lastName = lastName,
-		userName: (state, userName) => state.userName = userName,
-		pw: (state, pw) => state.pw = pw,
-		dim: (state, dim) => state.dimension = dim,
-		planet: (state, planet) => state.planet = planet,
-		pay: (state, payment) => state.pay = payment,
-
-		logout: state => {
-			state.firstName = '';
-			state.lastName = '';
-			state.userName = '';
-			state.pw = '';
-			state.dimension = 'Dimension';
-			state.planet = 'Planet';
-			state.pay = '';
-			state.token = '';
-		},
-
-		einloggen: state => {
-			var pw = encrypt(state.pw, state.userName);
-
-			loginDB(state.userName, pw, result => {
-				alert(result.message);
-
-				if(result.success) {
-					state.token = result.data.token;
-				}
-			});
-		},
-
-		registrieren: state => {
-			var pw = encrypt(state.pw, state.userName);
-
-			registerDB(state.userName, state.firstName, state.lastName, pw, result => {
-				if(!result.success) return alert(result.message);
-
-				loginDB(state.userName, pw, result => {
-					alert(result.message);
-
-					if(result.success) {
-						var token = result.data.token;
-
-						state.token = token;
-						addAddress(token, state.planet, state.dimension, result => {
-							console.log(result);
-						});
-					}
-				});
-			});
-		},
+		token: (state, token) => state.token = token,
 
 		// mutation of the first page,
 		/* The add-Button check, if the add-Btn of the selected door is in the shooping cart,
@@ -175,81 +114,5 @@ export default new Vuex.Store({
 		reqOrderIdBack: (state) => {
 			state.reqOrderId = -1;
 		},
-
-		// mutation for the pdf-print of the order
-		print: (state) => {
-			printDB(cart, allDoors, allTotal, token)
-		},
 	},
 });
-
-
-// TODO Es wäre echt super/übersichtlicher, wenn wir diese Functionen in eine eigene Datei bekommen
-// Functions for the mutations
-var rounds = 1000;
-
-function encrypt(pwPlainText, user) {
-	pwPlainText = unorm.nfc(pwPlainText);
-	user = unorm.nfc(user.trim()).toLowerCase();
-	var salt = sjcl.codec.utf8String.toBits('fakedoors.com' + user); // Determenistic unique salt
-
-	// PBKDF2 computation, result returned as hexadecimal encoding
-	var key = sjcl.misc.pbkdf2(pwPlainText, salt, rounds, 32 * 8, function(key) {
-		var hasher = new sjcl.misc.hmac(key, sjcl.hash.sha256);
-		this.encrypt = function() {
-			return hasher.encrypt.apply(hasher, arguments);
-		};
-	});
-
-	return sjcl.codec.hex.fromBits(key);
-}
-
-function loginDB(username, password, callback) {
-    axios.post('//localhost:3000/login', JSON.stringify({
-			username: username,
-	        password: password
-	    }), {
-			headers: { 'Content-Type': 'application/json' }
-	    }
-	).then(function(response) {
-		callback(response.data);
-	});
-}
-
-function registerDB(username, firstName, lastName, password, callback) {
-	axios.post('//localhost:3000/register', JSON.stringify({
-		username: username,
-		email: 'fakedoors@gmx.de',
-		first_name: firstName,
-		last_name: lastName,
-		password: password,
-		password_repeat: password
-	}), {
-		headers: { 'Content-Type': 'application/json' }
-	}).then(function(response) {
-		callback(response.data);
-	});
-}
-
-function addAddress(token, planet, dim, callback) {
-	axios.post('//localhost:3000/addresses/add', JSON.stringify({
-		street: 'Teststreet',
-		street_nr: 1337,
-		city: 'Germantown',
-		zip: 420,
-		planet: planet,
-		dimension: dim
-	}), {
-		headers: {
-			'Content-Type': 'application/json',
-			'x-access-token': token
-		}
-	}).then(function(response) {
-		callback(response.data);
-	});
-}
-
-//TODO neue reqeust PDF drucken & vlt
-function printDB(cart, allDoors, allTotal, token) {
-	// TODO
-}

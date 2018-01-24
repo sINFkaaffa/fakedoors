@@ -23,6 +23,9 @@ module.exports = function(dbHandler) {
 				if(!(username && email && firstName && lastName && password && passwordRepeat))
 					return callback("Empty values");
 
+				if(username == "root")
+					return callback("Username forbidden");
+
 				if(password != passwordRepeat)
 					return callback("Passwords don't match");
 

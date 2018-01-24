@@ -1,5 +1,7 @@
 <template>
-<button v-on:click="orderDetail"><i class="material-icons center" >subdirectory_arrow_left</i></button>
+	<button v-on:click="orderDetail">
+		<i class="material-icons center">subdirectory_arrow_left</i>
+	</button>
 </template>
 
 <script>

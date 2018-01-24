@@ -123,7 +123,7 @@ class DatabaseHandler extends EventEmitter {
 	// Empty tables
 	//========================
 	emptyTables(callback) {
-		this._connection.query(sql.tables.empty, function(err, result) {
+		this._connection.query(sql.all.empty, function(err, result) {
 			if(typeof callback === 'function')
 				callback(err);
 		});

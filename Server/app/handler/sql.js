@@ -1,10 +1,9 @@
 module.exports = {
-	merge: function(/*...*/) {
+	merge: function(/*..*/) {
 		var query = "";
 		for (var i = 0; i < arguments.length; i++) {
 			query += arguments[i] + ";";
-		}
-		return query;
+		} return query;
 	},
 
 	all: {
@@ -16,11 +15,11 @@ module.exports = {
 			DROP TABLE IF EXISTS purchases;`,
 
 		empty: `
-			TRUNCATE TABLE IF EXISTS products;
-			TRUNCATE TABLE IF EXISTS users;
-			TRUNCATE TABLE IF EXISTS addresses;
-			TRUNCATE TABLE IF EXISTS paymethods;
-			TRUNCATE TABLE IF EXISTS purchases;`
+			TRUNCATE TABLE products;
+			TRUNCATE TABLE users;
+			TRUNCATE TABLE addresses;
+			TRUNCATE TABLE paymethods;
+			TRUNCATE TABLE purchases;`
 	},
 
 	products: {
@@ -175,7 +174,7 @@ module.exports = {
 			CREATE TABLE paymethods (
 				ID int(11) AUTO_INCREMENT PRIMARY KEY,
 				UserID int(11),
-				Type enum('Paypal','Bank','Bitcoin','Bill'),
+				Type enum('Bill','Spacecard','Bank','Paypal','Bitcoin'),
 				Data mediumtext COMMENT 'JSON'
 			)`,
 

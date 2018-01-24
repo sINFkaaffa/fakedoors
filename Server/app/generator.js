@@ -177,7 +177,7 @@ function _empty() { // Empty tables
 	 database.emptyTables(function(err) {
 		 var msg = "Finished!";
 		 if(err) msg = `Error: "${err}"`;
-		 else log(msg, "Empty");
+		 log(msg, "Empty");
 	 });
 }
 

@@ -1,5 +1,8 @@
 <template>
-<button v-on:click="removeIndex"><i class="material-icons right">remove_shopping_cart</i>remove</button>
+	<button v-on:click="removeIndex">
+		<i class="material-icons right">remove_shopping_cart</i>
+		remove
+	</button>
 </template>
 
 <script>
