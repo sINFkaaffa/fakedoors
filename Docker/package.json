@@ -1,0 +1,30 @@
+{
+  "name": "fakedoors",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app/server.js",
+    "safe": "node ./app/server.js reset",
+    "generate": "node ./app/generator.js",
+    "emptydb": "node ./app/generator.js empty",
+    "resetdb": "node ./app/generator.js reset",
+    "root": "node ./app/generator.js root"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "~1.18.2",
+    "express": "~4.15.5",
+    "html-pdf": "^2.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "mysql": "^2.15.0",
+    "pbkdf2": "^3.0.14",
+    "pug": "^2.0.0-rc.4",
+    "sjcl": "^1.0.7",
+    "unorm": "^1.4.1",
+    "vue": "^2.5.2",
+    "vue-resource": "^1.3.5",
+    "vue-router": "^3.0.1",
+    "vue-select": "^2.3.1",
+    "vuex": "^3.0.1"
+  }
+}

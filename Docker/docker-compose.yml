@@ -1,0 +1,29 @@
+# Use root/example as user/password credentials
+version: '2.1'
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+            MYSQL_ROOT_PASSWORD: ""
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    #healthcheck:
+            #test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            #interval: 10s
+            #timeout: 5s
+            #retries: 20
+
+  app:
+    container_name: fakedoors
+    #restart: always
+    build: .
+    depends_on:
+            - mysql
+              #condition: service_healthy
+    command: [ "./container-sleep.sh", "npm", "start" ]
+    ports:
+      - "3000:3000"
+    links:
+      - mysql:mysql

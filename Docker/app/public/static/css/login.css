@@ -1,0 +1,21 @@
+/* Variablen */
+/* Logo-Schrift */
+@font-face {
+  font-family: "get schwifty";
+  src: url("../fonts/get_schwifty.woff2") format("woff2"), url("../fonts/get_schwifty.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+#loginBtn {
+  background-color: #26c6da;
+  margin-left: 20%; }
+  @media screen and (min-width: 1000px) {
+    #loginBtn {
+      margin-top: -7%;
+      margin-left: 87%; } }
+
+#abort {
+  background-color: #26c6da;
+  margin-left: 0;
+  float: left; }
+
+/*# sourceMappingURL=login.css.map */
