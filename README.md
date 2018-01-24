@@ -1,8 +1,7 @@
 # Fakedoors.com
 
-## Webtechnologie-Projekt 2017
-## von
-## Simon Bräuer, Alex Roidl und Karin Affa
+Webtechnologie-Projekt 2017 von
+Simon Bräuer, Alex Roidl und Karin Affa
 
 [Live Version](https://sinfkaaffa.github.io/fakedoors/)
 
@@ -11,7 +10,7 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 
 ### Benötigt
 
-* Node (https://nodejs.org/en/) (Module: Express, Nodemon)
+* Node (https://nodejs.org/en/)
 * MySQL Server
 
 ### Features
@@ -20,5 +19,88 @@ Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgest
 * Advanced Toolkit: Vue
 * Back-End: Node
 * Database: MySQL
-* Deployed via heroku
+* Deployed via Docker# Fakedoors.com
+
+Webtechnologie-Projekt 2017 von
+Simon Bräuer, Alex Roidl und Karin Affa
+
+[Live Version](https://sinfkaaffa.github.io/fakedoors/)
+
+Fakedoors wird professioneller „Fakedoors“-Online-Shop.
+Dieser Webstore wird in einer Folge von der bekannten Serie Rick & Morty vorgestellt, daher soll die Marke "Rick & Morty" präsent sein.
+
+### Benötigt
+
+* Node (https://nodejs.org/en/)
+* MySQL Server
+
+### Features
+
+* User Stories: Warenkorb mit allen Bestellungen, Benutzerkonto usw.
+* Advanced Toolkit: Vue
+* Back-End: Node
+* Database: MySQL
+* Deployed via Docker
 * Design Framework: Materialize (http://materializecss.com/)
+
+# Server
+* **MySQL Zugangsdaten Konfiguration unter */Server/app/cfg/mysql.js*!**
+* **Empfohlen:**
+	Nodemon für beständiges Neustarten bei Änderungen während der Entwicklung
+	``` npm install -g nodemon ```
+
+* **Abhängigkeiten installieren:**
+	* ``` npm install```
+
+* **Generator:**
+	* **Konfiguration:**
+		* ``` /app/cfg/generator.js```
+	* **Datenbank befüllen:**
+		* ``` npm run generate```
+	* **Datenbank leeren:**
+		* ``` npm run empty```
+
+* **Starten:**
+	* Mit Nodemon:
+		* ``` nodemon npm start```
+	* Ohne Nodemon:
+		* ``` npm start```
+	* Sicherer Modus:
+		* (```nodemon```) ```  npm start safe```
+
+* **Requests:**
+	* (**POSTman Kollektion:** /Server/Fakedoors.postman_collection.json)
+
+	* **GET**
+		* / **Statisches Verzeichnis (index.html)**
+		* **Öffentlich:**
+			* /products/[seite] z.B. "/products/2" ("Öffentllich")
+				* Parameter durch URL (Siehe Beispiel)
+				* Rückgabe: *JSON*
+		* **Geschützt:**
+			* **Token-Übergabe durch Header-Key "x-access-token"**
+			* /account
+				* Rückgabe: JSON
+			* /purchases
+				* Rückgabe: JSON
+			* /adresses
+				* Rückgabe: JSON
+			* /paymethods
+				* Rückgabe: JSON
+			* /pdf/[bestellungs_id] z.B. "/pdf/13374204242" **(Noch nicht implementiert)**
+				* Parameter durch URL (Siehe Beispiel)
+				* Rückgabe: PDF-Datei
+	* **POST**
+		* **HEADER:** ```Content-Type``` ```application/x-www-form-urlencoded```
+		* **Öffentlich:**
+			* /login
+				* Parameter: *username, email, pass* **User oder Email UND Passwort werden benötigt!**
+				* Rückgabe: JSON **(Enthält TOKEN)**
+			* /register
+				* Parameter: *username, email, first_name, last_name, pass, pass_repeat*
+				* Rückgabe: JSON
+		* **Geschützt:**
+			* **Token-Übergabe durch Header-Key "x-access-token"**
+			* /adresses/add
+				* Parameter: **planet, dimension(, userId)** *(userId nur für Admins)*
+				* Rückgabe: JSON
