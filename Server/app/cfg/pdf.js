@@ -7,6 +7,6 @@ module.exports = {
  	},
 	footer: {
 		height: 2, //cm
-		html: '<p>FAKEDOORS</p> by Katrin Affa, Simon Br&auml;uer &amp; Alex Roidl'
+		html: '<p>FAKEDOORS</p> by Karin Affa, Simon Br&auml;uer &amp; Alex Roidl'
 	}
 }
