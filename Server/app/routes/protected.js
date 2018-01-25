@@ -1,7 +1,3 @@
-var pdf 			= require('html-pdf');
-var pug			  	= require('pug');
-var path		  	= require('path');
-
 module.exports = function(app, responseHandler) {
 	//========================
 	// Account
@@ -229,32 +225,19 @@ module.exports = function(app, responseHandler) {
 
 		console.log(`/purchases/${purchaseId}/pdf GET request`);
 
-		responseHandler.purchases.byId(token, purchaseId, function(err, data) {
+		responseHandler.purchases.pdf(token, purchaseId, function(err, stream) {
 			if(err) {
 				res.json({
 					success: false,
 					message: err
 				})
-			} else { // TODO: Finish
-				var filename = `order_${purchaseId}.pdf`;
+			} else {
+				var filename = `purchase_${purchaseId}.pdf`;
 
-				// Set headers
 				res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
 				res.setHeader('Content-Type', 'application/pdf');
 
-				// Render HTML
-				var html = pug.renderFile(path.resolve(__dirname, '../pdf/template.pug'), {
-					user: {
-						username: "alex",
-						firstName: "Alex",
-						lastName: "Ander"
-					}
-				});
-
-				// Create PDF
-				pdf.create(html).toStream(function(err, stream){
-					stream.pipe(res);
-				});
+				stream.pipe(res);
 			}
 		});
 	});

@@ -1,3 +1,5 @@
+var purchasePDF = require('../pdf/purchasePDF');
+
 module.exports = function(dbHandler) {
 	return {
 		// Public
@@ -147,7 +149,18 @@ module.exports = function(dbHandler) {
 				dbHandler.getUserById(token.id, function(err, user) {
 					if(err) return callback(err);
 
+					// Get purchase by id
+					dbHandler.getPurchaseById(purchaseId, function(err, purchase) {
+						if(err) return callback(err);
 
+						if(purchase.userId != user.id)
+							return callback("Invalid purchase id");
+
+						// Render PDF
+						purchasePDF.render(user, purchase, function(stream) {
+							callback(null, stream);
+						});
+					});
 				});
 			},
 

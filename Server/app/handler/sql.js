@@ -140,22 +140,23 @@ module.exports = {
 				Paymethod varchar(32),
 				Address mediumtext COMMENT 'JSON',
 				Data mediumtext COMMENT 'JSON',
+				Total int(11),
 				Time datetime DEFAULT CURRENT_TIMESTAMP
 			)`,
 
-		add: function(userId, payMethod, address, data) {
+		add: function(userId, payMethod, address, data, total) {
 			return `
 				INSERT INTO
 				purchases
-				(ID, UserID, Paymethod, Address, Data, Time)
+				(ID, UserID, Paymethod, Address, Data, Total, Time)
 				VALUES
-				(null, ${userId}, ${payMethod}, ${address}, ${data}, NOW())`;
+				(null, ${userId}, ${payMethod}, ${address}, ${data}, ${total}, NOW())`;
 		},
 
 		byId: function(id) {
 			return `
 				SELECT
-				UserID, Paymethod, Address, Data, Time
+				UserID, Paymethod, Address, Data, Total, Time
 				FROM purchases
 				WHERE ID=${id}`;
 		},
@@ -163,7 +164,7 @@ module.exports = {
 		byUserId: function(userId) {
 			return `
 				SELECT
-				ID, Paymethod, Address, Data, Time
+				ID, Paymethod, Address, Data, Total, Time
 				FROM purchases
 				WHERE UserID=${userId}`;
 		}

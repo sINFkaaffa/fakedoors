@@ -5,7 +5,6 @@ Client/dist/
 Client/npm-debug.log*
 Client/yarn-debug.log*
 Client/yarn-error.log*
-Client/build/*
 
 # Editor directories and files
 Client/.idea
@@ -17,4 +16,3 @@ Client/*.sln
 
 # Server
 Server/node_modules/
-Server/package-lock.json

@@ -395,13 +395,14 @@ class DatabaseHandler extends EventEmitter {
 
 							var price = product.price;
 							var shipping = shopCfg.shipping;
+							var total = (price * quantity + shipping).toFixed(2); // Two digits max
 
 							items.push({
 								name: fullName,
 								price: price,
 								quantity: quantity,
 								shipping: shipping,
-								total: price * quantity + shipping
+								total: total
 							});
 						}
 						proceed(--count);
@@ -411,9 +412,17 @@ class DatabaseHandler extends EventEmitter {
 					function proceed(count) {
 						if(count > 0) return; // Not done yet
 
-						// Save items to final purchase
-						final.items = items;
+						// Calculate total costs
+						var total = 0;
+						items.forEach(item => {
+							total += item.total;
+						})
 
+						// Save items and total costs to final purchase
+						final.items = items;
+						final.total = total;
+
+						// Preview only
 						if(preview)
 							return callback(null, { items: items });
 
@@ -421,9 +430,10 @@ class DatabaseHandler extends EventEmitter {
 						var payMethod = connection.escape(final.payMethod);
 						var address = connection.escape(JSON.stringify(final.address));
 						var products = connection.escape(JSON.stringify(final.items));
+						total = connection.escape(total);
 
 						// Save final purchase to database
-						var _sql = sql.purchases.add(user.id, payMethod, address, products);
+						var _sql = sql.purchases.add(user.id, payMethod, address, products, total);
 						connection.query(_sql, function(err, result) {
 							if(err) throw err;
 
@@ -469,6 +479,7 @@ class DatabaseHandler extends EventEmitter {
 				return callback(`Couldn't find purchase matching id ${purchaseId}`);
 
 			// Transform and return purchase
+			result[0].ID = purchaseId;
 			var purchase = sqlDataModel.purchase(result[0]);
 			callback(null, purchase);
 		});

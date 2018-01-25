@@ -29,6 +29,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:3000/product/234",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"234"
+							]
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
@@ -178,14 +199,14 @@
 									},
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzMxMTIwLCJleHAiOjE1MTY4MTc1MjB9.5j2Ly3dbvjgyHKKcdGfrlvMA14mtWngeJxJfpJlvRzA"
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2ODQxMTA0LCJleHAiOjE1MTY5Mjc1MDR9.2VkXXi43wqRjRXSr6cqY9xVu13vRyyvA3pjkEu947Eo"
 									}
 								],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "payment_id",
+											"key": "paymethod_id",
 											"value": "1",
 											"description": "",
 											"type": "text"
@@ -198,9 +219,16 @@
 										},
 										{
 											"key": "data",
-											"value": "[{\"id\":1,\"addressId\":29393,\"quantity\":3},{\"id\":9,\"addressId\":29393,\"quantity\":23}]",
+											"value": "[{\"id\":1,\"quantity\":3},{\"id\":9,\"quantity\":23}]",
 											"description": "",
 											"type": "text"
+										},
+										{
+											"key": "preview",
+											"value": "true",
+											"description": "Additional",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -251,19 +279,19 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzMzNjY5LCJleHAiOjE1MTY4MjAwNjl9.GhP-D7xmNirylGrFsC18MCxlH0unPsp4hAUbdJ1UHHg"
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTE2ODI3Nzk2LCJleHAiOjE1MTY5MTQxOTZ9.rcc0pjF0c6WgM8O8F72A6q5lNOQlANmQJOjOEySXQk0"
 									}
 								],
 								"body": {},
 								"url": {
-									"raw": "localhost:3000/purchases/1/",
+									"raw": "localhost:3000/purchases/12/",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
 										"purchases",
-										"1",
+										"12",
 										""
 									]
 								},
@@ -278,12 +306,8 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzE4NzAzLCJleHAiOjE1MTY4MDUxMDN9.E2z06QG8F1qoYI_Qi7I8-PmOB3CrLqZK09l7T56a0X4",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2ODQxMTA0LCJleHAiOjE1MTY5Mjc1MDR9.2VkXXi43wqRjRXSr6cqY9xVu13vRyyvA3pjkEu947Eo",
 										"description": "Authentification"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/x-www-form-urlencoded"
 									}
 								],
 								"body": {
@@ -357,7 +381,7 @@
 								"header": [
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzA2OTAyLCJleHAiOjE1MTY3OTMzMDJ9.tRzCXSVP7Y4MjDMwAILcaaVGyfDt86GsF1Ush-1pDp4"
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2ODQxMTA0LCJleHAiOjE1MTY5Mjc1MDR9.2VkXXi43wqRjRXSr6cqY9xVu13vRyyvA3pjkEu947Eo"
 									},
 									{
 										"key": "Content-Type",
@@ -484,19 +508,12 @@
 									},
 									{
 										"key": "x-access-token",
-										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzEwNTA3LCJleHAiOjE1MTY3OTY5MDd9.QZ9IMRwhT_MtnYLDLDIo9H6cdqUfy1QmRYFPGPdO2FI"
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2ODQxMTA0LCJleHAiOjE1MTY5Mjc1MDR9.2VkXXi43wqRjRXSr6cqY9xVu13vRyyvA3pjkEu947Eo"
 									}
 								],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
-										{
-											"key": "user_id",
-											"value": "5",
-											"description": "Optional",
-											"type": "text",
-											"disabled": true
-										},
 										{
 											"key": "type",
 											"value": "PayPal",
@@ -628,103 +645,6 @@
 							]
 						},
 						"description": "\t"
-					},
-					"response": []
-				},
-				{
-					"name": "Add address (admin)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-access-token",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE2NzA2OTAyLCJleHAiOjE1MTY3OTMzMDJ9.tRzCXSVP7Y4MjDMwAILcaaVGyfDt86GsF1Ush-1pDp4"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "user_id",
-									"value": "4",
-									"description": "Only admins can add addresses for other users\n",
-									"type": "text"
-								},
-								{
-									"key": "first_name",
-									"value": "Alex",
-									"description": "Additional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "last_name",
-									"value": "",
-									"description": "Additional",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "street",
-									"value": "Teststraße",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "street_nr",
-									"value": "13",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "city",
-									"value": "Einbahnstraße",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "zip",
-									"value": "1337",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "planet",
-									"value": "Der Planet",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "dimension",
-									"value": "XYZ Dimension",
-									"description": "",
-									"type": "text"
-								},
-								{
-									"key": "additional",
-									"value": "Add",
-									"description": "Additional",
-									"type": "text",
-									"disabled": true
-								}
-							]
-						},
-						"url": {
-							"raw": "localhost:3000/addresses/add",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"addresses",
-								"add"
-							]
-						},
-						"description": ""
 					},
 					"response": []
 				}

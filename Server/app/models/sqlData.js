@@ -51,8 +51,10 @@ module.exports = {
 		return {
 			id: row.ID,
 			userId: row.UserID,
+			payMethod: row.Paymethod,
 			address: JSON.parse(row.Address),
 			items: JSON.parse(row.Data),
+			total: row.Total,
 			time: row.Time
 		}
 	}

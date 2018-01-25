@@ -11,6 +11,7 @@
     "root": "node ./app/generator.js root"
   },
   "dependencies": {
+    "base64-img": "^1.0.3",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "express": "~4.15.5",
