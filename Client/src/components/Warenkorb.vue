@@ -2,7 +2,7 @@
 <div id="warenkorb">
   <div class="cartContainer">
     <div class="section hoverable z-depth-1 cartitem" v-for="(i,index) in cart" v-if="cart.length>0">
-      <img src="i.image" alt="no piture" />
+      <img src="i.imagePath" alt="no piture" />
       <p class="cartitemName">{{i.name}}</p>
       <p class="cartitemTextCount">Quantity: {{i.st}}</p>
       <p class="cartitemPrice">a {{i.price}} SCM</p>
